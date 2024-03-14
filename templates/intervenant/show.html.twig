@@ -15,6 +15,13 @@
                 <th>Name</th>
                 <td>{{ intervenant.name }}</td>
             </tr>
+            <tr>
+                <th>Classes Taught</th>
+                {% for classe in intervenant.classesTaught %}
+                    <td>{{ classe.name }}</td>
+                {% endfor %}
+
+            </tr>
         </tbody>
     </table>
 

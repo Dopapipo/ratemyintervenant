@@ -17,7 +17,7 @@ class IntervenantType extends AbstractType
             ->add('name')
             ->add('classesTaught', EntityType::class, [
                 'class' => Classe::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
                 'multiple' => true,
             ])
         ;
