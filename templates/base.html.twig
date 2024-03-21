@@ -1,65 +1,72 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Bienvenue!{% endblock %}</title>
-    {# Liens vers les fichiers CSS #}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Bienvenue!
+			{% endblock %}
+		</title>
+		{# Liens vers les fichiers CSS #}
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+		 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>{% block stylesheets %}
+		{% endblock %}
+		<link
+		rel="stylesheet" href="{{ asset('styles/form.css') }}"/> {# Ajouter le lien vers le fichier CSS de Bootstrap #}
+		{% block javascripts %}{% endblock %}
+	</head>
+	<body class="d-flex flex-column min-vh-100">
+		<div class="container-fluid my-1">
+			<div class="d-flex justify-content-between align-items-center">
+				<div class="my-auto">
+					<a class="dropdown-item" href="{{ path('app_home') }}">Maison</a>
+				</div>
+				<div class="my-auto">
+					<img src="{{ asset('miage.png') }}" alt="Petite image" width="300">
+				</div>
+				<div class="my-auto">
+					<div
+						class="dropdown">
+						{# Gérer les différentes vues en fonction des rôles de l'utilisateur #}
+						{% if is_granted('ROLE_ADMIN') %}
+							{# Contenu pour un administrateur #}
+						{% elseif is_granted('ROLE_USER') %}
+							{# Contenu pour un utilisateur authentifié #}
+						{% else %}
+							{# Contenu pour un utilisateur non authentifié #}
+							<a class="dropdown-item" href="{{ path('app_user_new') }}">Register</a>
+							<a class="dropdown-item" href="{{ path('app_login') }}">Connection</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr
+		class="hrCustom w-100">
+		{# Afficher les messages flash #}
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 
+		{% for message in app.flashes('notice') %}
+			<div class="alert alert-success" style="background-color: rgba(255,0,0,0.48)">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% block body %}{% endblock %}
 
-    {% block stylesheets %}{% endblock %}
-    <link rel="stylesheet" href="{{ asset('styles/form.css') }}" />
-    {# Ajouter le lien vers le fichier CSS de Bootstrap #}
-    {% block javascripts %}{% endblock %}
-</head>
-<body class="d-flex flex-column min-vh-100">
-<div class="container-fluid my-1">
-    <div class="d-flex justify-content-between align-items-center">
-        <div class="my-auto">
-            <a class="dropdown-item" href="{{ path('app_home') }}">Maison</a>
-        </div>
-        <div class="my-auto">
-            <img src="miage.png" alt="Petite image" width="300" >
-        </div>
-        <div class="my-auto">
-            <div class="dropdown">
-                {# Gérer les différentes vues en fonction des rôles de l'utilisateur #}
-                {% if is_granted('ROLE_ADMIN') %}  {# Contenu pour un administrateur #}
-                {% elseif is_granted('ROLE_USER') %}  {# Contenu pour un utilisateur authentifié #}
-                {% else %} {# Contenu pour un utilisateur non authentifié #}
-                    <a class="dropdown-item" href="{{ path('app_user_new') }}">Register</a>
-                    <a class="dropdown-item" href="{{ path('app_login') }}">Connection</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</div>
-<hr class="hrCustom w-100">
-{# Afficher les messages flash #}
-{% for message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ message }}
-    </div>
-{% endfor %}
+		<div
+			class="footer mt-auto">
+			<!-- Copyright -->
+			<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+				<p class="text-reset fw-bold">© 2024 Copyright: RMI GROUP</p>
+			</div>
+			<!-- Copyright -->
+		</div>
 
-{% for message in app.flashes('notice') %}
-    <div class="alert alert-success" style="background-color: rgba(255,0,0,0.48)">
-        {{ message }}
-    </div>
-{% endfor %}
-{% block body %}{% endblock %}
-
-<div class="footer mt-auto">
-    <!-- Copyright -->
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        <p class="text-reset fw-bold">© 2024 Copyright: RMI GROUP</p>
-    </div>
-    <!-- Copyright -->
-</div>
-
-</body>
+	</body>
 </html>
