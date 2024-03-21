@@ -1,20 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Ajoutez ici vos styles CSS pour personnaliser la page d'accueil */
+        .jumbotron {
+            background-color: #3498db; /* Couleur de fond */
+            color: #fff; /* Couleur du texte */
+        }
+
+        .jumbotron a.btn-primary {
+            background-color: #2ecc71; /* Couleur du bouton principal */
+            border-color: #2ecc71; /* Couleur de la bordure du bouton principal */
+        }
+
+        .jumbotron a.btn-primary:hover {
+            background-color: #27ae60; /* Couleur du bouton principal au survol */
+            border-color: #27ae60; /* Couleur de la bordure du bouton principal au survol */
+        }
+
+        .col-md-4 h2 {
+            color: #2c3e50; /* Couleur du titre */
+        }
+
+        .col-md-4 p {
+            color: #34495e; /* Couleur du texte */
+        }
+
+        footer {
+            background-color: #34495e; /* Couleur de fond du footer */
+            color: #fff; /* Couleur du texte du footer */
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>Rate My Intervenant</h1>
+            <p>Un endroit où les étudiants prennent la parole</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Commencer</a>
+            </p>
+        </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>À propos</h2>
+                <p>Découvrez qui nous sommes et ce que nous faisons.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">En savoir plus &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Services</h2>
+                <p>Découvrez les services que nous offrons.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">Explorer &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Contact</h2>
+                <p>Vous avez des questions? Contactez-nous!</p>
+                <p><a class="btn btn-secondary" href="#" role="button">Nous contacter &raquo;</a></p>
+            </div>
+        </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/lisni/git/ratemyintervenant/ratemyintervenant/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/lisni/git/ratemyintervenant/ratemyintervenant/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+        <hr>
+
+        <footer>
+            <p>&copy; 2024 MIAGE CORPORATE. Tous droits réservés.</p>
+        </footer>
+    </div> <!-- /container -->
 {% endblock %}
