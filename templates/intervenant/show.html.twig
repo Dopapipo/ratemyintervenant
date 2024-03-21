@@ -17,8 +17,8 @@
             </tr>
             <tr>
                 <th>Classes Taught</th>
-                {% for classe in intervenant.classesTaught %}
-                    <td>{{ classe.name }}</td>
+                {% for classe in intervenant.getClassesTaught()  %}
+                    <td>{{ classe.getName() }}</td>
                 {% endfor %}
 
             </tr>
