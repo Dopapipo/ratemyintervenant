@@ -27,12 +27,16 @@ class Classe
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'classe')]
     private Collection $students;
 
+    #[ORM\OneToMany(targetEntity: Matiere::class, mappedBy: 'classe')]
+    private Collection $matieres;
+
 
     public function __construct()
     {
         $this->students = new ArrayCollection();
         $this->intervenants = new ArrayCollection();
         $this->students = new ArrayCollection();
+        $this->matieres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,6 +139,36 @@ class Classe
             // set the owning side to null (unless already changed)
             if ($student->getClasse() === $this) {
                 $student->setClasse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Matiere>
+     */
+    public function getMatieres(): Collection
+    {
+        return $this->matieres;
+    }
+
+    public function addMatiere(Matiere $matiere): static
+    {
+        if (!$this->matieres->contains($matiere)) {
+            $this->matieres->add($matiere);
+            $matiere->setClasse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatiere(Matiere $matiere): static
+    {
+        if ($this->matieres->removeElement($matiere)) {
+            // set the owning side to null (unless already changed)
+            if ($matiere->getClasse() === $this) {
+                $matiere->setClasse(null);
             }
         }
 

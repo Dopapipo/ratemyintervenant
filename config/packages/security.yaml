@@ -14,14 +14,19 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            form_login:
+                # "app_login" is the name of the route created previously
+                login_path: app_login
+                check_path: app_login
+                default_target_path: app_home
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\UserAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
-
+                target: app_home
+            entry_point: 'form_login'
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800

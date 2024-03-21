@@ -26,6 +26,17 @@
                         {% endfor %}
                     </ul>
             </tr>
+            <tr>
+                <th>Matieres</th>
+                <td>
+                    <ul>
+                        {% for matiere in classe.matieres %}
+                            <li>
+                                <a href="{{ path('app_matiere_show', {'id': matiere.id}) }}">{{ matiere.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+            </tr>
         </tbody>
     </table>
 

@@ -26,10 +26,14 @@ class Intervenant
     #[ORM\ManyToMany(targetEntity: Classe::class, mappedBy: 'intervenants')]
     private Collection $classesTaught;
 
+    #[ORM\OneToMany(targetEntity: Matiere::class, mappedBy: 'intervenant')]
+    private Collection $matieresEnseignees;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
         $this->classesTaught = new ArrayCollection();
+        $this->matieresEnseignees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,6 +112,36 @@ class Intervenant
     {
         if ($this->classesTaught->removeElement($classesTaught)) {
             $classesTaught->removeIntervenant($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Matiere>
+     */
+    public function getMatieresEnseignees(): Collection
+    {
+        return $this->matieresEnseignees;
+    }
+
+    public function addMatieresEnseignee(Matiere $matieresEnseignee): static
+    {
+        if (!$this->matieresEnseignees->contains($matieresEnseignee)) {
+            $this->matieresEnseignees->add($matieresEnseignee);
+            $matieresEnseignee->setIntervenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatieresEnseignee(Matiere $matieresEnseignee): static
+    {
+        if ($this->matieresEnseignees->removeElement($matieresEnseignee)) {
+            // set the owning side to null (unless already changed)
+            if ($matieresEnseignee->getIntervenant() === $this) {
+                $matieresEnseignee->setIntervenant(null);
+            }
         }
 
         return $this;

@@ -28,6 +28,7 @@ class ReviewController extends AbstractController
         $review = new Review();
         $form = $this->createForm(ReviewType::class, $review);
         $form->handleRequest($request);
+        $review->setAuthor($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($review);
