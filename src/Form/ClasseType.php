@@ -15,6 +15,13 @@ class ClasseType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('intervenants', EntityType::class, [
+                'class' => Intervenant::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false
+            ])
         ;
     }
 

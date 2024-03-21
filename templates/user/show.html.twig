@@ -35,6 +35,9 @@
                 <th>Class</th>
                 <td>{{ user.classe }}</td>
             </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
         </tbody>
     </table>
 

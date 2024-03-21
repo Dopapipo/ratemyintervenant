@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 
     {% block stylesheets %}{% endblock %}
 
@@ -18,23 +15,26 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 <div class="container my-1">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between">
         <div class="my-auto">
-            <a class="dropdown-item" href="{{ path('app_home') }}">Maison</a>
-        </div>
-        <div class="my-auto">
-            <img src="miage.png" alt="Petite image" width="315" height="120">
+            {# Ajoutez d'autres liens selon vos besoins #}
         </div>
         <div class="my-auto">
             <div class="dropdown">
-                {# Gérer les différentes vues en fonction des rôles de l'utilisateur #}
-                {% if is_granted('ROLE_ADMIN') %}  {# Contenu pour un administrateur #}
-                {% elseif is_granted('ROLE_USER') %}  {# Contenu pour un utilisateur authentifié #}
-                {% else %} {# Contenu pour un utilisateur non authentifié #}
-                    <a class="dropdown-item" href="{{ path('app_user_new') }}">Register</a>
-                    <a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
-                {% endif %}
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButtonLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Lang </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonLang">
+
+                </div>
             </div>
+            {# Gérer les différentes vues en fonction des rôles de l'utilisateur #}
+            {% if is_granted('ROLE_ADMIN') %}
+                {# Contenu pour un administrateur #}
+            {% elseif is_granted('ROLE_USER') %}
+
+                {# Contenu pour un utilisateur authentifié #}
+            {% else %}
+                {# Contenu pour un utilisateur non authentifié #}
+            {% endif %}
         </div>
     </div>
 </div>
@@ -52,7 +52,6 @@
     </div>
 {% endfor %}
 {% block body %}{% endblock %}
-
 <div class="footer mt-auto">
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
@@ -60,6 +59,5 @@
     </div>
     <!-- Copyright -->
 </div>
-
 </body>
 </html>

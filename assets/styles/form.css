@@ -1,0 +1,30 @@
+/* Custom CSS styles for form */
+
+.form-group {
+    margin-top:5px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    
+    font-weight: bold;
+}
+
+.form-control {
+    width: 50%;
+    /* Adjust the width as needed */
+    padding: 10px;
+    /* Adjust the padding as needed */
+    border: 1px solid #ccc;
+    /* Add border styles as needed */
+    border-radius: 5px;
+    /* Add border radius as needed */
+}
+
+.btn {
+    margin-top: 10px;
+    /* Add spacing above the button as needed */
+}
