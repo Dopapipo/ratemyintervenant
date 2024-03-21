@@ -1,17 +1,63 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Bienvenue!{% endblock %}</title>
+    {# Liens vers les fichiers CSS #}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block stylesheets %}{% endblock %}
+
+    {% block javascripts %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+<div class="container my-1">
+    <div class="d-flex justify-content-between">
+        <div class="my-auto">
+            {# Ajoutez d'autres liens selon vos besoins #}
+        </div>
+        <div class="my-auto">
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButtonLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Lang </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonLang">
+
+                </div>
+            </div>
+            {# Gérer les différentes vues en fonction des rôles de l'utilisateur #}
+            {% if is_granted('ROLE_ADMIN') %}
+                {# Contenu pour un administrateur #}
+            {% elseif is_granted('ROLE_USER') %}
+
+                {# Contenu pour un utilisateur authentifié #}
+            {% else %}
+                {# Contenu pour un utilisateur non authentifié #}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<hr class="hrCustom w-100">
+{# Afficher les messages flash #}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('notice') %}
+    <div class="alert alert-success" style="background-color: rgba(255,0,0,0.48)">
+        {{ message }}
+    </div>
+{% endfor %}
+{% block body %}{% endblock %}
+<div class="footer mt-auto">
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        <p class="text-reset fw-bold">© 2024 Copyright: RMI GROUP</p>
+    </div>
+    <!-- Copyright -->
+</div>
+</body>
 </html>
