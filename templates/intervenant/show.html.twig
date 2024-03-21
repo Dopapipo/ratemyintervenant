@@ -17,9 +17,14 @@
             </tr>
             <tr>
                 <th>Classes Taught</th>
-                {% for classe in intervenant.getClassesTaught()  %}
-                    <td>{{ classe.getName() }}</td>
-                {% endfor %}
+                <td>
+                    <ul>
+                        {% for classe in intervenant.classesTaught %}
+                            <li>
+                                <a href="{{ path('app_classe_show', {'id': classe.id}) }}">{{ classe.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
 
             </tr>
         </tbody>

@@ -15,6 +15,17 @@
                 <th>Name</th>
                 <td>{{ classe.name }}</td>
             </tr>
+            <tr>
+                <th>Intervenants</th>
+                <td>
+                    <ul>
+                        {% for intervenant in classe.intervenants %}
+                            <li>
+                                <a href="{{ path('app_intervenant_show', {'id': intervenant.id}) }}">{{ intervenant.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+            </tr>
         </tbody>
     </table>
 
