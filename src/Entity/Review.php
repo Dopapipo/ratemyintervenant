@@ -17,15 +17,16 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private ?Intervenant $intervenant = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reviews')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $author = null;
+
 
     #[ORM\Column(length: 255)]
     private ?string $content = null;
 
     #[ORM\Column]
     private ?int $grade = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reviews')]
+    private ?User $author = null;
 
     public function getId(): ?int
     {
