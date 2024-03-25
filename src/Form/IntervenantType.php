@@ -21,11 +21,15 @@ class IntervenantType extends AbstractType
                 'class' => Classe::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'expanded' => true,
+                'required' => false
             ])
             ->add('matieresEnseignees', EntityType::class, [
                 'class' => Matiere::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'expanded' => true,
+                'required' => false
             ])
         ;
     }

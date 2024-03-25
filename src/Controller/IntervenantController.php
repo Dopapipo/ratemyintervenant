@@ -30,6 +30,7 @@ class IntervenantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->persist($intervenant);
             $entityManager->flush();
 
