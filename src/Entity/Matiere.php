@@ -19,7 +19,7 @@ class Matiere
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'matieresEnseignees')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Intervenant $intervenant = null;
 
     #[ORM\ManyToOne(inversedBy: 'matieres')]

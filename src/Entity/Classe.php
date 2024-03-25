@@ -21,7 +21,7 @@ class Classe
 
 
 
-    #[ORM\ManyToMany(targetEntity: Intervenant::class, inversedBy: 'classesTaught')]
+    #[ORM\ManyToMany(targetEntity: Intervenant::class, mappedBy: 'classesTaught')]
     private Collection $intervenants;
 
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'classe')]
