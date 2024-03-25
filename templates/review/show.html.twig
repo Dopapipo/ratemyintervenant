@@ -9,7 +9,8 @@
         <tbody>
             <tr>
                 <th>Intervenant concerné</th>
-                <td>{{ review.intervenant.name }}</td>
+               <td> <a href="{{ path('app_intervenant_show', {'id': review.intervenant.id}) }}">{{ review.intervenant.name }}</a></td>
+
             </tr>
             <tr>
                 <th>Content</th>
