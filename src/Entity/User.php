@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Classe $classe = null;
 
+    #[ORM\Column]
+    private ?bool $isVerified = false;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -215,5 +218,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getName(): string
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    public function isIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 }
