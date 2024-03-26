@@ -1,4 +1,19 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="form-group">
+    {{ form_label(form.content) }}
+    {{ form_widget(form.content, {'attr': {'class': 'form-control', 'placeholder': 'Your review content'}}) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.grade) }}
+    {{ form_widget(form.grade, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.intervenant) }}
+    {{ form_widget(form.intervenant, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.matiere) }}
+    {{ form_widget(form.matiere, {'attr': {'class': 'form-control'}}) }}
+</div>
+<button class="btn btn-primary btn-block">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

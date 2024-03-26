@@ -24,7 +24,7 @@ class ClasseType extends AbstractType
                 'mapped' => false, //Pour ne pas afficher car pas nécessaire
                 'label' => false, // Cacher le label du champ
                 'attr' => [
-                    'style' => 'display: none;', // Cacher le champ avec du CSS
+                    'style' => 'display: none;',
                 ],
 
             ])
