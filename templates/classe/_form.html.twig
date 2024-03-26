@@ -1,6 +1,7 @@
 {{ form_start(form) }}
-<div >
-    {{ form_widget(form) }}
+<div class="form-group">
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nom de la classe'}}) }}
 </div>
 <button class="btn-primary btn-block mb-4">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

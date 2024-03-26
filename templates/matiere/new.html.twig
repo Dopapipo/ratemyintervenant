@@ -3,9 +3,20 @@
 {% block title %}New Matiere{% endblock %}
 
 {% block body %}
-    <h1>Create new Matiere</h1>
-
-    {{ include('matiere/_form.html.twig') }}
-
-    <a href="{{ path('app_matiere_index') }}">back to list</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        {{ block('title') }}
+                    </div>
+                    <div class="card-body">
+                        <h1 class="mb-4">{{ block('title') }}</h1>
+                        {{ include('matiere/_form.html.twig') }}
+                        <a href="{{ path('app_matiere_index') }}" class="btn btn-secondary mt-4">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
