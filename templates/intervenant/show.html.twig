@@ -33,7 +33,7 @@
                     <ul>
                         {% for review in intervenant.reviews %}
                             <li>
-                                <a href="{{ path('app_review_show', {'id': review.id}) }}">{{ review.content }}</a>
+                                <a href="{{ path('app_review_show', {'id': review.id}) }}">{{ review.content }}</a> Note : {{ review.grade }}
                             </li>
                         {% endfor %}
                     </ul>

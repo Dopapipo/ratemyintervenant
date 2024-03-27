@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/classe')]
+#[Route('/admin/classe')]
 class ClasseController extends AbstractController
 {
     #[Route('/', name: 'app_classe_index', methods: ['GET'])]

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/intervenant')]
+#[Route('/admin/intervenant')]
 class IntervenantController extends AbstractController
 {
     #[Route('/', name: 'app_intervenant_index', methods: ['GET'])]
