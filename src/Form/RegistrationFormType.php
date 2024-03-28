@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Classe;
 use App\Entity\User;
-use Doctrine\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -78,9 +77,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ]);
-
-
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

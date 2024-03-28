@@ -39,48 +39,5 @@ class SecurityController extends AbstractController
 
 
 
-    #[Route(path: "/verify", name: "app_verify_email")]
 
-    public function verifyUserEmail(): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        // Validate the user id and token query parameters
-        if (empty ($_GET['id']) || empty ($_GET['token'])) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        // Validate the user id and token query parameters
-        if (!is_string($_GET['id']) || !is_string($_GET['token'])) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        $id = $_GET['id'];
-        $token = $_GET['token'];
-
-        // Verify the user
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-
-        if (!$user) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        // Check if the user has already been verified
-        if ($user->isVerified()) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        // Validate the token
-        if (!$user->verify($token)) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        // Update the user
-        $user->setIsVerified(true);
-        $this->getDoctrine()->getManager()->flush();
-
-        // Do anything else you need here, like send an email
-
-        return $this->redirectToRoute('app_home');
-    }
 }
