@@ -34,6 +34,11 @@
             <tr>
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Vérifié?</th>
+                <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
+            </tr>
         </tbody>
     </table>
 

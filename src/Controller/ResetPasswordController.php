@@ -139,6 +139,7 @@ class ResetPasswordController extends AbstractController
 
         // Do not reveal whether a user account was found or not.
         if (!$user) {
+
             return $this->redirectToRoute('app_check_email');
         }
 
@@ -168,6 +169,7 @@ class ResetPasswordController extends AbstractController
                 'resetToken' => $resetToken,
             ])
         ;
+
 
         try {
             $mailer->send($email);
