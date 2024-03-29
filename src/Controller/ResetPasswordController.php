@@ -164,7 +164,7 @@ class ResetPasswordController extends AbstractController
             ->from(new Address('mailtrap@demomailtrap.com', 'RMI Bot'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
-            ->htmlTemplate('reset_password/email.html.twig')
+            ->htmlTemplate('reset_password/reset_password_email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
             ])
