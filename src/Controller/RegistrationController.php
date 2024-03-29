@@ -119,7 +119,7 @@ class RegistrationController extends AbstractController
                     $user,
                     ($this->emailService->createMail($user->getEmail(), 'Please confirm your Email', 'confirmation_email.html.twig')));
                 // do anything else you need here, like flash message
-                $this->addFlash('success', 'blabla.');
+                $this->addFlash('success', "Un email vous a été envoyé. Veuillez consulter votre boîte de réception pour confirmer votre adresse email");
                 return $this->redirectToRoute('app_home');
             } else {
                 $this->addFlash('error',  'Email inconnu.');
