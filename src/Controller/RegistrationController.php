@@ -112,7 +112,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // generate a signed url and email it to the user
-            $user =  $userRepository->findByEmail($form->get('email')->getData());
+            $user =  $userRepository->findOneByEmail($form->get('email')->getData());
             if ($user) {
                 $this->emailVerifier->sendEmailConfirmation(
                     'app_verify_email',
@@ -126,7 +126,7 @@ class RegistrationController extends AbstractController
             }
         }
         return $this->render('registration/request_email.html.twig', [
-            'requestForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }
