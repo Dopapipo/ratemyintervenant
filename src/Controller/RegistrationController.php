@@ -22,6 +22,7 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
+    private EmailService $emailService;
 
     public function __construct(EmailVerifier $emailVerifier)
     {
@@ -94,5 +95,44 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_home');
+    }
+    /**
+     * requestVerifyUserEmail
+     */
+    #[Route('/request-verify-email', name: 'app_request_verify_email')]
+    public function requestVerifyUserEmail(
+        Request $request,
+        UserRepository $userRepository
+    ): Response {
+
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        $form = $this->createForm(RequestVerifyUserEmailFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // generate a signed url and email it to the user
+            $user =  $userRepository->findOneByEmail($form->get('email')->getData());
+            if ($user) {
+                $this->emailVerifier->sendEmailConfirmation(
+                    'app_verify_email',
+                    $user,
+                    (new TemplatedEmail())
+                        ->from(new Address('email@example.com', 'Sender'))
+                        ->to($user->getEmail())
+                        ->subject('Validation Link')
+                        ->htmlTemplate('security/registration/confirmation_email.html.twig')
+                );
+                // do anything else you need here, like flash message
+                $this->addFlash('success', 'blabla.');
+                return $this->redirectToRoute('app_home');
+            } else {
+                $this->addFlash('error',  'Email inconnu.');
+            }
+        }
+        return $this->render('security/registration/request.html.twig', [
+            'requestForm' => $form->createView(),
+        ]);
     }
 }

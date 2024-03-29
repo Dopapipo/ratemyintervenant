@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Service\EmailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,8 +15,8 @@ class EmailVerifier
 {
     public function __construct(
         private VerifyEmailHelperInterface $verifyEmailHelper,
-        private MailerInterface $mailer,
-        private EntityManagerInterface $entityManager
+        private EmailService $mailer,
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
