@@ -1,0 +1,56 @@
+/* Ajoutez ici vos styles CSS pour personnaliser la page d'accueil */
+.jumbotron {
+    background-color: #3498db; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+}
+
+.jumbotron a.btn-primary {
+    background-color: #2ecc71; /* Couleur du bouton principal */
+    border-color: #2ecc71; /* Couleur de la bordure du bouton principal */
+}
+
+.jumbotron a.btn-primary:hover {
+    background-color: #27ae60; /* Couleur du bouton principal au survol */
+    border-color: #27ae60; /* Couleur de la bordure du bouton principal au survol */
+}
+
+.col-md-4 h2 {
+    color: #2c3e50; /* Couleur du titre */
+}
+
+.col-md-4 p {
+    color: #34495e; /* Couleur du texte */
+}
+
+footer {
+    background-color: #34495e; /* Couleur de fond du footer */
+    color: #fff; /* Couleur du texte du footer */
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.content {
+    margin-bottom: 20px;
+}
+
