@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\Exception\AccountExpiredException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Twig\Markup;
 
 class UserConfirmation implements UserCheckerInterface
 {
@@ -28,7 +29,8 @@ class UserConfirmation implements UserCheckerInterface
 // user account is expired, the user may be notified
         if (!$user->isVerified()) {
 // the message passed to this exception is meant to be displayed to the user
-            throw new CustomUserMessageAccountStatusException('Veuillez confirmer votre compte en cliquant sur le lien envoyé par mail.');
+            $message = new Markup();
+            throw new CustomUserMessageAccountStatusException();
         }
     }
 }
