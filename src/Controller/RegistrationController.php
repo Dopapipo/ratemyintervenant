@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\RequestVerifyUserEmailType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
+use App\Service\EmailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,9 +26,10 @@ class RegistrationController extends AbstractController
     private EmailVerifier $emailVerifier;
     private EmailService $emailService;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(EmailVerifier $emailVerifier, EmailService $emailService)
     {
         $this->emailVerifier = $emailVerifier;
+       $this->emailService = $emailService;
     }
 
     #[Route('/register', name: 'app_register')]
@@ -44,22 +47,18 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->addRole('ROLE_USER');
 
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('noreply@ratemyintervenant.com', 'noreply'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                ($this->emailService->createMail($user->getEmail(), 'Please confirm your Email', 'confirmation_email.html.twig'))
             );
-
             // do anything else you need here, like send an email
-
-            return $security->login($user, UserAuthenticator::class, 'main');
+            $this->addFlash('success', 'Enregistrement réussi. Regardez votre e-mail pour pouvoir vous connecter.');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -109,21 +108,16 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $form = $this->createForm(RequestVerifyUserEmailFormType::class);
+        $form = $this->createForm(RequestVerifyUserEmailType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // generate a signed url and email it to the user
-            $user =  $userRepository->findOneByEmail($form->get('email')->getData());
+            $user =  $userRepository->findByEmail($form->get('email')->getData());
             if ($user) {
                 $this->emailVerifier->sendEmailConfirmation(
                     'app_verify_email',
                     $user,
-                    (new TemplatedEmail())
-                        ->from(new Address('email@example.com', 'Sender'))
-                        ->to($user->getEmail())
-                        ->subject('Validation Link')
-                        ->htmlTemplate('security/registration/confirmation_email.html.twig')
-                );
+                    ($this->emailService->createMail($user->getEmail(), 'Please confirm your Email', 'confirmation_email.html.twig')));
                 // do anything else you need here, like flash message
                 $this->addFlash('success', 'blabla.');
                 return $this->redirectToRoute('app_home');
@@ -131,7 +125,7 @@ class RegistrationController extends AbstractController
                 $this->addFlash('error',  'Email inconnu.');
             }
         }
-        return $this->render('security/registration/request.html.twig', [
+        return $this->render('registration/request_email.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
