@@ -107,7 +107,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $form = $this->createForm(RequestVerifyUserEmailFormType::class);
+        $form = $this->createForm(RequestVerifyUserEmailType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // generate a signed url and email it to the user
@@ -124,7 +124,7 @@ class RegistrationController extends AbstractController
                 $this->addFlash('error',  'Email inconnu.');
             }
         }
-        return $this->render('security/registration/request.html.twig', [
+        return $this->render('registration/request_email.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
