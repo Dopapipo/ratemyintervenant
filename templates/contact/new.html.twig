@@ -2,13 +2,20 @@
 
 {% block title %}New Contact{% endblock %}
 
-{% block body %}
-<h1>Contactez-nous</h1>
-<p>Vous avez une question ou une suggestion ? N'hésitez pas à nous contacter en remplissant le formulaire ci-dessous.</p>
-<p>Nous vous répondrons dans les plus brefs délais.</p>
-<p>Vous pouvez également nous contacter par téléphone au 01 23 45 67 89 ou par mail à l'adresse suivante :
-
-    {{ include('contact/_form.html.twig') }}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
 {% endblock %}
 
+{% block body %}
+    <div class="container">
+        <h1 class="title">Contactez-nous</h1>
+        <p class="description">Vous avez une question ou une suggestion ? N'hésitez pas à nous contacter en remplissant le formulaire ci-dessous.</p>
+        <p class="description">Nous vous répondrons dans les plus brefs délais.</p>
+        <p class="description">Vous pouvez également nous contacter par téléphone au 01 23 45 67 89 ou par mail à l'adresse suivante :</p>
+
+        <div class="form-container">
+            {{ include('contact/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
