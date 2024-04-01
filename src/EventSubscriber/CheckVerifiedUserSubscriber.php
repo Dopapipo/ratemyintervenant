@@ -41,8 +41,8 @@ class CheckVerifiedUserSubscriber implements EventSubscriberInterface
         $response = new RedirectResponse(
             $this->router->generate('app_request_verify_email')
         );
-        $event->setResponse($response);
         $event->getRequest()->getSession()->getFlashBag()->add('warning', 'Votre compte n\'est pas encore vérifié. Veuillez vérifier votre boîte de réception pour le lien de vérification.');
+        $event->setResponse($response);
 
     }
 }
