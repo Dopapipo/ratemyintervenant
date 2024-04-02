@@ -3,9 +3,20 @@
 {% block title %}New Intervenant{% endblock %}
 
 {% block body %}
-    <h1>Create new Intervenant</h1>
-
-    {{ include('intervenant/_form.html.twig') }}
-
-    <a href="{{ path('app_intervenant_index') }}">back to list</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">{{ block('title') }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ block('title') }}</h2>
+                        {{ include('intervenant/_form.html.twig') }}
+                        <a href="{{ path('app_intervenant_index') }}" class="btn btn-secondary mt-4">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

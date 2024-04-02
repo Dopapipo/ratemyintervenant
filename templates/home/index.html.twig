@@ -4,39 +4,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <style>
-        /* Ajoutez ici vos styles CSS pour personnaliser la page d'accueil */
-        .jumbotron {
-            background-color: #3498db; /* Couleur de fond */
-            color: #fff; /* Couleur du texte */
-        }
-
-        .jumbotron a.btn-primary {
-            background-color: #2ecc71; /* Couleur du bouton principal */
-            border-color: #2ecc71; /* Couleur de la bordure du bouton principal */
-        }
-
-        .jumbotron a.btn-primary:hover {
-            background-color: #27ae60; /* Couleur du bouton principal au survol */
-            border-color: #27ae60; /* Couleur de la bordure du bouton principal au survol */
-        }
-
-        .col-md-4 h2 {
-            color: #2c3e50; /* Couleur du titre */
-        }
-
-        .col-md-4 p {
-            color: #34495e; /* Couleur du texte */
-        }
-
-        footer {
-            background-color: #34495e; /* Couleur de fond du footer */
-            color: #fff; /* Couleur du texte du footer */
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    
 {% endblock %}
 
 {% block body %}
@@ -45,7 +14,7 @@
             <h1>Rate My Intervenant</h1>
             <p>Un endroit où les étudiants prennent la parole</p>
             <p>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Commencer</a>
+                <a class="btn btn-primary btn-lg" href="{{ path('app_review_new') }}" role="button">Commencer</a>
             </p>
         </div>
 
@@ -53,24 +22,28 @@
             <div class="col-md-4">
                 <h2>À propos</h2>
                 <p>Découvrez qui nous sommes et ce que nous faisons.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">En savoir plus &raquo;</a></p>
+                <p>
+                    <a class="btn btn-secondary" href="{{ path('app_home_about') }}" role="button">En savoir plus &raquo;</a>
+                </p>
             </div>
             <div class="col-md-4">
                 <h2>Services</h2>
                 <p>Découvrez les services que nous offrons.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">Explorer &raquo;</a></p>
+                <p>
+                    <a class="btn btn-secondary" href="{{ path('app_home_services') }}" role="button">Explorer &raquo;</a>
+                </p>
             </div>
             <div class="col-md-4">
                 <h2>Contact</h2>
                 <p>Vous avez des questions? Contactez-nous!</p>
-                <p><a class="btn btn-secondary" href="#" role="button">Nous contacter &raquo;</a></p>
+                <p>
+                    <a class="btn btn-secondary" href="{{ path('app_contact_new') }}" role="button">Nous contacter &raquo;</a>
+                </p>
             </div>
         </div>
 
         <hr>
 
-        <footer>
-            <p>&copy; 2024 MIAGE CORPORATE. Tous droits réservés.</p>
-        </footer>
-    </div> <!-- /container -->
+    </div>
+    <!-- /container -->
 {% endblock %}

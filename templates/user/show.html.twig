@@ -16,10 +16,6 @@
                 <td>{{ user.username }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
@@ -38,6 +34,11 @@
             <tr>
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Vérifié?</th>
+                <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
+            </tr>
         </tbody>
     </table>
 

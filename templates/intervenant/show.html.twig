@@ -16,7 +16,7 @@
                 <td>{{ intervenant.name }}</td>
             </tr>
             <tr>
-                <th>Classes Taught</th>
+                <th>Classes enseignées</th>
                 <td>
                     <ul>
                         {% for classe in intervenant.classesTaught %}
@@ -26,6 +26,17 @@
                         {% endfor %}
                     </ul>
 
+            </tr>
+            <tr>
+                <th>Reviews</th>
+                <td>
+                    <ul>
+                        {% for review in intervenant.reviews %}
+                            <li>
+                                <a href="{{ path('app_review_show', {'id': review.id}) }}">{{ review.content }}</a> Note : {{ review.grade }}
+                            </li>
+                        {% endfor %}
+                    </ul>
             </tr>
             <tr>
                 <th>Matières Enseignées</th>

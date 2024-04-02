@@ -19,6 +19,7 @@ class MatiereType extends AbstractType
             ->add('intervenant', EntityType::class, [
                 'class' => Intervenant::class,
                 'choice_label' => 'name',
+                'required' => false,
             ])
             ->add('classe', EntityType::class, [
                 'class' => Classe::class,

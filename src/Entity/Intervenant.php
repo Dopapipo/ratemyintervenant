@@ -23,7 +23,8 @@ class Intervenant
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'intervenant')]
     private Collection $reviews;
 
-    #[ORM\ManyToMany(targetEntity: Classe::class, mappedBy: 'intervenants')]
+    #[ORM\ManyToMany(targetEntity: Classe::class, inversedBy: 'intervenants')]
+    #[ORM\JoinTable(name: 'intervenant_classe')]
     private Collection $classesTaught;
 
     #[ORM\OneToMany(targetEntity: Matiere::class, mappedBy: 'intervenant')]

@@ -20,7 +20,13 @@ class ClasseType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
-                'required' => false
+                'required' => false,
+                'mapped' => false, //Pour ne pas afficher car pas nécessaire
+                'label' => false, // Cacher le label du champ
+                'attr' => [
+                    'style' => 'display: none;',
+                ],
+
             ])
         ;
     }
