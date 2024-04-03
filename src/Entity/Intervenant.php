@@ -37,6 +37,12 @@ class Intervenant
         $this->matieresEnseignees = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        // Retourne le nom de l'intervenant
+        return $this->name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

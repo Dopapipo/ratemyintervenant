@@ -33,6 +33,11 @@ class Matiere
     {
         $this->reviews = new ArrayCollection();
     }
+    public function __toString(): string
+    {
+        // Retourne le nom de la matière
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
