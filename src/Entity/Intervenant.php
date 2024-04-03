@@ -30,6 +30,9 @@ class Intervenant
     #[ORM\OneToMany(targetEntity: Matiere::class, mappedBy: 'intervenant')]
     private Collection $matieresEnseignees;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePictureFileName = null;
+
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -150,6 +153,18 @@ class Intervenant
                 $matieresEnseignee->setIntervenant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfilePictureFileName(): ?string
+    {
+        return $this->profilePictureFileName;
+    }
+
+    public function setProfilePictureFileName(?string $profilePictureFileName): static
+    {
+        $this->profilePictureFileName = $profilePictureFileName;
 
         return $this;
     }
