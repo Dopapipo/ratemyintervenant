@@ -4,14 +4,7 @@
 		{{ form_label(form.username, 'Username', {'label_attr': {'class': 'form-label bold-label'}}) }}
 		{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
 	</div>
-	<div class="form-group">
-		{{ form_label(form.password, 'Password', {'label_attr': {'class': 'form-label bold-label'}}) }}
-		{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
-	</div>
-	<div class="form-group">
-		{{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label bold-label'}}) }}
-		{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-	</div>
+
 	<div class="form-group">
 		{{ form_label(form.firstName, 'First Name', {'label_attr': {'class': 'form-label bold-label'}}) }}
 		{{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
@@ -20,10 +13,7 @@
 		{{ form_label(form.lastName, 'Last Name', {'label_attr': {'class': 'form-label bold-label'}}) }}
 		{{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
 	</div>
-	<div class="form-group">
-		{{ form_label(form.classe, 'Class', {'label_attr': {'class': 'form-label bold-label'}}) }}
-		{{ form_widget(form.classe, {'attr': {'class': 'form-control'}}) }}
-	</div>
+
 	<div class="form-group">
 		<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
 	</div>

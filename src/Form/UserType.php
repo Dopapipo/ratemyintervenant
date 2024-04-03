@@ -10,6 +10,7 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Tests\Fixtures\ChoiceSubType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('password', PasswordType::class)
+            ->add('password', RepeatedType::class)
             ->add('email', EmailType::class)
             ->add('firstName')
             ->add('lastName')

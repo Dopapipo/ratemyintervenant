@@ -48,7 +48,11 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->addRole('ROLE_USER');
+            if (!preg_match('/[A-z0-9]+@etu\.univ-paris1\.fr/i', $user->getEmail())) {
+                $this->addFlash('warning', 'Vous devez utiliser une adresse email de l\'université Paris 1 Panthéon-Sorbonne.');
+                return $this->redirectToRoute('app_register');
 
+            }
             $entityManager->persist($user);
             $entityManager->flush();
 
