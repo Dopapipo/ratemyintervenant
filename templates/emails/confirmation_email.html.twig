@@ -1,11 +1,14 @@
-<h1>Hi! Please confirm your email!</h1>
+{% extends 'emails/base.email.html.twig' %}
 
-<p>
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-</p>
+{% block title %}Email Confirmation{% endblock %}
 
-<p>
-    Cheers!
-</p>
+{% block content %}
+    <h1>Bonjour ! Bienvenue sur Rate My Intervenant. </h1>
+
+    <p>Merci de confirmer ton email en cliquant sur le lien ci-dessous:</p>
+    <p><a href="{{ signedUrl }}">Confirmer mon Email</a></p>
+
+    <p>Le lien expirera dans 1 heure.</p>
+
+    <p>Cheers!</p>
+{% endblock %}
