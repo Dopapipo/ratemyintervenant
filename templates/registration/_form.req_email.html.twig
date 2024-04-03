@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+{{ form_errors(form) }}
+
+<div class="form-group">
+	{{ form_label(form.email) }}
+	{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+	{{ form_errors(form.email) }}
+</div>
+
+<button type="submit" class="btn btn-primary">Envoi d'un mail de vérification</button>
+{{ form_end(form) }}
