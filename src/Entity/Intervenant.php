@@ -171,4 +171,16 @@ class Intervenant
 
         return $this;
     }
+    public function getAverage() {
+        $sum = 0;
+        $count = 0;
+        foreach ($this->reviews as $review) {
+            $sum += $review->getGrade();
+            $count++;
+        }
+        if ($count == 0) {
+            return 0;
+        }
+        return $sum / $count;
+    }
 }

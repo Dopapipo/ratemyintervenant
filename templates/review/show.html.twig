@@ -1,35 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Review{% endblock %}
-
+{% block header %} {% endblock %}
+{% block footer %} {% endblock %}
 {% block body %}
-    <h1>Review</h1>
+   <div class="row">
+        <div class="col-12">
+            <h1>{{ review.grade }}</h1>
+            <main>{{ review.content }}</main>
+            <small>{{ review.author.name }}</small>
+        </div>
+   </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Intervenant concerné</th>
-               <td> <a href="{{ path('app_intervenant_show', {'id': review.intervenant.id}) }}">{{ review.intervenant.name }}</a></td>
 
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ review.content }}</td>
-            </tr>
-            <tr>
-                <th>Grade</th>
-                <td>{{ review.grade }}</td>
-            </tr>
-            <tr>
-                <th>Auteur</th>
-                <td>{{ review.author.name }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_review_index') }}">back to list</a>
-
-    <a href="{{ path('app_review_edit', {'id': review.id}) }}">edit</a>
-
-    {{ include('review/_delete_form.html.twig') }}
 {% endblock %}

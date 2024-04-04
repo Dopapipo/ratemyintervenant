@@ -4,25 +4,18 @@
 
 {% block body %}
     <h1>{{ intervenant.name }}</h1>
+    <h2>Moyenne: {{ intervenant.average }}/5</h2>
     <img height="200px" width="200 px" class="img-thumbnail" src = {{ asset("uploads/images/" ~ intervenant.profilePictureFileName) }}>
-    <table class="table">
-        <tbody>
+    <a class="dropdown-item" href="{{ path('app_blog_index')}}">Retour à la liste</a>
 
 
-            <tr>
-                <th>Reviews</th>
-                <td>
-                    <ul>
-                        {% for review in intervenant.reviews %}
-                            <li>
-                                <a href="{{ path('app_review_show', {'id': review.id}) }}">{{ review.content }}</a> Note : {{ review.grade }}
-                            </li>
-                        {% endfor %}
-                    </ul>
-            </tr>
+    <h1>Reviews</h1>
 
-        </tbody>
-    </table>
+        {% for review in intervenant.reviews %}
+    {%  include "review/show.html.twig" %}
+        {% endfor %}
+
+
 
 
 
