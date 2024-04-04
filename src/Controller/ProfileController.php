@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Form\ChangePasswordFormType;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class ProfileController extends AbstractController
@@ -33,6 +35,34 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('profile/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]
+        );
+    }
+    #[Route('/profile/reset-password', name: 'app_profile_reset_password', methods: ['GET', 'POST'])]
+    public function resetPassword(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
+    {
+        $user = $this->security->getUser();
+        $form = $this->createForm(ChangePasswordFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$userPasswordHasher->isPasswordValid($user, $form->get('password')->getData())) {
+                $this->addFlash('danger', 'Mot de passe actuel incorrect');
+                return $this->redirectToRoute('app_profile_reset_password');
+            }
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render('profile/reset_password.html.twig', [
             'user' => $user,
             'form' => $form,
         ]

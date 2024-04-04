@@ -3,35 +3,30 @@
 {% block title %}Review index{% endblock %}
 
 {% block body %}
-    <h1>Review index</h1>
+    <h1>Toutes les notes des intervenants</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Grade</th>
+                <th>Message</th>
+                <th>Note</th>
                 <th>Intervenant Concerné</th>
                 <th>Matière</th>
                 <th>Classe concernée</th>
                 <th>Auteur</th>
-                <th>actions</th>
+
             </tr>
         </thead>
         <tbody>
         {% for review in reviews %}
             <tr>
-                <td>{{ review.id }}</td>
                 <td>{{ review.content }}</td>
                 <td>{{ review.grade }}</td>
                 <td>{{ review.intervenant.name }}</td>
                 <td>{{review.matiere.name}}</td>
                 <td>{{ review.author.classe.name }}</td>
                 <td>{{ review.author.name }}</td>
-                <td>
-                    <a href="{{ path('app_review_show', {'id': review.id}) }}"><i class="fa-regular fa-eye" style="margin-right: 15px;"></i></a>
-                    <a href="{{ path('app_review_edit', {'id': review.id}) }}"><i class="fa-solid fa-pen" style="margin-right: 15px;"></i></a>
-                </td>
+
             </tr>
         {% else %}
             <tr>
@@ -41,5 +36,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_review_new') }}">Créer <i class="fa-solid fa-plus"></i></a>
 {% endblock %}
