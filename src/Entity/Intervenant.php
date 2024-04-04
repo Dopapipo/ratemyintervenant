@@ -31,7 +31,7 @@ class Intervenant
     private Collection $matieresEnseignees;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $profilePictureFileName = null;
+    private ?string $profilePictureFileName = "b006426e3e57f1f2c0b31e401fe8d21711839bc9.png";
 
     public function __construct()
     {
@@ -55,7 +55,10 @@ class Intervenant
     {
         return $this->name;
     }
-
+    public function getImagePath() {
+        $imagepath = "uploads/profilePictures/".$this->profilePictureFileName;
+        return $imagepath;
+    }
     public function setName(string $name): static
     {
         $this->name = $name;

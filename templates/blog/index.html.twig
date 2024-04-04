@@ -8,13 +8,13 @@
 
 {% block body %}
 {% for professeur in professeurs %}
-<div class="card inline" style="width: 18rem;">
-  <img src="" class="card-img-top" alt="...">
+<div class="card inline-flex" style="width: 18rem;">
+  <img src="{{ asset("uploads/images/" ~ professeur.profilePictureFileName) }}" class="card-img-top" alt="...">
   <div class="card-body">
-    <h1 class="card-title">{{ professeur.name }}</h5>
-    <a href='#' class="btn btn-primary">Voir</a>
+    <h1 class="card-title">{{ professeur.name }}</h1>
+    <a href='{{ path('app_intervenant_show', { 'id' : professeur.id}) }}' class="btn btn-primary">Voir</a>
 
-  </div>
+  </div></div>
 {% endfor %}
 
 {% endblock %}
