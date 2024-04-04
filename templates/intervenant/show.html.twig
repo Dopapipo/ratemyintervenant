@@ -7,6 +7,8 @@
     <h2>Moyenne: {{ intervenant.average }}/5</h2>
     <img height="200px" width="200 px" class="img-thumbnail" src = {{ asset("uploads/images/" ~ intervenant.profilePictureFileName) }}>
     <a class="dropdown-item" href="{{ path('app_blog_index')}}">Retour à la liste</a>
+    <a class="dropdown-item" href="{{ path('app_review_new', {"intervenantid":intervenant.id})}}">Laisser une note</a>
+
 
 
     <h1>Reviews</h1>

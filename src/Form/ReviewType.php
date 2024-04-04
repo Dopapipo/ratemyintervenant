@@ -29,10 +29,6 @@ class ReviewType extends AbstractType
                     'max' => 5,
                 ],
             ])
-            ->add('intervenant', EntityType::class, [
-                'class' => Intervenant::class,
-                'choice_label' => 'name',
-            ])
             ->add('matiere', EntityType::class, [
                 'class' => Matiere::class,
                 'choice_label' => 'name',

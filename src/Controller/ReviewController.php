@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Intervenant;
 use App\Entity\Review;
 use App\Form\ReviewType;
+use App\Repository\IntervenantRepository;
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,8 +24,8 @@ class ReviewController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_review_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route("/new/{intervenantid}", name: 'app_review_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, IntervenantRepository $intervenantRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $review = new Review();
@@ -32,10 +34,12 @@ class ReviewController extends AbstractController
         $review->setAuthor($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $intervenant = $intervenantRepository->find($request->get('intervenantid'));
+            $review->setIntervenant($intervenant);
             $entityManager->persist($review);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_review_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_intervenant_show', ['id'=> $request->get('intervenantid')], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('review/new.html.twig', [

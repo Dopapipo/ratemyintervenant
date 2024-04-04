@@ -77,12 +77,9 @@
 
 							{% if is_granted('ROLE_USER') %}
 								{# Contenu pour un utilisateur authentifié #}
-								{% if not is_granted('ROLE_ADMIN') %}
 									<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-								{% endif %}
 								<a class="dropdown-item" href="{{ path('app_blog_index')}}">Mes Intervenants</a>
 								<a class="dropdown-item" href="{{ path('app_profile')}}">Mon compte</a>
-								<a class="dropdown-item" href="{{ path('app_review_new') }}">Poster une review</a>
 							{% endif %}
 							{% if not app.user() %}
 								<div class="my-auto d-flex">
