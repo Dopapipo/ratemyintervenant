@@ -9,6 +9,7 @@ use App\Repository\IntervenantRepository;
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,6 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/review')]
 class ReviewController extends AbstractController
 {
+    private Security $security;
     #[Route('/', name: 'app_review_index', methods: ['GET'])]
     public function index(ReviewRepository $reviewRepository): Response
     {
@@ -78,10 +80,15 @@ class ReviewController extends AbstractController
     public function delete(Request $request, int $id, EntityManagerInterface $entityManager): Response
     {
         $review = $entityManager->getRepository(Review::class)->find($request->get('id'));
+        if ($this->security->getUser() === $review->getAuthor() || $this->security->isGranted('ROLE_ADMIN')) {
+            $intervenantid = $review->getIntervenant()->getId();
+            $entityManager->remove($review);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre commentaire a été supprimé avec succès');
+        }
         $intervenantid = $review->getIntervenant()->getId();
-        $entityManager->remove($review);
-        $entityManager->flush();
-        $this->addFlash('success', 'Votre commentaire a été supprimé avec succès');
+
         return $this->redirectToRoute('app_intervenant_show', ['id'=>$intervenantid], Response::HTTP_SEE_OTHER);
+
     }
 }
