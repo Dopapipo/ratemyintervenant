@@ -11,6 +11,19 @@
             <small>{{ review.author.name }}</small>
         </div>
    </div>
-
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="row">
+          <div class="col-12">
+                <a href="{{ path('app_review_delete', {'id': review.id}) }}" class="btn btn-danger">Supprimer</a>
+          </div>
+    </div>
+{% endif %}
+{# The and not part of the if is so that admins that posted comments don't see the button twice #}
+{% if app.user.id == review.author.id and not is_granted('ROLE_ADMIN') %}
+    <div class="row">
+          <div class="col-12">
+                <a href="{{ path('app_review_delete', {'id': review.id}) }}" class="btn btn-warning">Supprimer </a>
+          </div>
+        {% endif %}
 
 {% endblock %}

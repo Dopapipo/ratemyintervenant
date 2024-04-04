@@ -74,14 +74,14 @@ class ReviewController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_review_delete', methods: ['POST'])]
-    public function delete(Request $request, Review $review, EntityManagerInterface $entityManager): Response
+    #[Route('/delete/{id}', name: 'app_review_delete', methods: ['GET','DELETE'])]
+    public function delete(Request $request, int $id, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$review->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($review);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_review_index', [], Response::HTTP_SEE_OTHER);
+        $review = $entityManager->getRepository(Review::class)->find($request->get('id'));
+        $intervenantid = $review->getIntervenant()->getId();
+        $entityManager->remove($review);
+        $entityManager->flush();
+        $this->addFlash('success', 'Votre commentaire a été supprimé avec succès');
+        return $this->redirectToRoute('app_intervenant_show', ['id'=>$intervenantid], Response::HTTP_SEE_OTHER);
     }
 }
