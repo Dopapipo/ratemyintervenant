@@ -22,12 +22,17 @@ class IntervenantCrudController extends AbstractCrudController
         return [
             TextField::new('name'),
             AssociationField::new('classesTaught')
-                ->setLabel('Classes taught')
-                ->setRequired(false),
-                //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
+                ->setLabel('Classes enseignées')
+                ->setRequired(false)
+            ->hideOnIndex(),
+            ArrayField::new('classesTaught')->hideOnForm(),
+
+            //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             AssociationField::new('matieresEnseignees')
                 ->setLabel('Matieres enseignees')
-            ->setRequired(false),
+            ->setRequired(false)
+            ->hideOnIndex(),
+            ArrayField::new('matieresEnseignees')->hideOnForm(),
                 //->setRequired(false),
                 //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             ImageField::new('profilePictureFileName', 'Profile picture')

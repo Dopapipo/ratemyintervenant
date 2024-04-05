@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Matiere;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -23,7 +24,9 @@ class MatiereCrudController extends AbstractCrudController
             TextField::new('name'),
             AssociationField::new('intervenants')
                 ->setLabel('Intervenants')
-                ->setRequired(false),
+                ->setRequired(false)
+                ->onlyOnForms(),
+            ArrayField::new('intervenants')->hideOnForm(),
             //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             AssociationField::new('classe')
                 ->setLabel('Classe')
