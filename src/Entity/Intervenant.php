@@ -27,7 +27,8 @@ class Intervenant
     #[ORM\JoinTable(name: 'intervenant_classe')]
     private Collection $classesTaught;
 
-    #[ORM\OneToMany(targetEntity: Matiere::class, mappedBy: 'intervenant')]
+    #[ORM\ManyToMany(targetEntity: Matiere::class, inversedBy: 'intervenants')]
+    #[ORM\JoinTable(name: 'intervenant_matiere')]
     private Collection $matieresEnseignees;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -142,7 +143,7 @@ class Intervenant
     {
         if (!$this->matieresEnseignees->contains($matieresEnseignee)) {
             $this->matieresEnseignees->add($matieresEnseignee);
-            $matieresEnseignee->setIntervenant($this);
+            $matieresEnseignee->addIntervenant($this);
         }
 
         return $this;
@@ -151,10 +152,7 @@ class Intervenant
     public function removeMatieresEnseignee(Matiere $matieresEnseignee): static
     {
         if ($this->matieresEnseignees->removeElement($matieresEnseignee)) {
-            // set the owning side to null (unless already changed)
-            if ($matieresEnseignee->getIntervenant() === $this) {
-                $matieresEnseignee->setIntervenant(null);
-            }
+            $matieresEnseignee->removeIntervenant($this);
         }
 
         return $this;

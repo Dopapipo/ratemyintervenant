@@ -26,7 +26,8 @@ class IntervenantCrudController extends AbstractCrudController
                 ->setRequired(false),
                 //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             AssociationField::new('matieresEnseignees')
-                ->setLabel('Matieres enseignees'),
+                ->setLabel('Matieres enseignees')
+            ->setRequired(false),
                 //->setRequired(false),
                 //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             ImageField::new('profilePictureFileName', 'Profile picture')

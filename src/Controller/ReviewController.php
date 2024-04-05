@@ -58,7 +58,7 @@ class ReviewController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_review_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_review_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Review $review, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ReviewType::class, $review);
@@ -66,8 +66,8 @@ class ReviewController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_review_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre commentaire a été modifié avec succès');
+            return $this->redirectToRoute('app_intervenant_show', ['id' => $review->getIntervenant()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('review/edit.html.twig', [

@@ -21,8 +21,8 @@ class MatiereCrudController extends AbstractCrudController
     {
         return [
             TextField::new('name'),
-            AssociationField::new('intervenant')
-                ->setLabel('Intervenant')
+            AssociationField::new('intervenants')
+                ->setLabel('Intervenants')
                 ->setRequired(false),
             //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             AssociationField::new('classe')

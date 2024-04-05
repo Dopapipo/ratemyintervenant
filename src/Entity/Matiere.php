@@ -18,9 +18,8 @@ class Matiere
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'matieresEnseignees')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Intervenant $intervenant = null;
+    #[ORM\ManyToMany(targetEntity:Intervenant::class, mappedBy: 'matieresEnseignees')]
+    private Collection $intervenants;
 
     #[ORM\ManyToOne(inversedBy: 'matieres')]
     #[ORM\JoinColumn(nullable: false)]
@@ -32,6 +31,7 @@ class Matiere
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
+        $this->intervenants = new ArrayCollection();
     }
     public function __toString(): string
     {
@@ -56,15 +56,23 @@ class Matiere
         return $this;
     }
 
-    public function getIntervenant(): ?Intervenant
+    public function getIntervenants(): Collection
     {
-        return $this->intervenant;
+        return $this->intervenants;
     }
 
-    public function setIntervenant(?Intervenant $intervenant): static
+    public function addIntervenants(?Intervenant $intervenant): static
     {
-        $this->intervenant = $intervenant;
+        if (!$this->intervenants->contains($intervenant)) {
+            $this->intervenants->add($intervenant);
+        }
 
+
+        return $this;
+    }
+    public function removeIntervenants(?Intervenant $intervenant): static
+    {
+        $this->intervenants->removeElement($intervenant);
         return $this;
     }
 
