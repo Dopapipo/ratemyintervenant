@@ -3,7 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Classe;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -15,14 +18,23 @@ class ClasseCrudController extends AbstractCrudController
         return Classe::class;
     }
 
-/*
+
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('name')->setLabel('Nom de la classe'),
+            AssociationField::new('intervenants')
+                ->setLabel("Nb d'intervenants")
+                ->setRequired(false),
+            ArrayField::new('intervenants')->hideOnForm()->setLabel('Intervenants'),
         ];
     }
-*/
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return parent::configureFilters($filters)
+            ->add('name')
+            ->add('intervenants');
+    }
 }

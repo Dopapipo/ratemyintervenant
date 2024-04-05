@@ -24,7 +24,13 @@ class ProfileType extends AbstractType
                  'required' => true   ])
             ->add('lastName', TextType::class,
                 ['label' => 'Nom',
-                'required' => true]);
+                'required' => true])
+            ->add('classe', EntityType::class, [
+                'class' => Classe::class,
+                'choice_label' => 'name',
+                'label' => 'Classe',
+                'required' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

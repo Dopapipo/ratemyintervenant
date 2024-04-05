@@ -12,10 +12,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin_index')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
         //return parent::index();
@@ -46,11 +48,12 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+       // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Classe', 'fa-solid fa-school', Classe::class);
         yield MenuItem::linkToCrud('Intervenant', 'fa-solid fa-chalkboard-user', Intervenant::class);
         yield MenuItem::linkToCrud('Matiere', 'fa-solid fa-book', Matiere::class);
         yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
+        yield MenuItem::linkToUrl('Retour au site', 'fas fa-home', $this->generateUrl('app_home'));
 
 
 

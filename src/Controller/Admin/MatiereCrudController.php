@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Matiere;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -33,6 +34,13 @@ class MatiereCrudController extends AbstractCrudController
                 ->setRequired(false),
             //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
         ];
+    }
+    public function configureFilters(Filters $filters): Filters
+    {
+        return parent::configureFilters($filters)
+            ->add('name')
+            ->add('intervenants')
+            ->add('classe');
     }
 
 }
