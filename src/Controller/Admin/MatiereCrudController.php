@@ -26,12 +26,14 @@ class MatiereCrudController extends AbstractCrudController
             AssociationField::new('intervenants')
                 ->setLabel('Intervenants')
                 ->setRequired(false)
-                ->onlyOnForms(),
+                ->onlyOnForms()
+                ->setFormTypeOptionIfNotSet('by_reference', false),
             ArrayField::new('intervenants')->hideOnForm(),
             //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             AssociationField::new('classe')
                 ->setLabel('Classe')
-                ->setRequired(false),
+                ->setRequired(false)
+            ,
             //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
         ];
     }

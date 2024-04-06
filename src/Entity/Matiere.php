@@ -66,13 +66,16 @@ class Matiere
         if (!$this->intervenants->contains($intervenant)) {
             $this->intervenants->add($intervenant);
         }
-
+        if (!$intervenant->getMatieresEnseignees()->contains($this)) {
+            $intervenant->addMatieresEnseignee($this);
+        }
 
         return $this;
     }
     public function removeIntervenant(?Intervenant $intervenant): static
     {
         $this->intervenants->removeElement($intervenant);
+        $intervenant->getMatieresEnseignees()->removeElement($this);
         return $this;
     }
 
