@@ -22,11 +22,11 @@ class ClasseCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
             TextField::new('name')->setLabel('Nom de la classe'),
             AssociationField::new('intervenants')
-                ->setLabel("Nb d'intervenants")
-                ->setRequired(false),
+                ->setLabel("Intervenants")
+                ->setRequired(false)
+            ->setFormTypeOptionIfNotSet('by_reference', false),
             ArrayField::new('intervenants')->hideOnForm()->setLabel('Intervenants'),
         ];
     }

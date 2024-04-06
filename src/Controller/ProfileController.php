@@ -35,7 +35,7 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('profile/edit.html.twig', [
-            'user' => $user,
+            'makeadminview' => $user,
             'form' => $form,
         ]
         );
@@ -59,11 +59,11 @@ class ProfileController extends AbstractController
                 )
             );
             $entityManager->flush();
-
+            $this->addFlash('success', 'Mot de passe modifié avec succès');
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('profile/reset_password.html.twig', [
-            'user' => $user,
+            'makeadminview' => $user,
             'form' => $form,
         ]
         );

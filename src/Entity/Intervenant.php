@@ -116,7 +116,9 @@ class Intervenant
     {
         if (!$this->classesTaught->contains($classesTaught)) {
             $this->classesTaught->add($classesTaught);
-            $classesTaught->addIntervenant($this);
+            if (!$classesTaught->getIntervenants()->contains($this)) {
+                $classesTaught->addIntervenant($this);
+            }
         }
 
         return $this;
@@ -125,10 +127,13 @@ class Intervenant
     public function removeClassesTaught(Classe $classesTaught): static
     {
         if ($this->classesTaught->removeElement($classesTaught)) {
-            $classesTaught->removeIntervenant($this);
-        }
 
-        return $this;
+            if ($classesTaught->getIntervenants()->contains($this)) {
+                $classesTaught->removeIntervenant($this);
+            }
+
+    }        return $this;
+
     }
 
     /**
@@ -179,6 +184,6 @@ class Intervenant
         if ($count == 0) {
             return 0;
         }
-        return $sum / $count;
+        return  round($sum / $count, 2);
     }
 }

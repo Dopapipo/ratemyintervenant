@@ -19,7 +19,8 @@ class Review
 
 
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+
     private ?string $content = null;
 
     #[ORM\Column]

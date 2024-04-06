@@ -11,6 +11,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/blog')]
 class BlogController extends AbstractController
@@ -19,8 +20,10 @@ class BlogController extends AbstractController
     {
     }
     #[Route('', name: 'app_blog_index', methods: ['GET'])]
+    #[IsGranted("ROLE_USER")]
     public function index( Request $request): Response
     {
+
         $user = $this->security->getUser();
         $professeurs = $user->getClasse()->getIntervenants();
         return $this->render('blog/index.html.twig', [

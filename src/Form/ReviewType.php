@@ -19,8 +19,10 @@ class ReviewType extends AbstractType
     {
         $builder
             ->add('content', TextType::class, [
+                'required'=>false,
                 'attr' => [
                     'placeholder' => 'Message',
+
                 ],
             ])
             ->add('grade', RangeType::class, [

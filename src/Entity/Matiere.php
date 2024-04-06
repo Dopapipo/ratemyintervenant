@@ -61,7 +61,7 @@ class Matiere
         return $this->intervenants;
     }
 
-    public function addIntervenants(?Intervenant $intervenant): static
+    public function addIntervenant(?Intervenant $intervenant): static
     {
         if (!$this->intervenants->contains($intervenant)) {
             $this->intervenants->add($intervenant);
@@ -70,7 +70,7 @@ class Matiere
 
         return $this;
     }
-    public function removeIntervenants(?Intervenant $intervenant): static
+    public function removeIntervenant(?Intervenant $intervenant): static
     {
         $this->intervenants->removeElement($intervenant);
         return $this;

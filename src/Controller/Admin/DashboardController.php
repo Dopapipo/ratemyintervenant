@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Classe;
+use App\Entity\Contact;
 use App\Entity\Intervenant;
 use App\Entity\Matiere;
+use App\Entity\Review;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -17,7 +19,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin_index')]
-    #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
         //return parent::index();
@@ -28,7 +29,7 @@ class DashboardController extends AbstractDashboardController
         return $this->redirect($adminUrlGenerator->setController(ClasseCrudController::class)->generateUrl());
 
 
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
+        // Option 2. You can make your dashboard redirect to different pages depending on the makeadminview
         //
         // if ('jane' === $this->getUser()->getUsername()) {
         //     return $this->redirect('...');
@@ -53,6 +54,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Intervenant', 'fa-solid fa-chalkboard-user', Intervenant::class);
         yield MenuItem::linkToCrud('Matiere', 'fa-solid fa-book', Matiere::class);
         yield MenuItem::linkToCrud('User', 'fa-solid fa-user', User::class);
+        #yield MenuItem::linkToCrud('Review', 'fa-solid fa-user', Review::class);
+        yield MenuItem::linkToCrud('Contact', 'fa-solid fa-school', Contact::class);
+
         yield MenuItem::linkToUrl('Retour au site', 'fas fa-home', $this->generateUrl('app_home'));
 
 

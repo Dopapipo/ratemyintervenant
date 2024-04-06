@@ -22,6 +22,7 @@ class Classe
 
 
     #[ORM\ManyToMany(targetEntity: Intervenant::class, mappedBy: 'classesTaught')]
+    #[ORM\JoinTable(name: 'intervenant_classe')]
     private Collection $intervenants;
 
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'classe')]
@@ -106,6 +107,9 @@ class Classe
         if (!$this->intervenants->contains($intervenant)) {
             $this->intervenants->add($intervenant);
         }
+        if (!$intervenant->getClassesTaught()->contains($this)) {
+            $intervenant->addClassesTaught($this);
+        }
 
         return $this;
     }
@@ -113,6 +117,9 @@ class Classe
     public function removeIntervenant(Intervenant $intervenant): static
     {
         $this->intervenants->removeElement($intervenant);
+        if ($intervenant->getClassesTaught()->contains($this)) {
+            $intervenant->removeClassesTaught($this);
+        }
 
         return $this;
     }

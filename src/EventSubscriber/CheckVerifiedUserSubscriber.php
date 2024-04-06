@@ -28,7 +28,7 @@ class CheckVerifiedUserSubscriber implements EventSubscriberInterface
         $passport = $event->getPassport();
         $user = $passport->getUser();
         if (!$user instanceof User) {
-            throw new \Exception('Unexpected user type');
+            throw new \Exception('Unexpected makeadminview type');
         }
         if (!$user->isVerified()) {
             throw new AccountNotVerifiedException();

@@ -56,7 +56,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the user
+            // generate a signed url and email it to the makeadminview
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 ($this->emailService->createMail($user->getEmail(), 'Please confirm your Email', 'confirmation_email.html.twig'))
             );
@@ -115,7 +115,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RequestVerifyUserEmailType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // generate a signed url and email it to the user
+            // generate a signed url and email it to the makeadminview
             $user =  $userRepository->findOneByEmail($form->get('email')->getData());
             if ($user) {
                 $this->emailVerifier->sendEmailConfirmation(

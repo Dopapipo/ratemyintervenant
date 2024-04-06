@@ -18,6 +18,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class ReviewController extends AbstractController
 {
     private Security $security;
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
     #[Route('/', name: 'app_review_index', methods: ['GET'])]
     public function index(ReviewRepository $reviewRepository): Response
     {

@@ -25,7 +25,7 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($contact);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Votre message a bien été envoyé');
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 

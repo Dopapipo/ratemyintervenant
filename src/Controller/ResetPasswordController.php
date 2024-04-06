@@ -56,13 +56,13 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Confirmation page after a user has requested a password reset.
+     * Confirmation page after a makeadminview has requested a password reset.
      */
     #[Route('/check-email', name: 'app_check_email')]
     public function checkEmail(): Response
     {
-        // Generate a fake token if the user does not exist or someone hit this page directly.
-        // This prevents exposing whether or not a user was found with the given email address or not
+        // Generate a fake token if the makeadminview does not exist or someone hit this page directly.
+        // This prevents exposing whether or not a makeadminview was found with the given email address or not
         if (null === ($resetToken = $this->getTokenObjectFromSession())) {
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
@@ -73,7 +73,7 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Validates and process the reset URL that the user clicked in their email.
+     * Validates and process the reset URL that the makeadminview clicked in their email.
      */
     #[Route('/reset/{token}', name: 'app_reset_password')]
     public function reset(Request $request, UserPasswordHasherInterface $passwordHasher, TranslatorInterface $translator, ?string $token = null): Response
@@ -139,7 +139,7 @@ class ResetPasswordController extends AbstractController
             'email' => $emailFormData,
         ]);
 
-        // Do not reveal whether a user account was found or not.
+        // Do not reveal whether a makeadminview account was found or not.
         if (!$user) {
 
             return $this->redirectToRoute('app_check_email');
@@ -149,9 +149,9 @@ class ResetPasswordController extends AbstractController
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
 
         } catch (ResetPasswordExceptionInterface $e) {
-            // If you want to tell the user why a reset email was not sent, uncomment
+            // If you want to tell the makeadminview why a reset email was not sent, uncomment
             // the lines below and change the redirect to 'app_forgot_password_request'.
-            // Caution: This may reveal if a user is registered or not.
+            // Caution: This may reveal if a makeadminview is registered or not.
             //
             $this->addFlash('reset_password_error', sprintf(
                 '%s - %s',
