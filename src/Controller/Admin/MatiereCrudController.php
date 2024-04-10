@@ -22,7 +22,7 @@ class MatiereCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name'),
+            TextField::new('name')->setLabel('Nom'),
             AssociationField::new('intervenants')
                 ->setLabel('Intervenants')
                 ->setRequired(false)

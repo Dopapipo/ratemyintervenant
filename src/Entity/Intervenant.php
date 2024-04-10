@@ -30,9 +30,9 @@ class Intervenant
     #[ORM\ManyToMany(targetEntity: Matiere::class, inversedBy: 'intervenants')]
     #[ORM\JoinTable(name: 'intervenant_matiere')]
     private Collection $matieresEnseignees;
-
+    //Default profile picture is a question mark
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $profilePictureFileName = "b006426e3e57f1f2c0b31e401fe8d21711839bc9.png";
+    private ?string $profilePictureFileName = "73a6e95ceb9a9fc122eec56c23caf2945e4f3bf1.png";
 
     public function __construct()
     {
