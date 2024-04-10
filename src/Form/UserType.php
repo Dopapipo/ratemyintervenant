@@ -28,6 +28,7 @@ class UserType extends AbstractType
             ->add('classe', EntityType::class, [
                 'class' => Classe::class,
                 'choice_label' => 'name',
+
             ])
             ->add('roles', ChoiceType::class, [
                 'multiple' => true,

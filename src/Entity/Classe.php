@@ -21,6 +21,7 @@ class Classe
 
 
 
+
     #[ORM\ManyToMany(targetEntity: Intervenant::class, mappedBy: 'classesTaught')]
     private Collection $intervenants;
 
