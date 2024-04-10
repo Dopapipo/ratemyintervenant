@@ -37,10 +37,7 @@ class AdminUserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            $classe = new Classe();
-            $classe->setName("Admin");
-            $entityManager->persist($classe);
-            $user->setClasse($classe);
+
             $user->setIsVerified(true);
             $entityManager->persist($user);
             $entityManager->flush();
