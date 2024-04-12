@@ -43,8 +43,6 @@ class IntervenantCrudController extends AbstractCrudController
                 ->setUploadDir('public/uploads/images')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),
-
-
         ];
 
     }
@@ -56,5 +54,6 @@ class IntervenantCrudController extends AbstractCrudController
             ->add('matieresEnseignees');
 
     }
+
 }
 

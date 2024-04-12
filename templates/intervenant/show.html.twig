@@ -1,25 +1,65 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/show_intervenant.css') }}">
+{% endblock %}
+
 {% block title %}Intervenant{% endblock %}
 
 {% block body %}
-    <h1>{{ intervenant.name }}</h1>
-    <h2>Moyenne: {{ intervenant.average }}/5</h2>
-    <img height="200px" width="200 px" class="img-thumbnail" src = {{ asset("uploads/images/" ~ intervenant.profilePictureFileName) }}>
-    <a class="dropdown-item" href="{{ path('app_blog_index')}}">Retour à la liste</a>
-    <a class="dropdown-item" href="{{ path('app_review_new', {"intervenantid":intervenant.id})}}">Laisser une note</a>
+    <div class="container">
+        <div class="main-body">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href={{path('app_home')}}>Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Intervenants</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{intervenant.name}}</li>
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
 
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="{{ asset('uploads/images/' ~ intervenant.profilePictureFileName) }}" alt="{{ intervenant.name }}" class="rounded-circle" width="150">
+                                <div class="mt-3">
+                                    <h4>{{ intervenant.name }}</h4>
+                                    <p class="text-secondary mb-1">Full Stack Developer</p>
+                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    <!-- Afficher la note moyenne -->
+                                    <div class="stats">
+                                        <h6 class="mb-0">Note Moyenne</h6>
+                                        <span>{{ intervenant.average }}</span>
+                                    </div>
+                                    <a class="btn btn-primary" href={{ path('app_review_new', {"intervenantid":intervenant.id})}}>Noter</a>
+                                    <a class="btn btn-outline-primary" href="{{ path('app_blog_index')}}">Retour à la liste</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-md-8">
+                    <h1>Reviews</h1>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <!-- Afficher les deux dernières critiques -->
 
-    <h1>Reviews</h1>
+                            {% for review in intervenant.reviews|slice(-2) %}
+                                {% include "review/show.html.twig" %}
+                            {% endfor %}
+                        </div>
+                    </div>
 
-        {% for review in intervenant.reviews %}
-    {%  include "review/show.html.twig" %}
-        {% endfor %}
+                    <!-- Ajouter plus de sections si nécessaire -->
 
+                </div>
+            </div>
 
-
-
-
-
+        </div>
+    </div>
 {% endblock %}

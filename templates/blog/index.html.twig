@@ -1,20 +1,36 @@
-{%  extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block title %}Accueil{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
 {% endblock %}
 
 {% block body %}
-{% for professeur in professeurs %}
-<div class="card inline-flex" style="width: 18rem;">
-  <img src="{{ asset("uploads/images/" ~ professeur.profilePictureFileName) }}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h1 class="card-title">{{ professeur.name }}</h1>
-    <a href='{{ path('app_intervenant_show', { 'id' : professeur.id}) }}' class="btn btn-primary">Voir</a>
+  <div class="row">
+    {% for professeur in professeurs %}
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card">
+          <img src="{{ asset("uploads/images/" ~ professeur.profilePictureFileName) }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ professeur.name }}</h5>
+            <span>{{ professeur.average }}</span>
 
-  </div></div>
-{% endfor %}
+            {% if professeur.matieresEnseignees is not empty %}
+              <p class="card-text text-muted">Matière(s) enseignée(s):</p>
+              <ul>
+                {% for matiere in professeur.matieresEnseignees %}
+                  <li>{{ matiere.name }}</li> {% endfor %}
+              </ul>
+            {% else %}
+              <p class="card-text text-muted" style="font-size: 0.8rem;">Aucune matière enseignée.</p>
+            {% endif %}
+            <a href="{{ path('app_intervenant_show', { 'id' : professeur.id}) }}" class="btn btn-primary">Voir</a>
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 
 {% endblock %}
