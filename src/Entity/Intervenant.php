@@ -43,7 +43,6 @@ class Intervenant
 
     public function __toString(): string
     {
-        // Retourne le nom de l'intervenant
         return $this->name;
     }
 
@@ -182,8 +181,8 @@ class Intervenant
             $count++;
         }
         if ($count == 0) {
-            return 0;
+            return "pas noté";
         }
-        return  round($sum / $count, 2);
+        return  (string)round($sum / $count, 2)."/5";
     }
 }
