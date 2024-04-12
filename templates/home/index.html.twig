@@ -1,51 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %} 
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-    
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/home.css') }}">
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="jumbotron text-center">
-            <h1>Rate My Intervenant</h1>
-            <p>Un endroit où les étudiants prennent la parole</p>
-            <p>
-                <a class="btn btn-primary btn-lg" href="{{ path('app_blog_index') }}" role="button">Commencer</a>
-                <a class="btn btn-secondary btn-lg" href="{{ path('app_review_index') }}" role="button">Regarder les commentaires</a>
-            </p>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <h2>À propos</h2>
-                <p>Découvrez qui nous sommes et ce que nous faisons.</p>
-                <p>
-                    <a class="btn btn-secondary" href="{{ path('app_home_about') }}" role="button">En savoir plus &raquo;</a>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h2>Services</h2>
-                <p>Découvrez les services que nous offrons.</p>
-                <p>
-                    <a class="btn btn-secondary" href="{{ path('app_home_services') }}" role="button">Explorer &raquo;</a>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h2>Contact</h2>
-                <p>Vous avez des questions? Contactez-nous!</p>
-                <p>
-                    <a class="btn btn-secondary" href="{{ path('app_contact_new') }}" role="button">Nous contacter &raquo;</a>
-                </p>
-            </div>
-        </div>
-
-        <hr>
-
-    </div>
-    <!-- /container -->
+	<div class="container">
+		<div class="jumbotron-wrapper">
+			<div class="jumbotron">
+				<div class="title-subtitle">
+					<p class="title">RATE MY INTERVENANT</p>
+					<p class="subtitle">Un endroit où les étudiants prennent la parole!</p>
+				</div>
+				<p>
+					<a class="btn btn-secondary btn-lg btn-start" href="{{ path('app_blog_index') }}" role="button">Commencer</a>
+				</p>
+				<p>
+					<a class="btn btn-secondary btn-lg btn-comment" href="{{ path('app_review_index') }}" role="button">Regarder les commentaires</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<!-- /container -->
 {% endblock %}
-

@@ -2,10 +2,15 @@
 
 {% block title %}Nos Services{% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/services.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container">
-        <h1>Nos Services</h1>
-        <div style="border: 1px solid #ccc; padding: 20px;">
+        <h1>Nos Services: </h1>
+        <div class="container-2">
             <h2>Notation des Intervenants</h2>
             <p>Notre site propose un service de notation des intervenants de nos formations.</p>
             <p>Nous nous engageons à ne retenir que les meilleurs intervenants, ce qui garantit la qualité de nos formations.</p>

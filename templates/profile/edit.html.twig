@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer mon profil{% endblock %}
+{% block title %}Modifier mon profil
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/edit_profile.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Modifier mon profil</h1>
-
-    {{ include('profile/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_home') }}">Rtour au site</a>
-
-{% endblock %}
+	<h1>Modifier mon profil</h1>
+	<div class="container justify-content-center">
+		{{ include('profile/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+	</div>
+	<a href="{{ path('app_home') }}">Retour au site</a>
+</div>{% endblock %}

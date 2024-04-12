@@ -2,6 +2,11 @@
 
 {% block title %}Connexion{% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="row justify-content-center">
@@ -53,7 +58,7 @@
                     <!-- Boutons d'inscription via réseaux sociaux -->
                     <div class="text-center">
                         <p>Pas encore membre ? <a href= "{{ path('app_register')}}" >Inscription</a></p>
-                        <button type="button" class="btn btn-link btn-floating mx-1">
+                        <!--<button type="button" class="btn btn-link btn-floating mx-1">
                             <i class="fab fa-facebook-f"></i>
                         </button>
 
@@ -67,7 +72,7 @@
 
                         <button type="button" class="btn btn-link btn-floating mx-1">
                             <i class="fab fa-github"></i>
-                        </button>
+                        </button>-->
                     </div>
                 </form>
             </div>
