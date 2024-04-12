@@ -21,12 +21,13 @@ class IntervenantCrudController extends AbstractCrudController
     {
 
         return [
-            TextField::new('name'),
+            TextField::new('name')
+            ->setLabel('Nom'),
             AssociationField::new('classesTaught')
                 ->setLabel('Classes enseignées')
                 ->setRequired(false)
             ->hideOnIndex(),
-            ArrayField::new('classesTaught')->hideOnForm(),
+            ArrayField::new('classesTaught')->setLabel('Classes')->hideOnForm(),
 
             //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             AssociationField::new('matieresEnseignees')
@@ -38,6 +39,7 @@ class IntervenantCrudController extends AbstractCrudController
                 //->onlyOnForms(), // Affiche le champ uniquement dans les formulaires
             ImageField::new('profilePictureFileName', 'Profile picture')
                 ->setBasePath('uploads/images/')
+                ->setLabel('Photo de profil')
                 ->setUploadDir('public/uploads/images')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),

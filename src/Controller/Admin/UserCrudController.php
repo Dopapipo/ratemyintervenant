@@ -38,7 +38,6 @@ class UserCrudController extends AbstractCrudController
             ->renderAsSwitch(false),
             BooleanField::new('isBanned')
             ->setLabel("Est banni")
-            ->hideOnForm()
             ->renderAsSwitch(false)
 
         ];

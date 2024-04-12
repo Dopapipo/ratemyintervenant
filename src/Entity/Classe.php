@@ -21,8 +21,8 @@ class Classe
 
 
 
+
     #[ORM\ManyToMany(targetEntity: Intervenant::class, mappedBy: 'classesTaught')]
-    #[ORM\JoinTable(name: 'intervenant_classe')]
     private Collection $intervenants;
 
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'classe')]
@@ -34,7 +34,6 @@ class Classe
 
     public function __construct()
     {
-        $this->students = new ArrayCollection();
         $this->intervenants = new ArrayCollection();
         $this->students = new ArrayCollection();
         $this->matieres = new ArrayCollection();

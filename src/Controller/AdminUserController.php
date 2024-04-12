@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Classe;
 use App\Entity\User;
 use App\Form\AdminUserType;
 use App\Repository\UserRepository;
@@ -36,6 +37,10 @@ class AdminUserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            $classe = new Classe();
+            $classe->setName("Admin");
+            $entityManager->persist($classe);
+            $user->setClasse($classe);
             $user->setIsVerified(true);
             $entityManager->persist($user);
             $entityManager->flush();
