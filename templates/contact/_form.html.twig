@@ -1,20 +1,19 @@
 {{ form_start(form) }}
-<div class="container">
-    <div class="form-group">
-    {{ form_label(form.name) }}
-    {{ form_widget(form.name, {'attr':{'class': 'form-control', 'id':'name', 'placeholder':'Entrez votre nom'} }) }}
-</div>
-<div class="form-group">
-    {{ form_label(form.email) }}
-    {{ form_widget(form.email, {'attr':{'class': 'form-control', 'id':'email', 'placeholder':'Entrez votre email'}}) }}
-</div>
-<div class="form-group">
-    {{ form_label(form.message) }}
-    {{ form_widget(form.message, {'attr':{'class': 'form-control', 'id':'message', 'placeholder':'Entrez votre message'}}) }}
-</div>
-    <div class="form-group">
-
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    </div>
-</div>
+	<div class="container">
+		<div class="form-group">
+			{{ form_label(form.name) }}
+			{{ form_widget(form.name, {'attr':{'class': 'form-control', 'id':'name', 'placeholder':'Entrez votre nom'} }) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.email) }}
+			{{ form_widget(form.email, {'attr':{'class': 'form-control', 'id':'email', 'placeholder':'Entrez votre email'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(form.message) }}
+			{{ form_widget(form.message, {'attr':{'class': 'form-control', 'id':'message', 'placeholder':'Entrez votre message'}}) }}
+		</div>
+		<div class="form-group">
+			<button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+		</div>
+	</div>
 {{ form_end(form) }}

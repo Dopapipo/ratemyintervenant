@@ -8,16 +8,14 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<h1>Verifie ton Email</h1>
-
-		<p>Entre ton adresse ci-dessous afin que nous t'envoyions un mail de confirmation:</p>
-
-		{{ include('registration/_form.req_email.html.twig', {'button_label': 'Update'}) }}
-
-
-		<p class="text-center">Tu as déjà vérifié ton email ?
-			<a href="{{ path('app_login') }}" class="btn btn-secondary">Se connecter</a>
-		</p>
+	<div class="container d-flex justify-content-center">
+		<div>
+			<h1 class="h2 mb-3 font-weight-normal text-center">Vérifie ton Email</h1>
+			<p class="text-center mb-4">Entre ton adresse ci-dessous afin que nous t'envoyions un mail de confirmation:</p>
+			{{ include('registration/_form.req_email.html.twig', {'button_label': 'Update'}) }}
+			<p class="text-center mt-4">Tu as déjà vérifié ton email ?
+				<a href="{{ path('app_login')}}">Connexion</a>
+			</p>
+		</div>
 	</div>
 {% endblock %}

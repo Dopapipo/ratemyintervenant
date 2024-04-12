@@ -1,24 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/register.css') }}">
 {% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
 
-    <div class="container">
-        <div class="form-container">
-            <h1>Register</h1>
-
-            {{ form_errors(registrationForm) }}
-
-            {% include 'registration/_form.register.html.twig' with {'form': registrationForm} %}
-        </div>
-    </div>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="form-container">
+					<h1 class="h2 mb-3 font-weight-normal text-center">Inscription</h1>
+					{{ form_errors(registrationForm) }}
+					{% include 'registration/_form.register.html.twig' with {'form': registrationForm} %}
+					<p class="text-center">Déjà inscrit ?
+						<a href="{{ path('app_login')}}">Connexion</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

@@ -10,101 +10,103 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css"/>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-		 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 		 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		 <script src="{{ asset('js/header.js') }}"></script>
+		 <script src="{{ asset('js/footer.js') }}"></script>
 			{% block stylesheets %}
+			<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Bebas+Neue&family=Patrick+Hand+SC&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link
+			href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Bebas+Neue&family=Bungee+Shade&family=Patrick+Hand+SC&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 			 <script src="https://kit.fontawesome.com/5d94f6b61f.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="{{ asset('styles/form.css') }}"/> 
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>
-
-
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-		<script src="https://kit.fontawesome.com/5d94f6b61f.js" crossorigin="anonymous"></script>
-		<script>
-			// Attend que le document soit chargé
-			document.addEventListener("DOMContentLoaded", function() {
-				// Récupère le bouton du dropdown et son menu
-				var dropdownBtn = document.getElementById("adminDropdown");
-				var dropdownMenu = document.querySelector(".dropdown-menu");
-
-				// Ajoute un écouteur d'événement pour le clic sur le bouton dropdown
-				dropdownBtn.addEventListener("click", function(event) {
-					// Empêche le comportement par défaut du lien
-					event.preventDefault();
-					// Affiche ou cache le menu dropdown en fonction de son état actuel
-					if (dropdownMenu.classList.contains("show")) {
-						dropdownMenu.classList.remove("show");
-					} else {
-						dropdownMenu.classList.add("show");
-					}
-				});
-
-				// Ajoute un écouteur d'événement pour fermer le menu dropdown lorsque l'utilisateur clique à l'extérieur
-				document.addEventListener("click", function(event) {
-					if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
-						dropdownMenu.classList.remove("show");
-					}
-				});
-			});
-		</script>
+			<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>
+			<link rel="stylesheet" href="{{asset('styles/app.css')}}"/>
+			<link rel="stylesheet" href="{{ asset('styles/form.css') }}"/>
+			<link rel="stylesheet" href="{{ asset('styles/header.css') }}"/>
+			<link rel="stylesheet" href="{{ asset('styles/footer.css') }}"/>
+		 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+			 <script src="https://kit.fontawesome.com/5d94f6b61f.js" crossorigin="anonymous"></script>
+			 <script>document.addEventListener("DOMContentLoaded", function() {
+																																						var dropdownBtn = document.getElementById("adminDropdown");
+																																						var dropdownMenu = document.querySelector(".dropdown-menu");
+																																						
+																																							// Ajoute un écouteur d'événement pour le clic sur le bouton dropdown
+																																						dropdownBtn.addEventListener("click", function(event) {
+																																							// Empêche le comportement par défaut du lien
+																																							event.preventDefault();
+																																							// Affiche ou cache le menu dropdown en fonction de son état actuel
+																																							if (dropdownMenu.classList.contains("show")) {
+																																								dropdownMenu.classList.remove("show");
+																																							} else {
+																																								dropdownMenu.classList.add("show");
+																																							}
+																																					 	});
+																																							// Ajoute un écouteur d'événement pour fermer le menu dropdown lorsque l'utilisateur clique à l'extérieur
+																																						document.addEventListener("click", function(event) {
+																																							if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+																																								dropdownMenu.classList.remove("show");
+																																							}
+																																						});
+																																					});
+																																				</script>
 
 		{% endblock %}
 
 		{# Ajouter le lien vers le fichier CSS de Bootstrap #}
-		{% block header %}
-	<body class="d-flex flex-column min-vh-100">
-
-			<div class="container-fluid my-1">
-				<div class="d-flex justify-content-between align-items-center">
-					<div class="my-auto">
-						<a class="dropdown-item" href="{{ path('app_home') }}">
-							<i class="fa-solid fa-house fa-2x"></i>
-						</a>
-					</div>
-					<div class="my-auto">
-						<img src="{{ asset('miage.png') }}" alt="Petite image" width="300">
-					</div>
-					<div class="my-auto">
-						<div
-							class="dropdown">
-							{# Gérer les différentes vues en fonction des rôles de l'utilisateur #}
-							{% if is_granted('ROLE_ADMIN') %}
-								{# Contenu pour un administrateur #}
-								<a class="dropdown-item" href="{{ path('admin_index') }}">Admin Dashboard</a>
-
-
-							{% endif %}
-
-							{% if is_granted('ROLE_USER') %}
-								{# Contenu pour un utilisateur authentifié #}
-									<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-								<a class="dropdown-item" href="{{ path('app_blog_index')}}">Mes Intervenants</a>
-								<a class="dropdown-item" href="{{ path('app_profile')}}">Mon compte</a>
-							{% endif %}
-							{% if not app.user() %}
-								<div class="my-auto d-flex">
-									<a class="dropdown-item" href="{{ path('app_register') }}">
-										<i class="fa-solid fa-user-plus fa-2x"></i>
+		<body class="d-flex flex-column min-vh-100">
+			{% block header %}
+				<div class="container-fluid my-1 header-menu sticky-top">
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="my-auto">
+							<a class="dropdown-item" href="{{ path('app_home') }}">
+								<img class="logo-image" src="{{ asset('miage2.png') }}" alt="petite image" width="300">
+							</a>
+						</div>
+						<div class="my-auto">
+							<div
+								class="dropdown d-flex justify-content-between align-items-center">
+								{# Gérer les différentes vues en fonction des rôles de l'utilisateur #}
+								{% if is_granted('ROLE_USER') %}
+									{# Contenu pour un utilisateur authentifié #}
+									<a class="dropdown-item" href="{{ path('app_blog_index')}}" data-tooltip="Mes Intervenants">
+										<i class="fa fa-solid fa-user-graduate"></i>
 									</a>
-									<a class="dropdown-item" href="{{ path('app_login') }}">
-										<i class="fa-solid fa-right-to-bracket fa-2x"></i>
+									<a class="dropdown-item" href="{{ path('app_profile')}}" data-tooltip="Mon compte">
+										<i class="fa fa-regular fa-user fa-1x"></i>
 									</a>
-									<a class="dropdown-item" href="{{ path('app_request_verify_email') }}">
-										<i class="fa-solid fa-envelope-open fa-2x"></i>
-										Resend
+									<a class="dropdown-item" href="{{ path('app_logout') }}" data-tooltip="Déconnexion">
+										<i class="fa fa-solid fa-user-slash fa-1x"></i>
 									</a>
-								</div>
-								{# Contenu pour un utilisateur non authentifié #}
-
-							{% endif %}
+								{% endif %}
+								{% if is_granted('ROLE_ADMIN') %}
+									{# Contenu pour un administrateur #}
+									<a class="dropdown-item" href="{{ path('admin_index') }}" data-tooltip="Menu d'admin">
+										<i class="fa fa-solid fa-lock fa-1x"></i>
+									</a>
+								{% endif %}
+								{% if not app.user() %}
+									<a class="dropdown-item" href="{{ path('app_register') }}" data-tooltip="Inscription">
+										<i class="fa fa-solid fa-user-plus fa-1x"></i>
+									</a>
+									<a class="dropdown-item" href="{{ path('app_login') }}" data-tooltip="Connexion">
+										<i class="fa fa-regular fa-user fa-1x"></i>
+									</a>
+									<a class="dropdown-item" href="{{ path('app_request_verify_email') }}" data-tooltip="Renvoyer">
+										<i class="fa fa-regular fa-envelope-open fa-1x"></i>
+									</a>
+									{# Contenu pour un utilisateur non authentifié #}
+								{% endif %}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
 			{% endblock %}
-			<hr
-			class="hrCustom w-100">
+
 			{# Afficher les messages flash #}
 			{% for label, messages in app.flashes %}
 				{% for message in messages %}
@@ -115,15 +117,31 @@
 			{% endfor %}
 
 			{% block body %}{% endblock %}
-{% block footer %}
-			<div
-				class="footer mt-auto" style="margin-top: 10px">
-				<!-- Copyright -->
-				<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-					<p>&copy; 2024 MIAGE CORPORATE. Tous droits réservés.</p>
+			{% block footer %}
+				<div class="footer global-footer mt-auto">
+					<div class="row">
+						<div class="col-md-4">
+							<p>
+								<a class="footer-link" href="{{ path('app_home_about') }}" role="button">À propos</a>
+							</p>
+						</div>
+						<div class="col-md-4">
+							<p>
+								<a class="footer-link" href="{{ path('app_home_services') }}" role="button">Services</a>
+							</p>
+						</div>
+						<div class="col-md-4">
+							<p>
+								<a class="footer-link" href="{{ path('app_contact_new') }}" role="button">Contact</a>
+							</p>
+						</div>
+					</div>
+					<!-- Copyright -->
+					<div class="footer-credits">
+						<p>&copy; 2024 MIAGE CORPORATE. Tous droits réservés.</p>
+					</div>
 				</div>
-			</div>
-{% endblock %}
+			{% endblock %}
 		</body>
 	</head>
 </html>

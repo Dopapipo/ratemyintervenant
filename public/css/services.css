@@ -1,17 +1,22 @@
-.container {
+.container{
     margin-top: 20px;
 }
 
-.container>h1 {
+.container>h1{
     text-align: center;
 }
 
 .container-2 {
-    margin-bottom: 30px;
+    margin-top: 50px;
+    margin-bottom: 0px;
     border-radius: 20px;
     padding-top: 20px;
     padding-bottom: 10px;
     padding-left: 40px;
     padding-right: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-2>h2{
+    margin-bottom: 20px;
 }

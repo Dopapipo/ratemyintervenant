@@ -1,4 +1,4 @@
-/* CSS pour centrer le formulaire */
+/* CSS to center the form and title */
 .container {
     display: flex;
     justify-content: center;
@@ -12,9 +12,11 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+    text-align: center;
+    /* Center the content inside the form container */
 }
 
-/* CSS pour styliser les champs de formulaire */
+/* Additional styling for form fields */
 .form-group {
     margin-bottom: 20px;
 }
@@ -27,7 +29,7 @@
     border: 1px solid #ccc;
 }
 
-.btn-primary {
+.container .btn {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -37,6 +39,6 @@
     cursor: pointer;
 }
 
-.btn-primary:hover {
+.container .btn:hover {
     background-color: #0056b3;
 }
