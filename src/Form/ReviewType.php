@@ -9,6 +9,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,12 +19,13 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content', TextType::class, [
+            ->add('content', TextareaType::class, [
                 'required'=>false,
                 'label' => 'Message',
                 'attr' => [
-                    'placeholder' => 'Avis sur l\'intervenant',
-                    'maxlength'=>2000
+                    'placeholder' => '2000 caractères maximum',
+                    'maxlength'=>2000,
+
 
 
                 ],

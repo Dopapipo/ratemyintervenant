@@ -8,6 +8,9 @@
 .form-control::placeholder {
     color: #999; /* Adjust the color as needed */
 }
+#review_content {
+    height: 200px;
+}
 .btn {
     padding: 10px 20px; /* Adjust padding as desired */
     border-radius: 5px; /* Add some rounding */
