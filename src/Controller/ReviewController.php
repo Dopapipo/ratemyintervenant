@@ -105,12 +105,13 @@ class ReviewController extends AbstractController
             $this->getUser()->removeLikedReview($review);
             $review->setLikes($review->getLikes() - 1);
             $entityManager->flush();
+            $this->addFlash('success', 'La review a été unlikée avec succès');
             return $this->redirect($request->headers->get('referer'));
         }
         $this->getUser()->addLikedReview($review);
         $review->setLikes($review->getLikes() + 1);
         $entityManager->flush();
-
+        $this->addFlash('success', 'La review a été likée avec succès');
         return $this->redirect($request->headers->get('referer'));
     }
 
@@ -122,11 +123,13 @@ class ReviewController extends AbstractController
             $this->getUser()->removeDislikedReview($review);
             $review->setDislikes($review->getDislikes() - 1);
             $entityManager->flush();
+            $this->addFlash('success', 'La review a été undislikée avec succès');
             return $this->redirect($request->headers->get('referer'));
         }
         $review->setDislikes($review->getDislikes() + 1);
         $this->getUser()->addDislikedReview($review);
         $entityManager->flush();
+        $this->addFlash('success', 'La review a été dislikée avec succès');
         return $this->redirect($request->headers->get('referer'));
     }
 
