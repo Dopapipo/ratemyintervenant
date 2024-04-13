@@ -10,8 +10,8 @@
             <main>{{ review.content }}</main>
             <small>{{ review.author.name }}</small>
             <small>{{ review.likes }}</small>
-            <small>{{ review.dislikes }}</small>
             <a href={{ path('like_review', {"id":review.id}) }}>Like</a>
+            <small>{{ review.dislikes }}</small>
             <a href={{ path('dislike_review', {"id":review.id}) }}>Dislike</a>
         </div>
    </div>
