@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('css/new_review.css') }}">
 {% endblock %}
 
-{% block title %}New Review{% endblock %}
+{% block title %}Poster une Review{% endblock %}
 
 {% block body %}
     <div class="container mt-5">  <div class="row justify-content-center">
@@ -16,8 +16,8 @@
                     <div class="card-body">
                         <h1 class="mb-4">{{ block('title') }}</h1>
 
-                        {{ include('review/_form.html.twig', {'button_label': 'Create'}) }}
-                        <a href="{{ path('app_review_index') }}" class="btn btn-secondary mt-4">Back to List</a>
+                        {{ include('review/_form.html.twig', {'button_label': 'Poster'}) }}
+                        <a href="{{ path('app_intervenant_show', {"id":review.intervenant.id}) }}" class="btn btn-secondary mt-4">Retour à l'intervenant</a>
                     </div>
                 </div>
             </div>

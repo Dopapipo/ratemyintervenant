@@ -39,10 +39,10 @@ class ReviewController extends AbstractController
         $form = $this->createForm(ReviewType::class, $review);
         $form->handleRequest($request);
         $review->setAuthor($this->getUser());
-
+        $intervenant = $intervenantRepository->find($request->get('intervenantid'));
+        $review->setIntervenant($intervenant);
         if ($form->isSubmitted() && $form->isValid()) {
-            $intervenant = $intervenantRepository->find($request->get('intervenantid'));
-            $review->setIntervenant($intervenant);
+
             $entityManager->persist($review);
             $entityManager->flush();
 

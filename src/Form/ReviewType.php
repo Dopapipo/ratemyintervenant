@@ -20,12 +20,15 @@ class ReviewType extends AbstractType
         $builder
             ->add('content', TextType::class, [
                 'required'=>false,
+                'label' => 'Message',
                 'attr' => [
-                    'placeholder' => 'Message',
+                    'placeholder' => 'Avis sur l\'intervenant',
+
 
                 ],
             ])
             ->add('grade', RangeType::class, [
+                'label' => 'Note',
                 'attr' => [
                     'min' => 1,
                     'max' => 5,
