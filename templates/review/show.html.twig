@@ -9,6 +9,10 @@
             <h1>{{ review.grade }}</h1>
             <main>{{ review.content }}</main>
             <small>{{ review.author.name }}</small>
+            <small>{{ review.likes }}</small>
+            <small>{{ review.dislikes }}</small>
+            <a href={{ path('like_review', {"id":review.id}) }}>Like</a>
+            <a href={{ path('dislike_review', {"id":review.id}) }}>Dislike</a>
         </div>
    </div>
 {% if is_granted('ROLE_ADMIN') %}

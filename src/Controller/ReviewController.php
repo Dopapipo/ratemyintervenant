@@ -13,6 +13,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/review')]
 class ReviewController extends AbstractController
@@ -97,21 +98,23 @@ class ReviewController extends AbstractController
     }
 
     #[Route("/like/{id}", name: "like_review", methods: ["GET"])]
-    public function like(Review $review): Response
+    #[IsGranted("ROLE_USER")]
+    public function like(Review $review, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $review->setLikes($review->getLikes() + 1);
-        $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirectToRoute('app_review_index');
+        $review->setLikes($review->getLikes() + 1);
+        $entityManager->flush();
+
+        return $this->redirect($request->headers->get('referer'));
     }
 
     #[Route("/dislike/{id}", name: "dislike_review", methods: ["GET"])]
-    public function dislike(Review $review): Response
+    #[IsGranted("ROLE_USER")]
+    public function dislike(Review $review, EntityManagerInterface $entityManager, Request $request): Response
     {
         $review->setDislikes($review->getDislikes() + 1);
-        $this->getDoctrine()->getManager()->flush();
-
-        return $this->redirectToRoute('app_review_index');
+        $entityManager->flush();
+        return $this->redirect($request->headers->get('referer'));
     }
 
 }
