@@ -17,10 +17,7 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private ?Intervenant $intervenant = null;
 
-
-
     #[ORM\Column(length: 255, nullable: true)]
-
     private ?string $content = null;
 
     #[ORM\Column]
@@ -32,6 +29,12 @@ class Review
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Matiere $matiere = null;
+
+    #[ORM\Column(type: 'integer')]
+    private int $likes = 0;
+
+    #[ORM\Column(type: 'integer')]
+    private int $dislikes = 0;
 
     public function getId(): ?int
     {
@@ -50,12 +53,12 @@ class Review
         return $this;
     }
 
-    public function getAuthor(): ?user
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?user $author): static
+    public function setAuthor(?User $author): static
     {
         $this->author = $author;
 
@@ -96,5 +99,35 @@ class Review
         $this->matiere = $matiere;
 
         return $this;
+    }
+
+    public function getLikes(): int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(int $likes): void
+    {
+        $this->likes = $likes;
+    }
+
+    public function getDislikes(): int
+    {
+        return $this->dislikes;
+    }
+
+    public function setDislikes(int $dislikes): void
+    {
+        $this->dislikes = $dislikes;
+    }
+
+    public function like(): void
+    {
+        $this->likes++;
+    }
+
+    public function dislike(): void
+    {
+        $this->dislikes++;
     }
 }

@@ -181,8 +181,8 @@ class Intervenant
             $count++;
         }
         if ($count == 0) {
-            return "pas noté";
+            return "Pas encore noté";
         }
-        return  (string)round($sum / $count, 2)."/5";
+        return  "Note moyenne : ".(string)round($sum / $count, 2)."/5";
     }
 }

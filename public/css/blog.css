@@ -1,6 +1,6 @@
 .card {
     margin: 15px; /* Marge autour de chaque carte */
-    height: 500px;
+    height: 510px;
 }
 .card {
     transition: transform 0.3s ease;

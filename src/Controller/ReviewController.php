@@ -95,4 +95,23 @@ class ReviewController extends AbstractController
         return $this->redirectToRoute('app_intervenant_show', ['id'=>$intervenantid], Response::HTTP_SEE_OTHER);
 
     }
+
+    #[Route("/like/{id}", name: "like_review", methods: ["GET"])]
+    public function like(Review $review): Response
+    {
+        $review->setLikes($review->getLikes() + 1);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('app_review_index');
+    }
+
+    #[Route("/dislike/{id}", name: "dislike_review", methods: ["GET"])]
+    public function dislike(Review $review): Response
+    {
+        $review->setDislikes($review->getDislikes() + 1);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('app_review_index');
+    }
+
 }
