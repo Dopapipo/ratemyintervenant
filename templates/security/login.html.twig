@@ -12,10 +12,14 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <form method="post">
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
 
+                    {% if error %}
+                        {% if error.messageKey == 'Invalid credentials.' %}
+                            <div class="alert alert-danger">Mauvais nom d'utilisateur ou mot de passe.<br>Veuillez réessayer.</div>
+                        {% else %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                    {% endif %}
                     {% if app.user %}
                         <div class="mb-3">
                             Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
@@ -78,4 +82,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

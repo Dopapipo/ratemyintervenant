@@ -1,0 +1,24 @@
+.card {
+    /* Customize card styles here */
+    border-color: #ddd;  /* Example border color */
+}
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-control::placeholder {
+    color: #999; /* Adjust the color as needed */
+}
+.btn {
+    padding: 10px 20px; /* Adjust padding as desired */
+    border-radius: 5px; /* Add some rounding */
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #ddd; /* Change hover color */
+}
+label {
+    font-weight: normal; /* Make labels less bold */
+    display: block; /* Ensure labels are on separate lines */
+    margin-bottom: 5px; /* Add some space after labels */
+}
