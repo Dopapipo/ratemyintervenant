@@ -57,7 +57,7 @@
                         <div class="card-body">
                             <!-- Afficher les deux dernières critiques -->
 
-                            {% for review in intervenant.reviews|slice(-2) %}
+                            {% for review in intervenant.reviews %}
                                 {% include "review/show.html.twig" %}
                             {% endfor %}
                         </div>

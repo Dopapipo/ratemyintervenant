@@ -26,6 +26,7 @@ class BlogController extends AbstractController
     {
 
         $user = $this->security->getUser();
+        //show every intervenant for admins
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $professeurs = $this->entityManager->getRepository(Intervenant::class)->findAll();
         } else {

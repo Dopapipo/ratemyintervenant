@@ -27,6 +27,8 @@ body{
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1rem;
+    overflow:scroll;
+
 }
 
 .gutters-sm {

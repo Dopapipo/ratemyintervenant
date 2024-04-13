@@ -19,7 +19,7 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private ?Intervenant $intervenant = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 2000, nullable: true)]
     private ?string $content = null;
 
     #[ORM\Column]

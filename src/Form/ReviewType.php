@@ -23,6 +23,7 @@ class ReviewType extends AbstractType
                 'label' => 'Message',
                 'attr' => [
                     'placeholder' => 'Avis sur l\'intervenant',
+                    'maxlength'=>2000
 
 
                 ],
