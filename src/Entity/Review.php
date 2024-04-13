@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReviewRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
@@ -35,6 +37,18 @@ class Review
 
     #[ORM\Column(type: 'integer')]
     private int $dislikes = 0;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'likedReviews')]
+    private Collection $usersThatLiked;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'dislikedReviews')]
+    private Collection $usersThatDisliked;
+
+    public function __construct()
+    {
+        $this->usersThatLiked = new ArrayCollection();
+        $this->usersThatDisliked = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -129,5 +143,59 @@ class Review
     public function dislike(): void
     {
         $this->dislikes++;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsersThatLiked(): Collection
+    {
+        return $this->usersThatLiked;
+    }
+
+    public function addUserThatLiked(User $usersThatLiked): static
+    {
+        if (!$this->usersThatLiked->contains($usersThatLiked)) {
+            $this->usersThatLiked->add($usersThatLiked);
+            $usersThatLiked->addLikedReview($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserThatLiked(User $usersThatLiked): static
+    {
+        if ($this->usersThatLiked->removeElement($usersThatLiked)) {
+            $usersThatLiked->removeLikedReview($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsersThatDisliked(): Collection
+    {
+        return $this->usersThatDisliked;
+    }
+
+    public function addUserThatDisliked(User $usersThatDisliked): static
+    {
+        if (!$this->usersThatDisliked->contains($usersThatDisliked)) {
+            $this->usersThatDisliked->add($usersThatDisliked);
+            $usersThatDisliked->addDislikedReview($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserThatDisliked(User $usersThatDisliked): static
+    {
+        if ($this->usersThatDisliked->removeElement($usersThatDisliked)) {
+            $usersThatDisliked->removeDislikedReview($this);
+        }
+
+        return $this;
     }
 }

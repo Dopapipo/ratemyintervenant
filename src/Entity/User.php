@@ -57,11 +57,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isBanned = false;
 
+    #[ORM\ManyToMany(targetEntity: Review::class, inversedBy: 'usersThatLiked')]
+    #[ORM\JoinTable(name: 'user_liked_reviews')]
+    private Collection $likedReviews;
+
+    #[ORM\ManyToMany(targetEntity: Review::class, inversedBy: 'usersThatDisliked')]
+    #[ORM\JoinTable(name: 'user_disliked_reviews')]
+    private Collection $dislikedReviews;
+
 
 
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
+        $this->likedReviews = new ArrayCollection();
+        $this->dislikedReviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +263,56 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->isBanned = $isBanned;
 
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getLikedReviews(): Collection
+    {
+        return $this->likedReviews;
+    }
+
+    public function addLikedReview(Review $likedReview): static
+    {
+        if (!$this->likedReviews->contains($likedReview)) {
+            $this->likedReviews->add($likedReview);
+            $likedReview->addUserThatLiked($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedReview(Review $likedReview): static
+    {
+        $this->likedReviews->removeElement($likedReview);
+        $likedReview->removeUserThatLiked($this);
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getDislikedReviews(): Collection
+    {
+        return $this->dislikedReviews;
+    }
+
+    public function addDislikedReview(Review $dislikedReview): static
+    {
+        if (!$this->dislikedReviews->contains($dislikedReview)) {
+            $this->dislikedReviews->add($dislikedReview);
+            $dislikedReview->addUserThatDisliked($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDislikedReview(Review $dislikedReview): static
+    {
+        $this->dislikedReviews->removeElement($dislikedReview);
+        $dislikedReview->removeUserThatDisliked($this);
         return $this;
     }
 

@@ -101,7 +101,13 @@ class ReviewController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function like(Review $review, EntityManagerInterface $entityManager, Request $request): Response
     {
-
+        if ($this->getUser()->getLikedReviews()->contains($review)) {
+            $this->getUser()->removeLikedReview($review);
+            $review->setLikes($review->getLikes() - 1);
+            $entityManager->flush();
+            return $this->redirect($request->headers->get('referer'));
+        }
+        $this->getUser()->addLikedReview($review);
         $review->setLikes($review->getLikes() + 1);
         $entityManager->flush();
 
@@ -112,7 +118,14 @@ class ReviewController extends AbstractController
     #[IsGranted("ROLE_USER")]
     public function dislike(Review $review, EntityManagerInterface $entityManager, Request $request): Response
     {
+        if ($this->getUser()->getDislikedReviews()->contains($review)) {
+            $this->getUser()->removeDislikedReview($review);
+            $review->setDislikes($review->getDislikes() - 1);
+            $entityManager->flush();
+            return $this->redirect($request->headers->get('referer'));
+        }
         $review->setDislikes($review->getDislikes() + 1);
+        $this->getUser()->addDislikedReview($review);
         $entityManager->flush();
         return $this->redirect($request->headers->get('referer'));
     }
