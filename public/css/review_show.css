@@ -1,0 +1,15 @@
+.delete-text {
+    display: none;
+}
+
+.dropdown-item:hover .delete-text {
+    display: inline;
+}
+
+.delete-icon:hover {
+    color: red; /* Change la couleur de la croix en rouge au survol */
+}
+.delete-text:hover {
+    color: red; /* Change la couleur du texte en rouge au survol */
+}
+

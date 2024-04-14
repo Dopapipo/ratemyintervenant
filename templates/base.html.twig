@@ -75,6 +75,8 @@
 								{# Gérer les différentes vues en fonction des rôles de l'utilisateur #}
 								{% if is_granted('ROLE_USER') %}
 									{# Contenu pour un utilisateur authentifié #}
+									<a class="dropdown-item" href="{{ path('app_review_index')}}" data-tooltip="Toutes les reviews">
+										<i class="fa-solid fa-star"></i>
 									<a class="dropdown-item" href="{{ path('app_blog_index')}}" data-tooltip="Mes Intervenants">
 										<i class="fa fa-solid fa-user-graduate"></i>
 									</a>

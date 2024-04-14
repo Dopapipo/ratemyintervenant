@@ -33,3 +33,7 @@
         padding: 10px; /* Marge intérieure pour chaque carte sur petits écrans */
     }
 }
+.container-center {
+    margin-right: 15px;
+    margin-left: 15px;
+}
