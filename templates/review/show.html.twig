@@ -9,6 +9,7 @@
             <h1>{{ review.grade }}</h1>
             <main>{{ review.content }}</main>
             <small>{{ review.author.name }}</small>
+            <small>{{ review.createdAt | date('d-m-Y') }}</small>
             <small>{{ review.likes }}</small>
             <a href={{ path('like_review', {"id":review.id}) }}>Like</a>
             <small>{{ review.dislikes }}</small>

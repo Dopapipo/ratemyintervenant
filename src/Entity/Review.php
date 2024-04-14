@@ -44,10 +44,16 @@ class Review
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'dislikedReviews')]
     private Collection $usersThatDisliked;
 
+    #[ORM\Column(nullable: true)]
+
+    private ?\DateTimeImmutable $createdAt = null;
+
     public function __construct()
     {
         $this->usersThatLiked = new ArrayCollection();
         $this->usersThatDisliked = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+
     }
 
     public function getId(): ?int
@@ -195,6 +201,18 @@ class Review
         if ($this->usersThatDisliked->removeElement($usersThatDisliked)) {
             $usersThatDisliked->removeDislikedReview($this);
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

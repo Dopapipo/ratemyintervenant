@@ -21,6 +21,7 @@ class Intervenant
 
 
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'intervenant')]
+    #[ORM\OrderBy(['createdAt' => 'DESC'])]
     private Collection $reviews;
 
     #[ORM\ManyToMany(targetEntity: Classe::class, inversedBy: 'intervenants')]
