@@ -18,13 +18,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReviewType extends AbstractType
 {
-    private Security $security;
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {   $intervenant = $options['var'];
+    {   $intervenant = $options['intervenant'];
+        $user = $options['user'];
         $builder
             ->add('content', TextareaType::class, [
                 'required'=>false,
@@ -49,11 +46,11 @@ class ReviewType extends AbstractType
                 'choice_label' => 'name',
                 'required' => true,
                 'label' => 'Matière',
-                'query_builder' => function (MatiereRepository $matiereRepository) use ($intervenant) {
+                'query_builder' => function (MatiereRepository $matiereRepository) use ($user, $intervenant) {
                     return $matiereRepository->createQueryBuilder('m')
                         ->orderBy('m.name', 'ASC')
                         ->where('m.classe = :classe AND :intervenant MEMBER OF m.intervenants')
-                        ->setParameter('classe', $this->security->getUser()->getClasse())
+                        ->setParameter('classe', $user->getClasse())
                         ->setParameter('intervenant', $intervenant );
                 },
             ])
@@ -64,7 +61,8 @@ class ReviewType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Review::class,
-            'var'=>null,
+            'intervenant'=>null,
+            'user'=>null,
         ]);
     }
 }
