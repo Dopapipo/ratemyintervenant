@@ -9,11 +9,11 @@
             <h1>{{ review.grade }}</h1>
             <main>{{ review.content }}</main>
             <small>{{ review.author.name }}</small>
-            <small>{{ review.createdAt | date('d-m-Y') }}</small>
-            <small>{{ review.likes }}</small>
-            <a href={{ path('like_review', {"id":review.id}) }}>Like</a>
-            <small>{{ review.dislikes }}</small>
-            <a href={{ path('dislike_review', {"id":review.id}) }}>Dislike</a>
+            <div>
+                <a href="{{ path('like_review', {'id': review.id}) }}" class="link-muted me-2"><i class="fas fa-thumbs-up me-1"></i> {{ review.likes }}</a>
+                <a href="{{ path('dislike_review', {'id': review.id}) }}" class="link-muted"><i class="fas fa-thumbs-down me-1"></i> {{ review.dislikes }}</a>
+            </div>
+
         </div>
    </div>
 {% if is_granted('ROLE_ADMIN') %}
