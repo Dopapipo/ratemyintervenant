@@ -6,7 +6,9 @@ use App\Entity\Intervenant;
 use App\Entity\Matiere;
 use App\Entity\Review;
 use App\Entity\User;
+use App\Repository\MatiereRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,8 +18,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReviewType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    {   $intervenant = $options['intervenant'];
+        $user = $options['user'];
         $builder
             ->add('content', TextareaType::class, [
                 'required'=>false,
@@ -41,6 +45,14 @@ class ReviewType extends AbstractType
                 'class' => Matiere::class,
                 'choice_label' => 'name',
                 'required' => true,
+                'label' => 'Matière',
+                'query_builder' => function (MatiereRepository $matiereRepository) use ($user, $intervenant) {
+                    return $matiereRepository->createQueryBuilder('m')
+                        ->orderBy('m.name', 'ASC')
+                        ->where('m.classe = :classe AND :intervenant MEMBER OF m.intervenants')
+                        ->setParameter('classe', $user->getClasse())
+                        ->setParameter('intervenant', $intervenant );
+                },
             ])
         ;
     }
@@ -49,6 +61,8 @@ class ReviewType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Review::class,
+            'intervenant'=>null,
+            'user'=>null,
         ]);
     }
 }

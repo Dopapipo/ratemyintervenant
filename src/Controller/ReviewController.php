@@ -43,7 +43,7 @@ class ReviewController extends AbstractController
             return $this->redirectToRoute('app_intervenant_show', ['id'=> $request->get('intervenantid')], Response::HTTP_SEE_OTHER);
         }
         $review = new Review();
-        $form = $this->createForm(ReviewType::class, $review);
+        $form = $this->createForm(ReviewType::class, $review, ['intervenant' => $intervenant, 'user'=>$user] );
         $form->handleRequest($request);
         $review->setAuthor($user);
         $review->setIntervenant($intervenant);
