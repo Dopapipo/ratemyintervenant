@@ -36,11 +36,16 @@ class ReviewController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, IntervenantRepository $intervenantRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = $this->getUser();
+        $intervenant = $intervenantRepository->find($request->get('intervenantid'));
+        if (!$intervenant->getClassesTaught()->contains($user->getClasse())) {
+            $this->addFlash('error', 'Vous ne pouvez pas commenter un intervenant qui n\'enseigne pas dans votre classe');
+            return $this->redirectToRoute('app_intervenant_show', ['id'=> $request->get('intervenantid')], Response::HTTP_SEE_OTHER);
+        }
         $review = new Review();
         $form = $this->createForm(ReviewType::class, $review);
         $form->handleRequest($request);
-        $review->setAuthor($this->getUser());
-        $intervenant = $intervenantRepository->find($request->get('intervenantid'));
+        $review->setAuthor($user);
         $review->setIntervenant($intervenant);
         if ($form->isSubmitted() && $form->isValid()) {
 
