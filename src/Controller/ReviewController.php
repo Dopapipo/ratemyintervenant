@@ -39,7 +39,7 @@ class ReviewController extends AbstractController
         $user = $this->getUser();
         $intervenant = $intervenantRepository->find($request->get('intervenantid'));
         if (!$intervenant->getClassesTaught()->contains($user->getClasse())) {
-            $this->addFlash('error', 'Vous ne pouvez pas commenter un intervenant qui n\'enseigne pas dans votre classe');
+            $this->addFlash('danger', 'Vous ne pouvez pas commenter un intervenant qui n\'enseigne pas dans votre classe');
             return $this->redirectToRoute('app_intervenant_show', ['id'=> $request->get('intervenantid')], Response::HTTP_SEE_OTHER);
         }
         $review = new Review();

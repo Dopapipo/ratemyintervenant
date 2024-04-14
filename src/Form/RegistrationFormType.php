@@ -22,52 +22,64 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('email', EmailType::class, [
+            ->add('username', TextType::class, [
+                'label' => 'Nom d\'utilisateur',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter an email',
+                        'message' => 'Veuillez rentrer un nom d\'utilisateur',
+                    ]),
+                ],
+            ])
+            ->add('email', EmailType::class, [
+
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez rentrer votre adresse email',
                     ]),
                 ],
             ])
             ->add('firstName', TextType::class, [
+                'label' => 'Prénom',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your first name',
+                        'message' => 'Veuillez rentrer votre prénom',
                     ]),
                 ],
             ])
             ->add('lastName', TextType::class, [
+                'label' => 'Nom de famille',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your last name',
+                        'message' => 'Veuillez rentrer votre nom de famille',
                     ]),
                 ],
             ])
             ->add('classe', EntityType::class, [
+                'label' => 'Classe',
                 'class' => Classe::class,
                 'choice_label' => 'name',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please select a class',
+                        'message' => 'Veuillez choisir votre classe',
                     ]),
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'invalid_message' => 'Les mots de passe doivent correspondre.',
+                'first_options' => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Répéter le mot de passe'],
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez rentrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
