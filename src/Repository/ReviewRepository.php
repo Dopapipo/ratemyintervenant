@@ -20,6 +20,29 @@ class ReviewRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Review::class);
     }
+    public function findAllSortedByDate(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findReviewsByIntervenant($intervenantId): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.intervenant = :intervenantId')
+            ->setParameter('intervenantId', $intervenantId)
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findAllSortedByLikes(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.likes', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Review[] Returns an array of Review objects

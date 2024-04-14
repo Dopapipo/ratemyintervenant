@@ -23,11 +23,12 @@ class ReviewController extends AbstractController
     {
         $this->security = $security;
     }
+
     #[Route('/', name: 'app_review_index', methods: ['GET'])]
     public function index(ReviewRepository $reviewRepository): Response
     {
         return $this->render('review/index.html.twig', [
-            'reviews' => $reviewRepository->findAll(),
+            'reviews' => $reviewRepository->findAllSortedByDate()
         ]);
     }
 

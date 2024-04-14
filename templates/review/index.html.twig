@@ -17,6 +17,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Note : {{ review.grade }}/5</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{ review.author.name }}</h6>
+                                <small>{{ review.createdAt|date('d/m/Y H:i') }}</small>
                                 <p class="card-text small mb-3">{{ review.author.classe.name }}</p>
                                 <p class="card-text">Intervenant : <a href="{{ path('app_intervenant_show', {'id': review.intervenant.id}) }}">{{ review.intervenant.name }}</a></p>
                                 <p class="card-text">Matière : {{ review.matiere.name }}</p>
