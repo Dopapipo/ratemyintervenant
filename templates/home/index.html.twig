@@ -16,9 +16,17 @@
 					<p class="title">RATE MY INTERVENANT</p>
 					<p class="subtitle">Un endroit où les étudiants prennent la parole!</p>
 				</div>
-				<p>
-					<a class="btn btn-secondary btn-lg btn-start" href="{{ path('app_blog_index') }}" role="button">Commencer</a>
-				</p>
+				{% if app.user %}
+					{# Si l'utilisateur est connecté, le bouton "Commencer" l'enverra vers la page d'accueil #}
+					<p>
+						<a class="btn btn-secondary btn-lg btn-start" href="{{ path('app_blog_index') }}" role="button">Commencer</a>
+					</p>
+				{% else %}
+					{# Si l'utilisateur n'est pas connecté, le bouton "Commencer" l'enverra vers la page d'inscription #}
+					<p>
+						<a class="btn btn-secondary btn-lg btn-start" href="{{ path('app_register') }}" role="button">Commencer</a>
+					</p>
+				{% endif %}
 				<p>
 					<a class="btn btn-secondary btn-lg btn-comment" href="{{ path('app_review_index') }}" role="button">Regarder les commentaires</a>
 				</p>
