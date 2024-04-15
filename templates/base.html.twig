@@ -76,32 +76,32 @@
 								{% if is_granted('ROLE_USER') %}
 									{# Contenu pour un utilisateur authentifié #}
 									<a class="dropdown-item" href="{{ path('app_review_index')}}" data-tooltip="Toutes les reviews">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa fa-solid fa-star"></i>
 									<a class="dropdown-item" href="{{ path('app_blog_index')}}" data-tooltip="Mes Intervenants">
 										<i class="fa fa-solid fa-user-graduate"></i>
 									</a>
 									<a class="dropdown-item" href="{{ path('app_profile')}}" data-tooltip="Mon compte">
-										<i class="fa fa-regular fa-user fa-1x"></i>
+										<i class="fa fa-regular fa-user"></i>
 									</a>
 									<a class="dropdown-item" href="{{ path('app_logout') }}" data-tooltip="Déconnexion">
-										<i class="fa fa-solid fa-user-slash fa-1x"></i>
+										<i class="fa fa-solid fa-user-slash"></i>
 									</a>
 								{% endif %}
 								{% if is_granted('ROLE_ADMIN') %}
 									{# Contenu pour un administrateur #}
 									<a class="dropdown-item" href="{{ path('admin_index') }}" data-tooltip="Menu d'admin">
-										<i class="fa fa-solid fa-lock fa-1x"></i>
+										<i class="fa fa-solid fa-lock"></i>
 									</a>
 								{% endif %}
 								{% if not app.user() %}
 									<a class="dropdown-item" href="{{ path('app_register') }}" data-tooltip="Inscription">
-										<i class="fa fa-solid fa-user-plus fa-1x"></i>
+										<i class="fa fa-solid fa-user-plus"></i>
 									</a>
 									<a class="dropdown-item" href="{{ path('app_login') }}" data-tooltip="Connexion">
-										<i class="fa fa-regular fa-user fa-1x"></i>
+										<i class="fa fa-regular fa-user"></i>
 									</a>
 									<a class="dropdown-item" href="{{ path('app_request_verify_email') }}" data-tooltip="Renvoyer">
-										<i class="fa fa-regular fa-envelope-open fa-1x"></i>
+										<i class="fa fa-regular fa-envelope-open"></i>
 									</a>
 									{# Contenu pour un utilisateur non authentifié #}
 								{% endif %}
