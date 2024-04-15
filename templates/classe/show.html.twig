@@ -21,7 +21,7 @@
                     <ul>
                         {% for intervenant in classe.intervenants %}
                             <li>
-                                <a href="{{ path('app_intervenant_show', {'id': intervenant.id}) }}">{{ intervenant.name }}</a>
+                                <a title="intervenant" href="{{ path('app_intervenant_show', {'id': intervenant.id}) }}">{{ intervenant.name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -32,7 +32,7 @@
                     <ul>
                         {% for matiere in classe.matieres %}
                             <li>
-                                <a href="{{ path('app_matiere_show', {'id': matiere.id}) }}">{{ matiere.name }}</a>
+                                <a title="matière" href="{{ path('app_matiere_show', {'id': matiere.id}) }}">{{ matiere.name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -40,9 +40,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_classe_index') }}">back to list</a>
+    <a title="Retour à la liste" href="{{ path('app_classe_index') }}">back to list</a>
 
-    <a href="{{ path('app_classe_edit', {'id': classe.id}) }}">edit</a>
+    <a title="Modifer" href="{{ path('app_classe_edit', {'id': classe.id}) }}">edit</a>
 
     {{ include('classe/_delete_form.html.twig') }}
 {% endblock %}

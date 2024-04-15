@@ -1,27 +1,41 @@
 .card {
-    /* Customize card styles here */
-    border-color: #ddd;  /* Example border color */
+
+    border-color: #ddd; 
 }
+
+
+
 .form-group {
     margin-bottom: 1rem;
 }
+
+
 .form-control::placeholder {
-    color: #999; /* Adjust the color as needed */
+    color: #999;
 }
+
+
 #review_content {
     height: 200px;
 }
+
+
+
 .btn {
-    padding: 10px 20px; /* Adjust padding as desired */
-    border-radius: 5px; /* Add some rounding */
+    padding: 10px 20px; 
+    border-radius: 5px; 
     font-weight: bold;
 }
 
+
+
 .btn:hover {
-    background-color: #ddd; /* Change hover color */
+    background-color: #ddd;
 }
+
+
 label {
-    font-weight: normal; /* Make labels less bold */
-    display: block; /* Ensure labels are on separate lines */
-    margin-bottom: 5px; /* Add some space after labels */
+    font-weight: normal; 
+    display: block; 
+    margin-bottom: 5px; 
 }

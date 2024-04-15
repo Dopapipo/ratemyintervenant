@@ -1,6 +1,8 @@
+
 p {
     color: #666;
 }
+
 
 
 label {
@@ -9,12 +11,16 @@ label {
     color: #333;
 }
 
+
+
 input[type="email"] {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
+
 
 .btn-primary,
 .btn-secondary {
@@ -24,21 +30,29 @@ input[type="email"] {
     transition: background-color 0.3s ease;
 }
 
+
+
 .btn-primary {
     background-color: #007bff;
     color: #fff;
     border: none;
 }
 
+
+
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+
 
 .btn-secondary {
     background-color: #6c757d;
     color: #fff;
     border: none;
 }
+
+
 
 .btn-secondary:hover {
     background-color: #5a6268;

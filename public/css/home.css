@@ -3,15 +3,18 @@
 	overflow: hidden;
 }
 
+
+
+
 .jumbotron {
-	/* Couleur du texte */
+	
 	background-image: url("../students_debating_2.jpg");
 	background-size: cover;
 	background-position: center;
 	height: 550px;
-	/* or any other value */
+
 	width: 100%;
-	/* or any other value */
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -20,6 +23,9 @@
 	font-size: 36px;
 	position: relative;
 }
+
+
+
 
 .jumbotron::before {
 	content: "";
@@ -33,6 +39,9 @@
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
+
+
+
 .title {
 	font-family: "Bebas Neue", sans-serif;
 	font-size: 70px;
@@ -42,10 +51,15 @@
 }
 
 
+
+
 .subtitle {
 	font-size: 34px;
 	font-style: italic;
 }
+
+
+
 
 .title-subtitle {
 	color: white;
@@ -54,25 +68,35 @@
 	text-align: center;
 }
 
+
+
 .jumbotron a.btn-start {
 	background-color: #2ecc71;
 	border-color: #2ecc71;
 }
+
+
 
 .jumbotron a.btn-start:hover {
 	background-color: #27ae60;
 	border-color: #27ae60;
 }
 
+
+
 .jumbotron a.btn-comment {
 	background-color: rgb(103, 194, 215);
 	border-color: rgb(103, 194, 215);
 }
 
+
+
 .jumbotron a.btn-comment:hover {
 	background-color: rgb(83, 168, 189);
 	border-color: rgb(83, 168, 189);
 }
+
+
 
 .jumbotron a.btn-lg {
 	position: relative;

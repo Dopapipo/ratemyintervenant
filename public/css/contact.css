@@ -1,11 +1,14 @@
-/* contact.css */
 
-/* Reset default margins and paddings */
+
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+
 
 .container {
     max-width: 800px;
@@ -15,11 +18,15 @@
     align-items: center;
 }
 
+
+
 .content-container {
     width: 96%;
     align-items: center;
     margin-bottom: 20px;
 }
+
+
 
 .container .title {
     font-size: 36px;
@@ -28,24 +35,35 @@
     text-align: center;
 }
 
+
+
 .container .description {
     font-size: 18px;
     color: #666;
     text-align: justify;
 }
 
+
+
 .contact-text-3 {
     margin-bottom: 0px;
 }
+
+
 
 .form-container {
     width: 100%;
 }
 
+
+
+
 .container .form-group {
     margin-bottom: 20px;
     width: 100%;
 }
+
+
 
 .container .form-group label {
     display: block;
@@ -53,6 +71,9 @@
     margin-bottom: 8px;
     color: #444;
 }
+
+
+
 
 .container .form-group input[type="text"],
 .container .form-group input[type="email"],
@@ -65,12 +86,19 @@
     transition: border-color 0.3s ease;
 }
 
+
+
+
+
 .container .form-group textarea {
     min-height: 150px;
     resize: vertical;
 }
 
-/* Style the submit button */
+
+
+
+
 .container .btn {
     width: 100%;
     background-color: #007bff;
@@ -80,21 +108,27 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    /* Uppercase button text */
-    /* Bold button text */
+
+
 }
 
-/* Button hover effect */
+
+
+
+
 .container .btn:hover {
     background-color: #0056b3;
 }
 
-/* Additional styling for links */
+
+
 .container a {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s ease;
 }
+
+
 
 .container a:hover {
     color: #0056b3;

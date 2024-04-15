@@ -5,19 +5,27 @@
     padding: 10px 20px;
 }
 
+
+
 /* Logo styles */
 .logo {
     max-width: 200px;
     /* Adjust the maximum width as needed */
 }
 
+
+
 .header-menu {
     background-color: #fff;
 }
 
+
+
 .header-menu.shadow {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .sticky-top {
     position: sticky;
@@ -25,9 +33,11 @@
     z-index: 1020;
 }
 
+
+
 /* Dropdown styles */
 .dropdown-menu {
-    background-color: #fff; 
+    background-color: #fff;
     /* Change the background color as needed */
     border: none;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
@@ -36,31 +46,45 @@
     /* Add a subtle box shadow */
 }
 
+
+
 .dropdown>a {
     font-size: 20px;
     margin: 10px;
     transition: transform 0.3s ease;
 }
 
+
+
 .dropdown>a:hover {
     transform: scale(1.2);
 }
 
-.dropdown .dropdown-item:active{
+
+
+.dropdown .dropdown-item:active {
     color: initial !important;
 }
 
-.dropdown .fa:active{
+
+
+.dropdown .fa:active {
     color: initial !important;
 }
+
+
 
 .logo-image {
     transition: transform 0.3s ease;
 }
 
+
+
 .logo-image:hover {
     transform: scale(1.1);
 }
+
+
 
 .dropdown-item:hover,
 .dropdown-item:focus,
@@ -68,12 +92,16 @@
     background-color: transparent !important;
 }
 
+
+
 /* CSS for tooltip */
 .dropdown .dropdown-item {
     position: relative;
     /* Make the tooltip relative to the parent */
     display: inline-block;
 }
+
+
 
 .dropdown .dropdown-item:hover::after {
     font-size: 10px;

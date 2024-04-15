@@ -22,7 +22,7 @@
                     {% endif %}
                     {% if app.user %}
                         <div class="mb-3">
-                            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a title="déconnexion" href="{{ path('app_logout') }}">Déconnexion</a>
                         </div>
                     {% endif %}
 
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="col text-right">
-                            <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
+                            <a title="oublie mot de passe" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
 
                     <!-- Boutons d'inscription via réseaux sociaux -->
                     <div class="text-center">
-                        <p>Pas encore membre ? <a href= "{{ path('app_register')}}" >Inscription</a></p>
+                        <p>Pas encore membre ? <a title="inscription" href= "{{ path('app_register')}}" >Inscription</a></p>
                         <!--<button type="button" class="btn btn-link btn-floating mx-1">
                             <i class="fab fa-facebook-f"></i>
                         </button>

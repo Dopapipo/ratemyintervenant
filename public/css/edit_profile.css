@@ -2,9 +2,15 @@ h1, a {
     text-align: center;
 }
 
+
+
+
 h1{ 
     margin-bottom: 20px;
 }
+
+
+
 
 .container{
     width:60%;
@@ -21,10 +27,16 @@ h1{
 }
 
 
+
+
+
 .edit-profile {
     margin-bottom: 20px;
     margin-left: 0px;
 }
+
+
+
 
 .form-group .form-control {
     width: 100%;

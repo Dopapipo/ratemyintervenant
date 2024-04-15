@@ -1,3 +1,4 @@
+
 .global-footer {
     background-color: rgba(0, 0, 0, 0.05);
     color: black;
@@ -8,32 +9,46 @@
 }
 
 
+
+
 .col-md-4 .btn-secondary {
     color: black;
     background-color: transparent;
     border: none;
 }
 
+
+
 .col-md-4 .btn-secondary:hover {
     text-decoration: underline;
 }
+
+
 
 .col-md-4 .btn-secondary:active {
     background-color: grey !important;   
     color:black !important; 
 }
 
+
+
 .col-md-4 .footer-link {
     color: black;
 }
+
+
 
 .col-md-4 .footer-link:hover {
     text-decoration: underline;
 }
 
+
+
 .col-md-4 .footer-link:active {
     color: blue;
 }
+
+
 
 
 .footer-credits{

@@ -1,10 +1,15 @@
+
 body{margin-top:20px;
     background:#eee;
 }
 
+
+
 .card {
     transition: transform 0.3s ease;
 }
+
+
 
 .card:hover {
     transform: scale(1.05);

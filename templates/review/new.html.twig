@@ -17,7 +17,7 @@
                         <h1 class="mb-4">{{ block('title') }}</h1>
 
                         {{ include('review/_form.html.twig', {'button_label': 'Poster'}) }}
-                        <a href="{{ path('app_intervenant_show', {"id":review.intervenant.id}) }}" class="btn btn-secondary mt-4">Retour à l'intervenant</a>
+                        <a title="page intervenant" href="{{ path('app_intervenant_show', {"id":review.intervenant.id}) }}" class="btn btn-secondary mt-4">Retour à l'intervenant</a>
                     </div>
                 </div>
             </div>

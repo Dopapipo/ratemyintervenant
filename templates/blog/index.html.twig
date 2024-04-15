@@ -12,7 +12,7 @@
   <div class="container-center">
     <nav aria-label="breadcrumb" class="main-breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href={{path('app_home')}}>Accueil</a></li>
+        <li class="breadcrumb-item"><a title="accueil" href={{path('app_home')}}>Accueil</a></li>
         <li class="breadcrumb-item active" aria-current="page">Intervenants</li>
       </ol>
     </nav>
@@ -36,7 +36,7 @@
             {% else %}
               <p class="card-text text-muted" style="font-size: 0.8rem;">Aucune matière enseignée.</p>
             {% endif %}
-            <a href="{{ path('app_intervenant_show', { 'id' : professeur.id}) }}" class="btn btn-primary">Voir</a>
+            <a title="voir intervenant" href="{{ path('app_intervenant_show', { 'id' : professeur.id}) }}" class="btn btn-primary">Voir</a>
 
           </div>
         </div>
