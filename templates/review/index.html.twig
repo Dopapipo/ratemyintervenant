@@ -42,9 +42,12 @@
                             </div>
                         </div>
                     </div>
-                {% else %}
-                    <p class="text-center">Aucune critique disponible</p>
+
                 {% endfor %}
+
+                {% if reviews is empty%}
+                <p class="text-center">Aucune review disponible</p>
+                {% endif %}
             </div>
         </div>
     </section>

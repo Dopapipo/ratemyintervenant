@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Review;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -35,5 +38,13 @@ class ReviewCrudController extends AbstractCrudController
             //POur classe et author faut trouver un moyen de recup les données de l'user connecté
 
         ];
+    }
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions->disable(Action::EDIT);
+    }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud->showEntityActionsInlined();
     }
 }

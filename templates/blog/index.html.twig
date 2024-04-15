@@ -31,7 +31,9 @@
               <p class="card-text text-muted">Matière(s) enseignée(s):</p>
               <ul>
                 {% for matiere in professeur.matieresEnseignees %}
-                  <li>{{ matiere.name }}</li> {% endfor %}
+                  <li>{{ matiere.name }}
+                    {{ professeur.getAverageParMatiere(matiere) }}
+                  </li> {% endfor %}
               </ul>
             {% else %}
               <p class="card-text text-muted" style="font-size: 0.8rem;">Aucune matière enseignée.</p>
