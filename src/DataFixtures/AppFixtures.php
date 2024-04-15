@@ -13,9 +13,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
-    private static $MINIMUM_INTERVENANTS = 3;
-    private static $MAXIMUM_INTERVENANTS = 7;
+    private static $MINIMUM_INTERVENANTS_PAR_CLASSE = 3;
+    private static $MAXIMUM_INTERVENANTS_PAR_CLASSE = 7;
     private static $NUMBER_OF_USERS = 50;
+    private static $MAX_MATIERES_PAR_INTERVENANT = 4;
     private static $MINIMUM_REVIEWS = 5;
     private static $MAXIMUM_REVIEWS = 20;
     private array $abbreviatons = [
@@ -90,15 +91,6 @@ class AppFixtures extends Fixture
     {
     }
 
-    private function formatClassesMatieres(): void
-    {
-        foreach ($this->abbreviatons as $classeName => $abbreviation) {
-            for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
-                $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
-            }
-        }
-    }
-
     public function load(ObjectManager $manager): void
     {
         $this->formatClassesMatieres();
@@ -118,14 +110,18 @@ class AppFixtures extends Fixture
 
         //Intervenants
         foreach ($this->classes_matieres as $classeName => $matieres) {
-            for ($i = 0; $i < random_int(self::$MINIMUM_INTERVENANTS, self::$MAXIMUM_INTERVENANTS); $i++) {
+            for ($i = 0; $i < random_int(self::$MINIMUM_INTERVENANTS_PAR_CLASSE, self::$MAXIMUM_INTERVENANTS_PAR_CLASSE); $i++) {
+                //Intervenant matieres between 1 and MAX_MATIERES_PAR_INTERVENANT
                 $intervenant = new Intervenant();
                 $classe = $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]);
                 $intervenant->addClassesTaught($classe);
-                $matiere = $manager->getRepository(Matiere::class)->findOneBy(['name' => $matieres[array_rand($matieres)]]);
-                $intervenant->addMatieresEnseignee($matiere);
                 $intervenant->setName($this->factory::faker()->name());
                 $intervenant->setProfilePictureFileName('default_intervenant.jpg');
+
+                for ($i = 0; $i < random_int(1, min(count($matieres), self::$MAX_MATIERES_PAR_INTERVENANT)); $i++) {
+                    $matiere = $manager->getRepository(Matiere::class)->findOneBy(['name' => $matieres[$i]]);
+                    $intervenant->addMatieresEnseignee($matiere);
+                }
                 $manager->persist($intervenant);
             }
         }
@@ -151,7 +147,7 @@ class AppFixtures extends Fixture
             $allIntervenantsParClasseAuteur = $classe->getIntervenants();
             foreach ($allIntervenantsParClasseAuteur as $intervenant) {
                 $matieresDeIntervenantDansClasseAuteur = $intervenant->getMatieresEnseignees()->filter(fn(Matiere $matiere) => $matiere->getClasse() === $classe);
-                foreach ( $matieresDeIntervenantDansClasseAuteur as $matiere) {
+                foreach ($matieresDeIntervenantDansClasseAuteur as $matiere) {
                     $review = new Review();
                     $review->setMatiere($matiere);
                     $review->setAuthor($author);
@@ -167,5 +163,14 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
+    }
+
+    private function formatClassesMatieres(): void
+    {
+        foreach ($this->abbreviatons as $classeName => $abbreviation) {
+            for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
+                $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
+            }
+        }
     }
 }
