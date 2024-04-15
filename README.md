@@ -17,3 +17,68 @@ Then you can run commands like mysql -u root --password=password --host=127.0.0.
 Or you can do (you don't need mysql on your machine for this command) : 
 
 docker-compose exec database mysql -u root --password=password
+
+
+
+
+Documentation Rate My Intervenant:
+
+Les technologies utilisées pour ce projet: symfony, docker, git.
+
+Les langages et utilisés pour ce projet: php, twig, CSS, JaveScript, MySQL.
+
+Les librairies externes: bootstrap.
+
+Diagramme de classe: 
+Code PlantUML:
+@startuml
+
+class User {
+  +id: int
+  -username: String
+  -password: String
+  -firstName: String
+  -lastName: String
+  -email: String
+}
+
+class Classe {
+  +id: int
+  -name: String
+}
+
+class ResetPasswordRequest {
+  +id: int
+  -oid: int
+  -selector: String
+  -hashedToken: String
+  -requestedAt: datetime
+  -expiresAt: datetime
+}
+
+class Review {
+  +id: int
+  -content: String
+  -grade: int
+}
+
+class Matiere {
+  +id: int
+}
+
+class Intervenant {
+  +id: int
+  -name: String
+}
+
+User "1-1" -- "0-N" Review : publie >
+User "1-1" -- "0-N" ResetPasswordRequest : demande >
+User "1-N" -- "1-N" Matiere: assiste >
+Intervenant "1-N" -- "1-N" Classe : intervient >
+Intervenant "1-N" -- "1-N" Matiere : intervient >
+Classe "1-1" -- "1-N" User : comporte >
+Review "0-N" -- "1-1" Intervenant: concerne >
+
+@enduml
+
+

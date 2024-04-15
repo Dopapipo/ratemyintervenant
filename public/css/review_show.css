@@ -1,7 +1,7 @@
-
 .delete-text {
     display: none;
 }
+
 
 
 
@@ -9,14 +9,10 @@
     display: inline;
 }
 
-
-
 .delete-icon:hover {
-    color: red;
+    color: red; /* Change la couleur de la croix en rouge au survol */
 }
-
-
 .delete-text:hover {
-    color: red;
+    color: red; /* Change la couleur du texte en rouge au survol */
 }
 
