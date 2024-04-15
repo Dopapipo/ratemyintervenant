@@ -6,6 +6,8 @@ use App\Entity\Classe;
 use App\Entity\Intervenant;
 use App\Entity\Matiere;
 use App\Entity\Review;
+use App\Entity\User;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -13,6 +15,7 @@ class AppFixtures extends Fixture
 {
     private static $MINIMUM_INTERVENANTS = 3;
     private static $MAXIMUM_INTERVENANTS = 7;
+    private static $NUMBER_OF_USERS = 50;
     private static $MINIMUM_REVIEWS = 5;
     private static $MAXIMUM_REVIEWS = 20;
     private array $abbreviatons = [
@@ -41,7 +44,7 @@ class AppFixtures extends Fixture
             "Technologies du Web: Remise a niveau"
 
         ],
-        'L3 MIAGE APPRENTISSAGE' =>[
+        'L3 MIAGE APPRENTISSAGE' => [
             'Fondements de l\'algorithmique',
             'Programmation orientée objet',
             'Architecture des systemes informatiques',
@@ -64,7 +67,7 @@ class AppFixtures extends Fixture
             "Ingénierie des données",
             "Ingénierie des services",
             "Ingénierie des applications",
-       ],
+        ],
         'M1 MIAGE GR.2' => ["Ingénierie des systèmes d'information",
             "Ingénierie des processus métiers",
             "Ingénierie des données",
@@ -81,13 +84,21 @@ class AppFixtures extends Fixture
             "Ingénierie des services",
             "Ingénierie des applications",],
     ];
-    private function formatClassesMatieres() :void{
+
+    public function __construct(private readonly UserFactory $factory) //UserFactory pour l'autowiring
+        //(juste besoin des méthodes de l'interface, mais symfony ne l'autowire pas....
+    {
+    }
+
+    private function formatClassesMatieres(): void
+    {
         foreach ($this->abbreviatons as $classeName => $abbreviation) {
             for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
                 $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
             }
         }
     }
+
     public function load(ObjectManager $manager): void
     {
         $this->formatClassesMatieres();
@@ -107,31 +118,54 @@ class AppFixtures extends Fixture
 
         //Intervenants
         foreach ($this->classes_matieres as $classeName => $matieres) {
-            for ($i = 0; $i < random_int(self::$MINIMUM_INTERVENANTS,self::$MAXIMUM_INTERVENANTS); $i++) {
+            for ($i = 0; $i < random_int(self::$MINIMUM_INTERVENANTS, self::$MAXIMUM_INTERVENANTS); $i++) {
                 $intervenant = new Intervenant();
                 $classe = $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]);
                 $intervenant->addClassesTaught($classe);
                 $matiere = $manager->getRepository(Matiere::class)->findOneBy(['name' => $matieres[array_rand($matieres)]]);
                 $intervenant->addMatieresEnseignee($matiere);
-                $intervenant->setName('Intervenant '.$classeName.' '.$i);
+                $intervenant->setName($this->factory::faker()->name());
                 $intervenant->setProfilePictureFileName('default_intervenant.jpg');
                 $manager->persist($intervenant);
             }
         }
         $manager->flush();
-        //Reviews
-        /*
-        $intervenants = $manager->getRepository(Intervenant::class)->findAll();
 
-        foreach ($intervenants as $intervenant) {
-            for ($i = 0; $i < random_int(self::$MINIMUM_REVIEWS,self::$MAXIMUM_REVIEWS); $i++) {
-                $review = new Review();
-                $review->setIntervenant($intervenant);
-                $review->setMatiere($intervenant->getMatieresEnseignees()[random_int(0,count($intervenant->getMatieresEnseignees())-1)]);
-                $review->setGrade(random_int(1,5));
-                $review->setContent('Commentaire '.$i);
-                $manager->persist($review);
+        //Users
+        UserFactory::createMany(self::$NUMBER_OF_USERS);
+        $users = $manager->getRepository(User::class)->findAll();
+        foreach ($users as $user) {
+            $user->setClasse($manager->getRepository(Classe::class)->findAll()[random_int(0, count($this->classes_matieres) - 1)]);
+            $manager->persist($user);
+        }
+        $admin = $manager->getRepository(User::class)->findOneBy(['username' => 'admin1']);
+        if (!$admin) {
+            $adminUser = UserFactory::new()->create([
+                'username' => 'admin1',
+                'password' => 'admin1',
+                'roles' => ['ROLE_ADMIN', 'ROLE_USER'],]);
+        }
+        //Reviews
+        foreach ($users as $author) {
+            $classe = $author->getClasse();
+            $allIntervenantsParClasseAuteur = $classe->getIntervenants();
+            foreach ($allIntervenantsParClasseAuteur as $intervenant) {
+                $matieresDeIntervenantDansClasseAuteur = $intervenant->getMatieresEnseignees()->filter(fn(Matiere $matiere) => $matiere->getClasse() === $classe);
+                foreach ( $matieresDeIntervenantDansClasseAuteur as $matiere) {
+                    $review = new Review();
+                    $review->setMatiere($matiere);
+                    $review->setAuthor($author);
+                    $review->setGrade(random_int(1, 5));
+                    $review->setContent($this->factory::faker()->realText(300));
+                    $review->setIntervenant($intervenant);
+                    $classe = $author->getClasse();
+                    $manager->persist($review);
+
+                }
             }
-        }*/
+        }
+
+        $manager->flush();
+
     }
 }

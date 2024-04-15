@@ -40,9 +40,9 @@
                                     <p class="text-muted font-size-sm">Paris 1 Panthéon Sorbonne</p>
                                     <!-- Afficher la note moyenne -->
                                     <div class="stats">
-                                        <h6 class="mb-0">Note Moyenne</h6>
                                         <span>{{ intervenant.average }}</span>
                                     </div>
+                                    <br>
                                     <a title="noter" class="btn btn-primary" href={{ path('app_review_new', {"intervenantid":intervenant.id})}}>Noter</a>
                                     <a title="retour à la liste" class="btn btn-outline-primary" href="{{ path('app_blog_index')}}">Retour à la liste</a>
                                 </div>

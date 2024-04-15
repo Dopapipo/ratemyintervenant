@@ -15,7 +15,8 @@ use Symfony\Component\Validator\Constraints\Unique;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
-#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['username'], message: 'Cet e-mail ou nom d\'utilisateur est déjà utilisé')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -24,7 +25,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Unique (null,"Nom d'utilisateur déjà utilisé")]
     private ?string $username = null;
 
     /**
@@ -41,7 +41,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[MailParisUn]
-    #[Unique(null,"Mail déjà utilisé")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
