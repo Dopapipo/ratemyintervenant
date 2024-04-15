@@ -205,6 +205,17 @@ class Review
         return $this;
     }
 
+    public function isLikedByUser(User $user): bool
+    {
+        return $this->usersThatLiked->contains($user);
+    }
+
+    public function isDislikedByUser(User $user): bool
+    {
+        return $this->usersThatDisliked->contains($user);
+    }
+
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
