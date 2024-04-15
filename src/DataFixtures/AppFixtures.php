@@ -58,20 +58,40 @@ class AppFixtures extends Fixture
             "Technologies du Web: Remise a niveau"
 
         ],
-        'M1 MIAGE GR.1' => [],
-        'M1 MIAGE GR.2' => [],
-        'M2 MIAGE GR.1' => [],
-        'M2 MIAGE GR.2' => [],
+        'M1 MIAGE GR.1' => [
+            "Ingénierie des systèmes d'information",
+            "Ingénierie des processus métiers",
+            "Ingénierie des données",
+            "Ingénierie des services",
+            "Ingénierie des applications",
+       ],
+        'M1 MIAGE GR.2' => ["Ingénierie des systèmes d'information",
+            "Ingénierie des processus métiers",
+            "Ingénierie des données",
+            "Ingénierie des services",
+            "Ingénierie des applications",],
+        'M2 MIAGE GR.1' => ["Ingénierie des systèmes d'information",
+            "Ingénierie des processus métiers",
+            "Ingénierie des données",
+            "Ingénierie des services",
+            "Ingénierie des applications",],
+        'M2 MIAGE GR.2' => ["Ingénierie des systèmes d'information",
+            "Ingénierie des processus métiers",
+            "Ingénierie des données",
+            "Ingénierie des services",
+            "Ingénierie des applications",],
     ];
     private function formatClassesMatieres() :void{
         foreach ($this->abbreviatons as $classeName => $abbreviation) {
-            $this->classes_matieres[$classeName] = $this->classes_matieres[$classeName] . ' ' . $abbreviation;
+            for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
+                $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
+            }
         }
     }
     public function load(ObjectManager $manager): void
     {
-        //Classes & matieres
         $this->formatClassesMatieres();
+        //Classes & matieres
         foreach ($this->classes_matieres as $classeName => $matieres) {
             $classe = new Classe();
             $classe->setName($classeName);
@@ -83,6 +103,7 @@ class AppFixtures extends Fixture
                 $manager->persist($matiere);
             }
         }
+        $manager->flush();
 
         //Intervenants
         foreach ($this->classes_matieres as $classeName => $matieres) {
@@ -93,10 +114,13 @@ class AppFixtures extends Fixture
                 $matiere = $manager->getRepository(Matiere::class)->findOneBy(['name' => $matieres[array_rand($matieres)]]);
                 $intervenant->addMatieresEnseignee($matiere);
                 $intervenant->setName('Intervenant '.$classeName.' '.$i);
+                $intervenant->setProfilePictureFileName('default_intervenant.jpg');
                 $manager->persist($intervenant);
             }
         }
+        $manager->flush();
         //Reviews
+        /*
         $intervenants = $manager->getRepository(Intervenant::class)->findAll();
 
         foreach ($intervenants as $intervenant) {
@@ -108,6 +132,6 @@ class AppFixtures extends Fixture
                 $review->setContent('Commentaire '.$i);
                 $manager->persist($review);
             }
-        }
+        }*/
     }
 }
