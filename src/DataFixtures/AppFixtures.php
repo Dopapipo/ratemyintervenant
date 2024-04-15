@@ -116,7 +116,7 @@ class AppFixtures extends Fixture
                 $classe = $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]);
                 $intervenant->addClassesTaught($classe);
                 $intervenant->setName($this->factory::faker()->name());
-                $intervenant->setProfilePictureFileName('default_intervenant.jpg');
+                $intervenant->setProfilePictureFileName('default-intervenant.jpg');
 
                 for ($i = 0; $i < random_int(1, min(count($matieres), self::$MAX_MATIERES_PAR_INTERVENANT)); $i++) {
                     $matiere = $manager->getRepository(Matiere::class)->findOneBy(['name' => $matieres[$i]]);
