@@ -197,6 +197,7 @@ class Intervenant
         if ($count == 0) {
             return "Pas encore noté";
         }
-        return  "(".(string)round($sum / $count, 2)."/5".")";
+        $s = "(".(string)round($sum / $count, 2)."/5".")";
+        return $s ;
     }
 }

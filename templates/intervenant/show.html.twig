@@ -32,6 +32,7 @@
                                         Matières Enseignées :
                                         {% for matiere in intervenant.matieresEnseignees %}
                                             {{ matiere.name }}
+                                            {{ intervenant.getAverageParMatiere(matiere) }}
                                             {% if not loop.last %}
                                                 ,
                                             {% endif %}
