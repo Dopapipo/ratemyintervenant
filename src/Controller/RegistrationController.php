@@ -9,6 +9,8 @@ use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
 use App\Service\EmailService;
+use App\Validator\MailParisUn;
+use App\Validator\MailParisUnValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -33,7 +36,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager, MailParisUnValidator $validator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -48,11 +51,7 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->addRole('ROLE_USER');
-            if (!preg_match('/[A-z0-9]+@etu\.univ-paris1\.fr/i', $user->getEmail())) {
-                $this->addFlash('warning', 'Vous devez utiliser une adresse email de l\'université Paris 1 Panthéon-Sorbonne.');
-                return $this->redirectToRoute('app_register');
-
-            }
+            $validator->validate($user->getEmail(), new MailParisUn());
             $entityManager->persist($user);
             $entityManager->flush();
 

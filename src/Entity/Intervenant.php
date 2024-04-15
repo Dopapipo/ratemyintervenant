@@ -33,7 +33,7 @@ class Intervenant
     private Collection $matieresEnseignees;
     //Default profile picture is a question mark
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $profilePictureFileName = "73a6e95ceb9a9fc122eec56c23caf2945e4f3bf1.png";
+    private ?string $profilePictureFileName = "default-intervenant.png";
 
     public function __construct()
     {
@@ -185,5 +185,19 @@ class Intervenant
             return "Pas encore noté";
         }
         return  "Note moyenne : ".(string)round($sum / $count, 2)."/5";
+    }
+    public function getAverageParMatiere(Matiere $matiere) {
+        $reviewsMatiere = $this->getReviews()->filter(fn(Review $review) => $review->getMatiere() === $matiere);
+        $sum = 0;
+        $count = 0;
+        foreach ($reviewsMatiere as $review) {
+            $sum += $review->getGrade();
+            $count++;
+        }
+        if ($count == 0) {
+            return "Pas encore noté";
+        }
+        $s = "(".(string)round($sum / $count, 2)."/5".")";
+        return $s ;
     }
 }

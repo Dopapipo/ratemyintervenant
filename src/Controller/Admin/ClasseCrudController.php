@@ -28,6 +28,9 @@ class ClasseCrudController extends AbstractCrudController
                 ->setRequired(false)
             ->setFormTypeOptionIfNotSet('by_reference', false),
             ArrayField::new('intervenants')->hideOnForm()->setLabel('Intervenants'),
+            AssociationField::new('students')->setLabel('Élèves')
+                ->setRequired(false)
+            ->onlyOnIndex()
         ];
     }
 
