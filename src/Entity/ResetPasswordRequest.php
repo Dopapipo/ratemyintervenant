@@ -23,7 +23,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
 
 
 
-    public function __construct(object $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken)
+    public function __construct(User $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken)
     {
         $this->user = $user;
         $this->initialize($expiresAt, $selector, $hashedToken);
@@ -39,10 +39,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
         return $this->user;
     }
 
-    public function getToken(): ?string
-    {
-        return $this->token;
-    }
+
 
 
 }
