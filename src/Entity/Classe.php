@@ -6,9 +6,12 @@ use App\Repository\ClasseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\Unique;
 
 #[ORM\Entity(repositoryClass: ClasseRepository::class)]
+#[UniqueEntity(fields: ['name'], message: 'Cette classe existe déjà')]
+
 class Classe
 {
     #[ORM\Id]
@@ -17,7 +20,6 @@ class Classe
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Unique]
     private ?string $name = null;
 
 

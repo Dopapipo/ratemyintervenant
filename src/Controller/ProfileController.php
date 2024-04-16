@@ -65,6 +65,7 @@ class ProfileController extends AbstractController
         return $this->render('profile/reset_password.html.twig', [
             'makeadminview' => $user,
             'form' => $form,
+
         ]
         );
     }

@@ -85,7 +85,6 @@ class RegistrationController extends AbstractController
         }
         if ($user->isVerified()) {
             $this->addFlash('success', 'Votre email a déjà été confirmé. Vous pouvez maintenant vous connecter.');
-
             return $this->redirectToRoute('app_login');
         }
         // validate email confirmation link, sets User::isVerified=true and persists
@@ -120,6 +119,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // generate a signed url and email it to the makeadminview
             $user =  $userRepository->findOneByEmail($form->get('email')->getData());
+
             if ($user) {
                 $this->emailVerifier->sendEmailConfirmation(
                     'app_verify_email',
