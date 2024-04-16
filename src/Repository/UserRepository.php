@@ -38,6 +38,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */
@@ -70,5 +71,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $this->getEntityManager()->remove($user);
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findNotAdmins() {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles NOT LIKE :role')
+            ->setParameter('role', '%ROLE_ADMIN%')
+            ->getQuery()
+            ->getResult();
     }
 }

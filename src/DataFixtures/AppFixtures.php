@@ -184,6 +184,31 @@ class AppFixtures extends Fixture
     {
         $this->formatClassesMatieres();
         //Classes & matieres
+        $this->loadClassesAndMatieres($manager);
+        //Intervenants
+        $this->loadIntervenants($manager);
+
+        //Users
+        $this->loadUsers($manager);
+
+        //Loggable Users for dev & testing
+        $this->loadLoggableUsers($manager);
+
+        //Reviews
+        $this->loadReviews($manager);
+
+    }
+
+    private function formatClassesMatieres(): void
+    {
+        foreach ($this->abbreviatons as $classeName => $abbreviation) {
+            for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
+                $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
+            }
+        }
+    }
+
+    public function loadClassesAndMatieres(ObjectManager $manager) {
         foreach ($this->classes_matieres as $classeName => $matieres) {
             $classe = new Classe();
             $classe->setName($classeName);
@@ -196,8 +221,8 @@ class AppFixtures extends Fixture
             }
         }
         $manager->flush();
-
-        //Intervenants
+    }
+    private function loadIntervenants(ObjectManager $manager) {
         foreach ($this->classes_matieres as $classeName => $matieres) {
             for ($i = 0; $i < random_int(self::$MINIMUM_INTERVENANTS_PAR_CLASSE, self::$MAXIMUM_INTERVENANTS_PAR_CLASSE); $i++) {
                 //Intervenant matieres between 1 and MAX_MATIERES_PAR_INTERVENANT
@@ -215,14 +240,19 @@ class AppFixtures extends Fixture
             }
         }
         $manager->flush();
-
-        //Users
+    }
+    private function loadUsers(ObjectManager $manager) {
         UserFactory::createMany(self::$NUMBER_OF_USERS);
         $users = $manager->getRepository(User::class)->findAll();
         foreach ($users as $user) {
             $user->setClasse($manager->getRepository(Classe::class)->findAll()[random_int(0, count($this->classes_matieres) - 1)]);
             $manager->persist($user);
         }
+
+        $manager->flush();
+    }
+    private function loadLoggableUsers(ObjectManager $manager)
+    {
         $admin = $manager->getRepository(User::class)->findOneBy(['username' => 'admin1']);
         if (!$admin) {
             $adminUser = UserFactory::new()->create([
@@ -231,7 +261,20 @@ class AppFixtures extends Fixture
                 'roles' => ['ROLE_ADMIN', 'ROLE_USER'],
             ]);
         }
-        //Reviews
+
+        foreach($this->abbreviatons as $classeName) {
+            UserFactory::createOne([
+                'username' => $classeName,
+                'password' => $classeName,
+                'roles' => ['ROLE_USER'],
+                'classe' => $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]),
+            ]);
+        }
+        $manager->flush();
+    }
+
+    private function loadReviews(ObjectManager $manager) {
+        $users = $manager->getRepository(User::class)->findNotAdmins();
         foreach ($users as $author) {
             $classe = $author->getClasse();
             $allIntervenantsParClasseAuteur = $classe->getIntervenants();
@@ -244,7 +287,6 @@ class AppFixtures extends Fixture
                     $review->setGrade(random_int(1, 5));
                     $review->setContent($this->factory::faker()->realText(300));
                     $review->setIntervenant($intervenant);
-                    $classe = $author->getClasse();
                     $manager->persist($review);
 
                 }
@@ -252,15 +294,5 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
-
-    }
-
-    private function formatClassesMatieres(): void
-    {
-        foreach ($this->abbreviatons as $classeName => $abbreviation) {
-            for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
-                $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
-            }
-        }
     }
 }
