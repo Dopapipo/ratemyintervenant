@@ -8,26 +8,23 @@
 {% block title %}Poster une Review{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">  <div class="row justify-content-center">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card shadow-sm">  <div class="card-header">
+                <div class="card shadow-sm">
+                    <div class="card-header">
                         {{ block('title') }}
                     </div>
                     <div class="card-body">
-                        <h1 class="mb-4">{{ block('title') }}</h1>
+                        <h1 class="mb-4">Poster une Review</h1>
 
                         {{ include('review/_form.html.twig', {'button_label': 'Poster'}) }}
-                        <a title="page intervenant" href="{{ path('app_intervenant_show', {"id":review.intervenant.id}) }}" class="btn btn-secondary mt-4">Retour à l'intervenant</a>
+                        {% if review is defined %}
+                            <a title="page intervenant" href="{{ path('app_intervenant_show', {"id":review.intervenant.id}) }}" class="btn btn-secondary mt-4">Retour à l'intervenant</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-<script>
-    function updateGradeDisplay(value) {
-        var display = document.getElementById('grade-display');
-        display.textContent = 'Note : ' + value + '/5';
-    }
-</script>
 {% endblock %}
