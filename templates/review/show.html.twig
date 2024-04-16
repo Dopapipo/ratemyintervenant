@@ -1,37 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Review{% endblock %}
-{% block header %} {% endblock %}
-{% block footer %} {% endblock %}
+{% block title %}Review
+{% endblock %}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
 {% block body %}
-   <div class="row">
-        <div class="col-12">
-            <h1>{{ review.grade }}</h1>
-            <main>{{ review.content }}</main>
-            <small>{{ review.author.name }}</small>
-            <small>{{ review.createdAt|date('d/m/Y H:i') }}</small>
-            <div>
-                <a title="like" href="{{ path('like_review', {'id': review.id}) }}" class="link-muted me-2"><i class="fas fa-thumbs-up me-1"></i> {{ review.likes }}</a>
-                <a title="dislike" href="{{ path('dislike_review', {'id': review.id}) }}" class="link-muted me-2"><i class="fas fa-thumbs-down me-1"></i> {{ review.dislikes }}</a>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a title="supprimer" href="{{ path('app_review_delete', {'id': review.id}) }}" class="btn btn-danger"><i class="fa-solid fa-x"></i></a>
-                {% endif %}
-            </div>
+	<div class="row">
+		<div class="col-12">
+			<h1>{{ review.grade }}</h1>
+			<main>{{ review.content }}</main>
+			<small>{{ review.author.name }}</small>
+			<small>{{ review.createdAt|date('d/m/Y H:i') }}</small>
+			<div>
+				<a title="like" href="{{ path('like_review', {'id': review.id}) }}" class="link-muted me-2">
+					<i class="fas fa-thumbs-up me-1"></i>
+					{{ review.likes }}</a>
+				<a title="dislike" href="{{ path('dislike_review', {'id': review.id}) }}" class="link-muted me-2">
+					<i class="fas fa-thumbs-down me-1"></i>
+					{{ review.dislikes }}</a>
+				{% if is_granted('ROLE_ADMIN') %}
+					<a title="supprimer" href="{{ path('app_review_delete', {'id': review.id}) }}" class="btn btn-danger">
+						<i class="fa-solid fa-x"></i>
+					</a>
+				{% endif %}
+			</div>
 
-        </div>
-   </div>
+		</div>
+	</div>
 
-{# The and not part of the if is so that admins that posted comments don't see the button twice #}
-{% if is_granted('ROLE_USER') and app.user.id == review.author.id and not is_granted('ROLE_ADMIN') %}
-    <div class="row">
-          <div class="col-12">
-              <a href="{{ path('app_review_delete', {'id': review.id}) }}" class="btn btn-danger" title="supprimer"><i class="fa-solid fa-x"></i></a>
-          </div>
-        <div class="col-12">
-            <a title="modifer" href="{{ path('app_review_edit', {'id': review.id}) }}" class="btn btn-warning">Modifier </a>
+	{# The and not part of the if is so that admins that posted comments don't see the button twice #}
+	{% if is_granted('ROLE_USER') and app.user.id == review.author.id and not is_granted('ROLE_ADMIN') %}
+		<div class="row">
+			<div class="col-12">
+				<a href="{{ path('app_review_delete', {'id': review.id}) }}" class="btn btn-danger" title="supprimer">
+					<i class="fa-solid fa-x"></i>
+				</a>
+			</div>
+			<div class="col-12">
+				<a title="modifer" href="{{ path('app_review_edit', {'id': review.id}) }}" class="btn btn-warning">Modifier
+				</a>
 
-        </div>
-    </div>
-        {% endif %}
+			</div>
+		</div>
+	{% endif %}
 
 {% endblock %}
