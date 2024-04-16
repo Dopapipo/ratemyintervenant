@@ -46,7 +46,7 @@ class ReviewCrudController extends AbstractCrudController
     }
     public function configureActions(Actions $actions): Actions
     {
-        return $actions->disable(Action::EDIT);
+        return $actions->disable(Action::EDIT)->disable(Action::NEW);
     }
     public function configureCrud(Crud $crud): Crud
     {

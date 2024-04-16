@@ -43,7 +43,7 @@ class ReviewController extends AbstractController
             return $this->redirectToRoute('app_intervenant_show', ['id'=> $request->get('intervenantid')], Response::HTTP_SEE_OTHER);
         }
         $review = new Review();
-        $form = $this->createForm(ReviewType::class, $review, ['intervenant' => $intervenant, 'user'=>$user] );
+        $form = $this->createForm(ReviewType::class, $review, ['intervenant' => $intervenant, 'user'=>$user, 'mode'=>'new'] );
         $form->handleRequest($request);
         $review->setAuthor($user);
         $review->setIntervenant($intervenant);
@@ -58,6 +58,7 @@ class ReviewController extends AbstractController
         return $this->render('review/new.html.twig', [
             'review' => $review,
             'form' => $form,
+            'mode' => 'new',
         ]);
     }
 
@@ -72,7 +73,7 @@ class ReviewController extends AbstractController
     #[Route('/edit/{id}', name: 'app_review_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Review $review, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ReviewType::class, $review);
+        $form = $this->createForm(ReviewType::class, $review, ['intervenant' => $review->getIntervenant(), 'user'=>$this->getUser(), 'mode' => 'edit']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,6 +85,7 @@ class ReviewController extends AbstractController
         return $this->render('review/edit.html.twig', [
             'review' => $review,
             'form' => $form,
+            'mode' => 'edit',
         ]);
     }
 

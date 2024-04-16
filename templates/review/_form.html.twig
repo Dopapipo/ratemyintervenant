@@ -12,11 +12,12 @@
 	<div id="grade-message" class="grade-message" style="display: none;">Note :
 		<span id="grade-value">0</span>/5</div>
 </div>
-
+{% if mode is same as 'new' %}
 <div class="form-group">
 	{{ form_label(form.matiere) }}
 	{{ form_widget(form.matiere, {'attr': {'class': 'form-control'}}) }}
 </div>
+{% endif %}
 
 <button class="btn btn-primary btn-block">{{ button_label|default('Save') }}</button>
 
