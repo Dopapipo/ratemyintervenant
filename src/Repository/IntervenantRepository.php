@@ -45,12 +45,5 @@ class IntervenantRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-    public function findNotAdmins()
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.roles NOT LIKE :role')
-            ->setParameter('role', '%ROLE_ADMIN%')
-            ->getQuery()
-            ->getResult();
-    }
+
 }
