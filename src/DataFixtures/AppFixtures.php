@@ -27,6 +27,7 @@ class AppFixtures extends Fixture
         'M2 MIAGE GR.1' => 'M2G1',
         'M2 MIAGE GR.2' => 'M2G2',
     ];
+
     private array $classes_matieres = [
         'L3 MIAGE CLASSIQUE' => [
             'Architecture des systèmes informatiques',
@@ -183,19 +184,11 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $this->formatClassesMatieres();
-        //Classes & matieres
         $this->loadClassesAndMatieres($manager);
-        //Intervenants
         $this->loadIntervenants($manager);
-
-        //Users
         $this->loadUsers($manager);
-
-        //Loggable Users for dev & testing
-        $this->loadLoggableUsers($manager);
-
-        //Reviews
         $this->loadReviews($manager);
+        $this->loadLoggableUsers($manager);
 
     }
 
@@ -243,7 +236,7 @@ class AppFixtures extends Fixture
     }
     private function loadUsers(ObjectManager $manager) {
         UserFactory::createMany(self::$NUMBER_OF_USERS);
-        $users = $manager->getRepository(User::class)->findAll();
+        $users = $manager->getRepository(User::class)->findNotAdmins();
         foreach ($users as $user) {
             $user->setClasse($manager->getRepository(Classe::class)->findAll()[random_int(0, count($this->classes_matieres) - 1)]);
             $manager->persist($user);
@@ -262,10 +255,10 @@ class AppFixtures extends Fixture
             ]);
         }
 
-        foreach($this->abbreviatons as $classeName) {
+        foreach($this->abbreviatons as $classeName=>$classeAbbreviation) {
             UserFactory::createOne([
-                'username' => $classeName,
-                'password' => $classeName,
+                'username' => $classeAbbreviation,
+                'password' => $classeAbbreviation,
                 'roles' => ['ROLE_USER'],
                 'classe' => $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]),
             ]);
