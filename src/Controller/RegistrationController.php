@@ -55,9 +55,9 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the makeadminview
+            // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                ($this->emailService->createMail($user->getEmail(), 'Please confirm your Email', 'confirmation_email.html.twig'))
+                ($this->emailService->createMail($user->getEmail(), 'Mail de confirmation', 'confirmation_email.html.twig'))
             );
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Enregistrement réussi. Regardez votre e-mail pour pouvoir vous connecter.');
@@ -93,8 +93,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Votre adresse mail a été vérifiée.');
 
         return $this->redirectToRoute('app_home');
     }
@@ -114,13 +113,13 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RequestVerifyUserEmailType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // generate a signed url and email it to the makeadminview
+            // generate a signed url and email it to the user
             $user =  $userRepository->findOneByEmail($form->get('email')->getData());
             if ($user) {
                 $this->emailVerifier->sendEmailConfirmation(
                     'app_verify_email',
                     $user,
-                    ($this->emailService->createMail($user->getEmail(), 'Please confirm your Email', 'confirmation_email.html.twig')));
+                    ($this->emailService->createMail($user->getEmail(), 'Mail de confirmation', 'confirmation_email.html.twig')));
                 // do anything else you need here, like flash message
                 $this->addFlash('success', "Un email vous a été envoyé. Veuillez consulter votre boîte de réception pour confirmer votre adresse email");
                 return $this->redirectToRoute('app_home');

@@ -37,7 +37,7 @@ class EmailService
     public function createMail(string $to, string $subject, string $templateTwig, array $context = []): TemplatedEmail
     {
         return (new TemplatedEmail())
-            ->from(new Address("noreply@ratemyintervenant.com", "noreply"))
+            ->from(new Address("lisniclucian@gmail.com", "noreply"))
             ->to($to)
             ->subject($subject)
             ->htmlTemplate("emails/$templateTwig")
