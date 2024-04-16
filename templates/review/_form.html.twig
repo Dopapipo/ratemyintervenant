@@ -1,20 +1,21 @@
 {{ form_start(form) }}
 
 <div class="form-group">
-    {{ form_label(form.content) }}
-    {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+	{{ form_label(form.content) }}
+	{{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
 </div>
 
 <div class="form-group">
-    {{ form_label(form.grade) }}
-    <span id="grade-display" class="grade-display"></span>
-    {{ form_widget(form.grade, {'attr': {'class': 'form-control', 'id': 'grade-input', 'title': 'Note: ' ~ form.grade.vars.value ~ '/5', 'oninput': 'showGradeMessage(this.value)'}}) }}
-    <div id="grade-message" class="grade-message" style="display: none;">Note : <span id="grade-value">0</span>/5</div>
+	{{ form_label(form.grade) }}
+	<span id="grade-display" class="grade-display"></span>
+	{{ form_widget(form.grade, {'attr': {'class': 'form-control', 'id': 'grade-input', 'title': 'Note: ' ~ form.grade.vars.value ~ '/5', 'oninput': 'showGradeMessage(this.value)'}}) }}
+	<div id="grade-message" class="grade-message" style="display: none;">Note :
+		<span id="grade-value">0</span>/5</div>
 </div>
 
 <div class="form-group">
-    {{ form_label(form.matiere) }}
-    {{ form_widget(form.matiere, {'attr': {'class': 'form-control'}}) }}
+	{{ form_label(form.matiere) }}
+	{{ form_widget(form.matiere, {'attr': {'class': 'form-control'}}) }}
 </div>
 
 <button class="btn btn-primary btn-block">{{ button_label|default('Save') }}</button>
@@ -22,3 +23,5 @@
 {{ form_end(form) }}
 
 <script src="{{ asset('js/form_review.js') }}"></script>
+
+

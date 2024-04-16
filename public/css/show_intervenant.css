@@ -54,13 +54,14 @@ body {
 
 .col-md-8 .mb-3 .card-body {
     overflow-y: auto;
-    max-height: 400px;
+    max-height: 470px;
 }
 
 .col-md-4 .card {
     border-radius: 20px !important;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border:none;
+    min-height: 470px;
 }
 
 
@@ -74,4 +75,3 @@ body {
 }
 
 
-.shadow-none {}

@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/new_review.css') }}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/new_review.css') }}">
 {% endblock %}
 
-{% block title %}Poster une Review{% endblock %}
+{% block title %}Poster une Review
+{% endblock %}
 
 {% block body %}
     <div class="container mt-5">
@@ -27,4 +28,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
