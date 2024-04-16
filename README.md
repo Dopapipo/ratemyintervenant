@@ -2,7 +2,11 @@ To run database :
 
 docker compose up -d
 
+ symfony console doctrine:schema:update --force
+
 symfony console doctrine:migrations:migrate
+
+symfony console doctrine:fixtures:load --purge-with-truncate --purger=mysql_purger
 
 To use symfony with the docker database easily, use symfony console [your command] instead of php bin/console [your command]
 
