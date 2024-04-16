@@ -44,7 +44,7 @@ class ProfileController extends AbstractController
     public function resetPassword(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = $this->security->getUser();
-        $form = $this->createForm(ChangePasswordFormType::class, $user);
+        $form = $this->createForm(ChangePasswordFormType::class, $user,['from' => 'profile']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
