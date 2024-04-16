@@ -216,4 +216,7 @@ class Review
 
         return $this;
     }
+    public function getAuthorName() {
+        return $this->author->getUsername();
+    }
 }
