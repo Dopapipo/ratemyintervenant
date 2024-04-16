@@ -44,7 +44,7 @@ class ProfileController extends AbstractController
     public function resetPassword(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = $this->security->getUser();
-        $form = $this->createForm(ChangePasswordFormType::class, $user);
+        $form = $this->createForm(ChangePasswordFormType::class, $user,['from' => 'profile']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -65,6 +65,7 @@ class ProfileController extends AbstractController
         return $this->render('profile/reset_password.html.twig', [
             'makeadminview' => $user,
             'form' => $form,
+
         ]
         );
     }

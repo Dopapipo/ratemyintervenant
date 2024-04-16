@@ -22,6 +22,7 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {   $intervenant = $options['intervenant'];
         $user = $options['user'];
+        $mode = $options['mode'];
         $builder
             ->add('content', TextareaType::class, [
                 'required'=>false,
@@ -41,7 +42,10 @@ class ReviewType extends AbstractType
                     'max' => 5,
                 ],
             ])
-            ->add('matiere', EntityType::class, [
+
+        ;
+        if ($mode === 'new') {
+            $builder->add('matiere', EntityType::class, [
                 'class' => Matiere::class,
                 'choice_label' => 'name',
                 'required' => true,
@@ -53,8 +57,12 @@ class ReviewType extends AbstractType
                         ->setParameter('classe', $user->getClasse())
                         ->setParameter('intervenant', $intervenant );
                 },
-            ])
-        ;
+            ]);
+        }
+        if ($mode === 'edit') {
+            //No need for extra logic for now
+        }
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -63,6 +71,7 @@ class ReviewType extends AbstractType
             'data_class' => Review::class,
             'intervenant'=>null,
             'user'=>null,
+            'mode'=>null
         ]);
     }
 }

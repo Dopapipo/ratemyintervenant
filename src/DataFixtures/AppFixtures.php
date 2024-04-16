@@ -27,74 +27,181 @@ class AppFixtures extends Fixture
         'M2 MIAGE GR.1' => 'M2G1',
         'M2 MIAGE GR.2' => 'M2G2',
     ];
+
     private array $classes_matieres = [
         'L3 MIAGE CLASSIQUE' => [
-            'Fondements de l\'algorithmique',
-            'Programmation orientée objet',
-            'Architecture des systemes informatiques',
+            'Architecture des systèmes informatiques',
+            "Fondement de l'Algorithmique",
+            'Programmation orientée objet (POO)',
             'Réseaux',
-            'Bases de données avancées',
-            'Gestion de projet',
-            'Techniques de test et validation du logiciel',
             'Ingénierie de développement des IHM',
-            'Comptabilité et Comptabilité analytique',
-            'Techniques de communication',
+            "Méthodes d'ingénierie des SI: Fondamentaux",
+            'Comptabilité & comptabilité analytique',
+            'Techniques de test et validation du logiciel',
             'Anglais',
-            "Ateliers d'outils de développement",
+            'Ateliers "outils de développement',
+            'Techniques de communication',
+            "Algorithmique avancée",
+            "Technologie du Web: niveau avancé",
+            "Architecture Orientée Objet",
+            "Gestion de projets: Fondamentaux",
+            "Bases de la RO et de l'optimisation",
+            "Programmation des BD relationnelles",
+            "Ressources Humaines et Marketing",
+            "Anglais",
+            "Ateliers outils de développement mobiles",
+            "Mission d'analyse et de développement",
             "Projet commun ou concours",
-            "Technologies du Web: Remise a niveau"
+            "Techniques de communication",
+            "Atelier lié à la créativité",
+            "Atelier Positionnement Projet Professionnel"
 
         ],
         'L3 MIAGE APPRENTISSAGE' => [
-            'Fondements de l\'algorithmique',
-            'Programmation orientée objet',
-            'Architecture des systemes informatiques',
+            'Architecture des systèmes informatiques',
+            "Fondement de l'Algorithmique",
+            'Programmation orientée objet (POO)',
             'Réseaux',
-            'Bases de données avancées',
-            'Gestion de projet',
-            'Techniques de test et validation du logiciel',
             'Ingénierie de développement des IHM',
-            'Comptabilité et Comptabilité analytique',
-            'Techniques de communication',
+            "Méthodes d'ingénierie des SI: Fondamentaux",
+            'Comptabilité & comptabilité analytique',
+            'Techniques de test et validation du logiciel',
             'Anglais',
-            "Ateliers d'outils de développement",
+            'Ateliers "outils de développement',
+            'Techniques de communication',
+            "Algorithmique avancée",
+            "Technologie du Web: niveau avancé",
+            "Architecture Orientée Objet",
+            "Gestion de projets: Fondamentaux",
+            "Bases de la RO et de l'optimisation",
+            "Programmation des BD relationnelles",
+            "Ressources Humaines et Marketing",
+            "Anglais",
+            "Ateliers outils de développement mobiles",
+            "Mission d'analyse et de développement",
             "Projet commun ou concours",
-            "Technologies du Web: Remise a niveau"
+            "Techniques de communication",
+            "Atelier lié à la créativité",
+            "Atelier Positionnement Projet Professionnel"
 
         ],
+
         'M1 MIAGE GR.1' => [
-            "Ingénierie des systèmes d'information",
-            "Ingénierie des processus métiers",
-            "Ingénierie des données",
-            "Ingénierie des services",
-            "Ingénierie des applications",
+            "Gestion de projet avancée",
+            "Modèles de l'ingénierie des SI",
+            "Architectures logicielles et Web",
+            "Frameworks, composants métiers et Web service",
+            "Contrôle de gestion",
+            "Droit",
+            "Graphes et algoritmes",
+            "Marketing digital",
+            "Méthodes statistiques",
+            "Anglais",
+            "Séminaire thématique",
+            "Atelier Veille technologique",
+            "Techniques de communication",
+            "Bases de données non SQL",
+            "Outils d'analyse de documents structurés",
+            "Modèles et outils pour les processus",
+            "Modélisation événementielle et ses implémentations",
+            "Initiation aux stratégies d'entreprises dans les TIC",
+            "Techniques mathématiques pour l'aide à la décision",
+            "Anglais (préparation certification)",
+            "Mémoire et mission",
+            "Projet commun ou concours",
+            "Techniques de communication",
         ],
-        'M1 MIAGE GR.2' => ["Ingénierie des systèmes d'information",
-            "Ingénierie des processus métiers",
-            "Ingénierie des données",
-            "Ingénierie des services",
-            "Ingénierie des applications",],
-        'M2 MIAGE GR.1' => ["Ingénierie des systèmes d'information",
-            "Ingénierie des processus métiers",
-            "Ingénierie des données",
-            "Ingénierie des services",
-            "Ingénierie des applications",],
-        'M2 MIAGE GR.2' => ["Ingénierie des systèmes d'information",
-            "Ingénierie des processus métiers",
-            "Ingénierie des données",
-            "Ingénierie des services",
-            "Ingénierie des applications",],
+        'M1 MIAGE GR.2' => [
+            "Gestion de projet avancée",
+            "Modèles de l'ingénierie des SI",
+            "Architectures logicielles et Web",
+            "Frameworks, composants métiers et Web service",
+            "Contrôle de gestion",
+            "Droit",
+            "Graphes et algoritmes",
+            "Marketing digital",
+            "Méthodes statistiques",
+            "Anglais",
+            "Séminaire thématique",
+            "Atelier Veille technologique",
+            "Techniques de communication",
+            "Bases de données non SQL",
+            "Outils d'analyse de documents structurés",
+            "Modèles et outils pour les processus",
+            "Modélisation événementielle et ses implémentations",
+            "Initiation aux stratégies d'entreprises dans les TIC",
+            "Techniques mathématiques pour l'aide à la décision",
+            "Anglais (préparation certification)",
+            "Mémoire et mission",
+            "Projet commun ou concours",
+            "Techniques de communication",
+        ],
+        'M2 MIAGE GR.1' => [
+            "Ingénierie avancée des processus",
+            "Ingénierie dirigée par les modèles",
+            "Méthodes de recherche",
+            "Séminaire thématique",
+            "Architecture d'entreprise basée sur les services : partie 1",
+            "Architecture d'entreprise basée sur les services : partie 2",
+            "Blockchain",
+            "Cloud & pervasive computing",
+            "Fouille de processus",
+            "Informatique décisionnelle",
+            "Ingénierie & management de la connaissance",
+            "Ingénierie des exigences",
+            "Machine Learning",
+            "Raisonnement par contraintes et ses applications",
+            "Sécurité & qualité des SI",
+            "Variabilité, ligne de produits et fabrique logicielle",
+            "Mémoire de Master, Entreprenariat & Stage/Alternance",
+        ],
+        'M2 MIAGE GR.2' => [
+            "Ingénierie avancée des processus",
+            "Ingénierie dirigée par les modèles",
+            "Méthodes de recherche",
+            "Séminaire thématique",
+            "Architecture d'entreprise basée sur les services : partie 1",
+            "Architecture d'entreprise basée sur les services : partie 2",
+            "Blockchain",
+            "Cloud & pervasive computing",
+            "Fouille de processus",
+            "Informatique décisionnelle",
+            "Ingénierie & management de la connaissance",
+            "Ingénierie des exigences",
+            "Machine Learning",
+            "Raisonnement par contraintes et ses applications",
+            "Sécurité & qualité des SI",
+            "Variabilité, ligne de produits et fabrique logicielle",
+            "Mémoire de Master, Entreprenariat & Stage/Alternance",
+        ],
     ];
 
     public function __construct(private readonly UserFactory $factory) //UserFactory pour l'autowiring
-        //(juste besoin des méthodes de l'interface, mais symfony ne l'autowire pas....
+    //(juste besoin des méthodes de l'interface, mais symfony ne l'autowire pas....
     {
     }
 
     public function load(ObjectManager $manager): void
     {
         $this->formatClassesMatieres();
-        //Classes & matieres
+        $this->loadClassesAndMatieres($manager);
+        $this->loadIntervenants($manager);
+        $this->loadUsers($manager);
+        $this->loadReviews($manager);
+        $this->loadLoggableUsers($manager);
+
+    }
+
+    private function formatClassesMatieres(): void
+    {
+        foreach ($this->abbreviatons as $classeName => $abbreviation) {
+            for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
+                $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
+            }
+        }
+    }
+
+    public function loadClassesAndMatieres(ObjectManager $manager) {
         foreach ($this->classes_matieres as $classeName => $matieres) {
             $classe = new Classe();
             $classe->setName($classeName);
@@ -107,8 +214,8 @@ class AppFixtures extends Fixture
             }
         }
         $manager->flush();
-
-        //Intervenants
+    }
+    private function loadIntervenants(ObjectManager $manager) {
         foreach ($this->classes_matieres as $classeName => $matieres) {
             for ($i = 0; $i < random_int(self::$MINIMUM_INTERVENANTS_PAR_CLASSE, self::$MAXIMUM_INTERVENANTS_PAR_CLASSE); $i++) {
                 //Intervenant matieres between 1 and MAX_MATIERES_PAR_INTERVENANT
@@ -116,7 +223,7 @@ class AppFixtures extends Fixture
                 $classe = $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]);
                 $intervenant->addClassesTaught($classe);
                 $intervenant->setName($this->factory::faker()->name());
-                $intervenant->setProfilePictureFileName('default_intervenant.jpg');
+                $intervenant->setProfilePictureFileName('defaut-intervenant.jpg');
 
                 for ($i = 0; $i < random_int(1, min(count($matieres), self::$MAX_MATIERES_PAR_INTERVENANT)); $i++) {
                     $matiere = $manager->getRepository(Matiere::class)->findOneBy(['name' => $matieres[$i]]);
@@ -126,22 +233,41 @@ class AppFixtures extends Fixture
             }
         }
         $manager->flush();
-
-        //Users
+    }
+    private function loadUsers(ObjectManager $manager) {
         UserFactory::createMany(self::$NUMBER_OF_USERS);
-        $users = $manager->getRepository(User::class)->findAll();
+        $users = $manager->getRepository(User::class)->findNotAdmins();
         foreach ($users as $user) {
             $user->setClasse($manager->getRepository(Classe::class)->findAll()[random_int(0, count($this->classes_matieres) - 1)]);
             $manager->persist($user);
         }
+
+        $manager->flush();
+    }
+    private function loadLoggableUsers(ObjectManager $manager)
+    {
         $admin = $manager->getRepository(User::class)->findOneBy(['username' => 'admin1']);
         if (!$admin) {
             $adminUser = UserFactory::new()->create([
                 'username' => 'admin1',
                 'password' => 'admin1',
-                'roles' => ['ROLE_ADMIN', 'ROLE_USER'],]);
+                'roles' => ['ROLE_ADMIN', 'ROLE_USER'],
+            ]);
         }
-        //Reviews
+
+        foreach($this->abbreviatons as $classeName=>$classeAbbreviation) {
+            UserFactory::createOne([
+                'username' => $classeAbbreviation,
+                'password' => $classeAbbreviation,
+                'roles' => ['ROLE_USER'],
+                'classe' => $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]),
+            ]);
+        }
+        $manager->flush();
+    }
+
+    private function loadReviews(ObjectManager $manager) {
+        $users = $manager->getRepository(User::class)->findNotAdmins();
         foreach ($users as $author) {
             $classe = $author->getClasse();
             $allIntervenantsParClasseAuteur = $classe->getIntervenants();
@@ -154,7 +280,6 @@ class AppFixtures extends Fixture
                     $review->setGrade(random_int(1, 5));
                     $review->setContent($this->factory::faker()->realText(300));
                     $review->setIntervenant($intervenant);
-                    $classe = $author->getClasse();
                     $manager->persist($review);
 
                 }
@@ -162,15 +287,5 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
-
-    }
-
-    private function formatClassesMatieres(): void
-    {
-        foreach ($this->abbreviatons as $classeName => $abbreviation) {
-            for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
-                $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
-            }
-        }
     }
 }

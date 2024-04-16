@@ -1,13 +1,26 @@
 .card {
-
-    border-color: #ddd; 
+    border: none;
+    box-shadow: none !important;
 }
 
 
+h1{
+    text-align: center;
+}
+
+.overall-form {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    max-width: 535px;
+    align-items: center;
+}
 
 .form-group {
     margin-bottom: 1rem;
 }
+
+
 
 
 .form-control::placeholder {
@@ -21,21 +34,11 @@
 
 
 
-.btn {
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    font-weight: bold;
-}
 
-
-
-.btn:hover {
-    background-color: #ddd;
-}
 
 
 label {
-    font-weight: normal; 
-    display: block; 
-    margin-bottom: 5px; 
+    font-weight: normal;
+    display: block;
+    margin-bottom: 5px;
 }
