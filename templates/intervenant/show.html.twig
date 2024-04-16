@@ -64,21 +64,72 @@
 				<div class="col-md-8">
 					<h1>Reviews</h1>
 					<div class="card mb-3">
-						<div
-							class="card-body">
-							<!-- Afficher les deux dernières critiques -->
-
+						<div class="card-body">
+							<!-- Afficher les reviews -->
 							{% for review in intervenant.reviews %}
-								{% include "review/show.html.twig" %}
+								{% if loop.index % 2 == 1 %}
+									<div class="row">
+								{% endif %}
+								<div class="col-lg-6 mb-4">
+									<div class="card shadow">
+										<div class="card-body">
+											<h5 class="card-title">Note : {{ review.grade }}/5</h5>
+											<h6 class="card-subtitle mb-2 text-muted">{{ review.author.name }}</h6>
+											<small>{{ review.createdAt|date('d/m/Y H:i') }}</small>
+											<p class="card-text small mb-3">{{ review.author.classe.name }}</p>
+											<p class="card-text">Intervenant : <a title="intervenant" href="{{ path('app_intervenant_show', {'id': review.intervenant.id}) }}">{{ review.intervenant.name }}</a></p>
+											<p class="card-text">Matière : {{ review.matiere.name }}</p>
+											<p class="card-text" style="font-size: 18px;">{{ review.content }}</p>
+										</div>
+										<div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
+											<div>
+												{% if review.isLikedByUser(app.user) %}
+													<a title="like" href="{{ path('like_review', {'id': review.id}) }}" class="link-muted me-2"><i class="fas fa-thumbs-up me-1 text-success"></i> {{ review.likes }}</a>
+												{% else %}
+													<a title="like" href="{{ path('like_review', {'id': review.id}) }}" class="link-muted me-2"><i class="fas fa-thumbs-up me-1"></i> {{ review.likes }}</a>
+												{% endif %}
+
+												{# Afficher le pouce vers le bas (dislike) #}
+												{% if review.isDislikedByUser(app.user) %}
+													<a title="dislike" href="{{ path('dislike_review', {'id': review.id}) }}" class="link-muted"><i class="fas fa-thumbs-down me-1 text-danger"></i> {{ review.dislikes }}</a>
+												{% else %}
+													<a title="dislike" href="{{ path('dislike_review', {'id': review.id}) }}" class="link-muted"><i class="fas fa-thumbs-down me-1"></i> {{ review.dislikes }}</a>
+												{% endif %}
+											</div>
+											{# Ajout des boutons Supprimer et Modifier #}
+											{% if is_granted('ROLE_ADMIN') %}
+												{# Si l'utilisateur est un administrateur, afficher le bouton de suppression #}
+												<div>
+													<a href="{{ path('app_review_delete', {'id': review.id}) }}" class="btn btn-danger" title="Supprimer">
+														<i class="fas fa-trash-alt"></i>
+													</a>
+												</div>
+											{% elseif is_granted('ROLE_USER') and app.user and review.author and review.author.id == app.user.id %}
+												{# Si l'utilisateur est connecté, est l'auteur de la review et n'est pas administrateur, afficher les boutons de modification et de suppression #}
+												<div>
+													<a href="{{ path('app_review_delete', {'id': review.id}) }}" class="btn btn-danger" title="Supprimer">
+														<i class="fas fa-trash-alt"></i>
+													</a>
+													<a href="{{ path('app_review_edit', {'id': review.id}) }}" class="btn btn-warning" title="Modifier">
+														<i class="fas fa-edit"></i>
+													</a>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								{% if loop.index % 2 == 0 or loop.last %}
+									</div>
+								{% endif %}
 							{% endfor %}
+
+							{% if intervenant.reviews is empty %}
+								<p class="text-center">Aucune review disponible</p>
+							{% endif %}
 						</div>
 					</div>
-
-					<!-- Ajouter plus de sections si nécessaire -->
-
 				</div>
 			</div>
-
 		</div>
 	</div>
 {% endblock %}
