@@ -54,7 +54,7 @@ class MysqlOrmPurger implements ORMPurgerInterface
         return $this->purger->getPurgeMode();
     }
 
-    public function setEntityManager(EntityManagerInterface $em)
+    public function setEntityManager(EntityManagerInterface $em):void
     {
         $this->purger->setEntityManager($em);
     }
@@ -62,7 +62,7 @@ class MysqlOrmPurger implements ORMPurgerInterface
     /**
      * @throws Exception
      */
-    public function purge()
+    public function purge():void
     {
         $conn = $this->getObjectManager()->getConnection();
         /** @var \PDO $pdo */
@@ -92,7 +92,7 @@ class MysqlOrmPurger implements ORMPurgerInterface
      *
      * @return EntityManagerInterface
      */
-    public function getObjectManager()
+    public function getObjectManager() : EntityManagerInterface
     {
         return $this->purger->getObjectManager();
     }
