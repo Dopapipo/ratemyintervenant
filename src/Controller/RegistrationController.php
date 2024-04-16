@@ -83,7 +83,11 @@ class RegistrationController extends AbstractController
         if (null === $user) {
             return $this->redirectToRoute('app_register');
         }
+        if ($user->isVerified()) {
+            $this->addFlash('success', 'Votre email a déjà été confirmé. Vous pouvez maintenant vous connecter.');
 
+            return $this->redirectToRoute('app_login');
+        }
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);
