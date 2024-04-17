@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="text-center my-5">Liste des professeurs de ta classe</h1>
+<h1 class="text-center my-5">{% trans %}Liste des professeurs de ta classe{% endtrans %}</h1>
   <!-- Breadcrumb -->
   <div class="container-center">
     <nav aria-label="breadcrumb" class="main-breadcrumb">
@@ -31,7 +31,7 @@
               <p class="card-text text-muted">Matière(s) enseignée(s):</p>
               <ul>
                 {% for matiere in professeur.matieresEnseignees %}
-                  <li>{{ matiere.name }}
+                  <li>{{ matiere.name |trans }}
                     {{ professeur.getAverageParMatiere(matiere) }}
                   </li> {% endfor %}
               </ul>
