@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Intervenant;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -45,5 +46,11 @@ class IntervenantRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-
+    public function findAllWithMatieresFromUser($user) {
+        return $this->createQueryBuilder('i')
+            ->where(':userMatieres MEMBER OF i.matieresEnseignees')
+            ->setParameter('userMatieres', $user->getClasse()->getMatieres())
+            ->getQuery()
+            ->getResult();
+    }
 }
