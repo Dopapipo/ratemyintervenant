@@ -1,36 +1,63 @@
-To run database : 
+##Bienvenue dans notre Projet Symfony : RATE MY INTERVENANT !
+
+##Membres de l'équipe
+
+- JACOB Romain **(PO)**
+- LISNIC Lucian 
+- BOULZE Noam
+- GROSSMAN Abel
+
+
+##Etapes pour lancer le projet correctement : 
+
+_STEP 1_ 
+
+ composer require --dev orm-fixtures
+
+_STEP 2_ 
+
+composer install 
+
+_STEP 3_ 
 
 docker compose up -d
 
-symfony console doctrine:migrations:migrate
+_STEP 4_ 
 
-To use symfony with the docker database easily, use symfony console [your command] instead of php bin/console [your command]
+symfony console doctrine:schema:update -f
 
-To find out the port on your local machine used to communicate with the mysql database , run this command: 
+_STEP 5_ 
 
-docker ps
+symfony console doctrine:fixtures:load --purge-with-truncate --purger=mysql_purger 
 
-Then find the database container, and you should see the port 3306 associated with another random port, let's say 32773.
+_STEP 6_ 
 
-Then you can run commands like mysql -u root --password=password --host=127.0.0.1 --port=32773 (only if you have mysql on local machine)
+symfony serve -d
 
-Or you can do (you don't need mysql on your machine for this command) : 
+La commande 5 est une commande pour load les fixtures et des utilisateurs par défauts associés à chaque classe (une utilisateur, une classe): 
+Vous pouvez désormais vous connecter et accéder au menu:
+  
+admin1 (Admin) -id: admin1, pwd: admin1
+L3Class (User) -id: L3Class, pwd: L3Class
+L3App (User) -id: L3App, pwd: L3App
+M1G1 (User) -id: M1G1, pwd: M1G1
+M1G2 (User) -id: M1G2, pwd: M1G2
+M2G1 (User) -id: M2G1, pwd: M2G1
+M2G2 (User) -id: M2G2, pwd: M2G2
 
-docker-compose exec database mysql -u root --password=password
+
+##Documentation du projet:
+
+Les technologies utilisées pour ce projet: 
+-local: symfony, composer.
+-docker: BDD mysql, maildev, adminer. (à venir: composer php, phpunit, xdebug)
+
+Les langages et utilisés pour ce projet: php, twig, CSS, JaveScript, DQL.
+
+Les librairies externes: bootstrap pour le CSS, Zenstruck Foundry pour générer des fixtures.
 
 
-
-
-Documentation Rate My Intervenant:
-
-Les technologies utilisées pour ce projet: symfony, docker, git.
-
-Les langages et utilisés pour ce projet: php, twig, CSS, JaveScript, MySQL.
-
-Les librairies externes: bootstrap.
-
-Diagramme de classe: 
-Code PlantUML:
+##Diagramme de classe (à lancer sur PlantUML):
 @startuml
 
 class User {
