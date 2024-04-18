@@ -38,6 +38,9 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager, MailParisUnValidator $validator): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -117,7 +120,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RequestVerifyUserEmailType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // generate a signed url and email it to the makeadminview
+            // generate a signed url and email it to the user
             $user =  $userRepository->findOneByEmail($form->get('email')->getData());
 
             if ($user) {
