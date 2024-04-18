@@ -13,7 +13,7 @@
 _STEP 1_ 
 
  composer require --dev orm-fixtures
-
+ 
 _STEP 2_ 
 
 composer install 
@@ -34,7 +34,7 @@ _STEP 6_
 
 symfony serve -d
 
-La commande 5 est une commande pour load les fixtures et des utilisateurs par défauts associés à chaque classe (une utilisateur, une classe): 
+La commande 5 est une commande pour load les fixtures et des utilisateurs par défaut associés à chaque classe (une utilisateur, une classe): 
 Vous pouvez désormais vous connecter et accéder au menu:
   
 admin1 (Admin) -id: admin1, pwd: admin1
@@ -45,8 +45,8 @@ M1G2 (User) -id: M1G2, pwd: M1G2
 M2G1 (User) -id: M2G1, pwd: M2G1
 M2G2 (User) -id: M2G2, pwd: M2G2
 
-## Fonctionnalités
 
+## Fonctionnalités
 Utilisateur:
 - Se connecter et créer un compte
 - Envoyer un mail lors de l'inscription et pour l'oubli de mot de passe
@@ -84,6 +84,17 @@ bootstrap pour le CSS, Zenstruck Foundry pour générer des fixtures.
 
 
 ## Diagramme de classe (à lancer sur PlantUML):
+
+Documentation Rate My Intervenant:
+
+Les technologies utilisées pour ce projet: symfony, docker, git.
+
+Les langages et utilisés pour ce projet: php, twig, CSS, JaveScript, MySQL.
+
+Les librairies externes: bootstrap.
+
+Diagramme de classe: 
+Code PlantUML:
 @startuml
 
 class User {
