@@ -1,6 +1,6 @@
-##Bienvenue dans notre Projet Symfony : RATE MY INTERVENANT !
+# Bienvenue dans notre Projet Symfony : RATE MY INTERVENANT !
 
-##Membres de l'équipe
+## Membres de l'équipe
 
 - JACOB Romain **(PO)**
 - LISNIC Lucian 
@@ -8,7 +8,7 @@
 - GROSSMAN Abel
 
 
-##Etapes pour lancer le projet correctement : 
+## Etapes pour lancer le projet correctement : 
 
 _STEP 1_ 
 
@@ -45,19 +45,45 @@ M1G2 (User) -id: M1G2, pwd: M1G2
 M2G1 (User) -id: M2G1, pwd: M2G1
 M2G2 (User) -id: M2G2, pwd: M2G2
 
+## Fonctionnalités
 
-##Documentation du projet:
+Utilisateur:
+- Se connecter et créer un compte
+- Envoyer un mail lors de l'inscription et pour l'oubli de mot de passe
+- Modifier ses informations personnelles
+- Modifier mot de passe
+- Voir toutes les reviews des élèves
+- Liker/disliker une review
+- Voir tous les intervenants de sa classe
+- Voir le profil d'un intervenant et toutes ses reviews
+- Faire une review d'un intervenant de sa classe
+- Modifier ou supprimer sa review
+- Envoyer un formulaire de contacte
 
-Les technologies utilisées pour ce projet: 
--local: symfony, composer.
--docker: BDD mysql, maildev, adminer. (à venir: composer php, phpunit, xdebug)
+Admin:
+- CRUD classe
+- CRUD matière
+- CRUD intervenant
+- CRUD review
+- CRUD utilisateur 
+- Bannir utilisateur
+- Lire un formulaire de contacte
 
-Les langages et utilisés pour ce projet: php, twig, CSS, JaveScript, DQL.
 
-Les librairies externes: bootstrap pour le CSS, Zenstruck Foundry pour générer des fixtures.
+## Documentation du projet:
+
+- Les technologies utilisées pour ce projet: 
+local: symfony, composer.
+docker: BDD mysql, maildev, adminer. (à venir: composer php, phpunit, xdebug)
+
+- Les langages et utilisés pour ce projet: 
+php, twig, CSS, JaveScript, DQL.
+
+- Les librairies externes: 
+bootstrap pour le CSS, Zenstruck Foundry pour générer des fixtures.
 
 
-##Diagramme de classe (à lancer sur PlantUML):
+## Diagramme de classe (à lancer sur PlantUML):
 @startuml
 
 class User {
@@ -107,5 +133,4 @@ Classe "1-1" -- "1-N" User : comporte >
 Review "0-N" -- "1-1" Intervenant: concerne >
 
 @enduml
-
 
