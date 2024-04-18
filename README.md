@@ -12,27 +12,39 @@
 
 _STEP 1_ 
 
+```
  composer require --dev orm-fixtures
+```
  
 _STEP 2_ 
 
+```
 composer install 
+```
 
 _STEP 3_ 
 
+```
 docker compose up -d
+```
 
 _STEP 4_ 
 
+```
 symfony console doctrine:schema:update -f
+```
 
 _STEP 5_ 
 
+```
 symfony console doctrine:fixtures:load --purge-with-truncate --purger=mysql_purger 
+```
 
 _STEP 6_ 
 
+```
 symfony serve -d
+```
 
 La commande 5 est une commande pour load les fixtures et des utilisateurs par défaut associés à chaque classe (une utilisateur, une classe): 
 Vous pouvez désormais vous connecter et accéder au menu:
@@ -85,63 +97,8 @@ bootstrap pour le CSS, Zenstruck Foundry pour générer des fixtures.
 
 ## Diagramme de classe (à lancer sur PlantUML):
 
-Documentation Rate My Intervenant:
+Diagramme de classe:
 
-Les technologies utilisées pour ce projet: symfony, docker, git.
+![image](https://github.com/Dopapipo/ratemyintervenant/assets/123425704/d20f65f7-ad2a-4162-92f5-a76f9963274e)
 
-Les langages et utilisés pour ce projet: php, twig, CSS, JaveScript, MySQL.
-
-Les librairies externes: bootstrap.
-
-Diagramme de classe: 
-Code PlantUML:
-@startuml
-
-class User {
-  +id: int
-  -username: String
-  -password: String
-  -firstName: String
-  -lastName: String
-  -email: String
-}
-
-class Classe {
-  +id: int
-  -name: String
-}
-
-class ResetPasswordRequest {
-  +id: int
-  -oid: int
-  -selector: String
-  -hashedToken: String
-  -requestedAt: datetime
-  -expiresAt: datetime
-}
-
-class Review {
-  +id: int
-  -content: String
-  -grade: int
-}
-
-class Matiere {
-  +id: int
-}
-
-class Intervenant {
-  +id: int
-  -name: String
-}
-
-User "1-1" -- "0-N" Review : publie >
-User "1-1" -- "0-N" ResetPasswordRequest : demande >
-User "1-N" -- "1-N" Matiere: assiste >
-Intervenant "1-N" -- "1-N" Classe : intervient >
-Intervenant "1-N" -- "1-N" Matiere : intervient >
-Classe "1-1" -- "1-N" User : comporte >
-Review "0-N" -- "1-1" Intervenant: concerne >
-
-@enduml
 
