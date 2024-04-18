@@ -90,13 +90,28 @@ class UserTest extends TestCase
 
         // Test adding roles
         $user->addRole('ROLE_ADMIN');
-        $this->assertEquals(['ROLE_ADMIN','ROLE_USER'], $user->getRoles());
-
-        
+        $this->assertEquals(['ROLE_ADMIN', 'ROLE_USER'], $user->getRoles());
 
     }
 
+    public function testUserClasse()
+    {
+        $user = new User();
+        $classe = new Classe();
+        $user->setClasse($classe);
 
+        // Test getting classe
+        $this->assertEquals($classe, $user->getClasse());
+    }
+
+    public function testUserPassword()
+    {
+        $user = new User();
+        $user->setPassword('password');
+
+        // Test getting password
+        $this->assertEquals('password', $user->getPassword());
+    }
 
 }
 
