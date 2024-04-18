@@ -57,7 +57,7 @@ class RegistrationController extends AbstractController
 
             // generate a signed url and email it to the makeadminview
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                ($this->emailService->createMail($user->getEmail(), 'Please confirm your Email', 'confirmation_email.html.twig'))
+                ($this->emailService->createMail($user->getEmail(), 'Confirmation email ratemyintervenant', 'confirmation_email.html.twig'))
             );
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Enregistrement réussi. Regardez votre e-mail pour pouvoir vous connecter.');
@@ -83,7 +83,10 @@ class RegistrationController extends AbstractController
         if (null === $user) {
             return $this->redirectToRoute('app_register');
         }
-
+        if ($user->isVerified()) {
+            $this->addFlash('success', 'Votre email a déjà été confirmé. Vous pouvez maintenant vous connecter.');
+            return $this->redirectToRoute('app_login');
+        }
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);
@@ -94,9 +97,9 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Votre email a été confirmé. Vous pouvez maintenant vous connecter.');
 
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_login');
     }
     /**
      * requestVerifyUserEmail
@@ -116,11 +119,12 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // generate a signed url and email it to the makeadminview
             $user =  $userRepository->findOneByEmail($form->get('email')->getData());
+
             if ($user) {
                 $this->emailVerifier->sendEmailConfirmation(
                     'app_verify_email',
                     $user,
-                    ($this->emailService->createMail($user->getEmail(), 'Please confirm your Email', 'confirmation_email.html.twig')));
+                    ($this->emailService->createMail($user->getEmail(), 'Confirmation email ratemyintervenant', 'confirmation_email.html.twig')));
                 // do anything else you need here, like flash message
                 $this->addFlash('success', "Un email vous a été envoyé. Veuillez consulter votre boîte de réception pour confirmer votre adresse email");
                 return $this->redirectToRoute('app_home');

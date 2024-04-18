@@ -3,7 +3,9 @@ services:
     database:
         volumes:
             - data:/var/lib/mysql
+            - ./init.sql:/data/application/init.sql
         image: 'mysql:latest'
+        command: --init-file /data/application/init.sql
         environment:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_DATABASE: main
