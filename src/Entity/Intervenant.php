@@ -18,8 +18,6 @@ class Intervenant
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-
-
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'intervenant')]
     #[ORM\OrderBy(['createdAt' => 'DESC'])]
     private Collection $reviews;
