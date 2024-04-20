@@ -45,6 +45,11 @@ _STEP 6_
 ```
 symfony serve -d
 ```
+BONUS : Si le style du dashboard admin n'apparait pas :
+
+```
+php bin/console assets:install
+```
 
 La commande 5 est une commande pour load les fixtures et des utilisateurs par défaut associés à chaque classe (une utilisateur, une classe): 
 Vous pouvez désormais vous connecter et accéder au menu:
