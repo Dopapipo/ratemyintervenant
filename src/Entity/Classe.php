@@ -22,10 +22,6 @@ class Classe
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-
-
-
-
     #[ORM\ManyToMany(targetEntity: Intervenant::class, mappedBy: 'classesTaught')]
     private Collection $intervenants;
 
@@ -34,7 +30,6 @@ class Classe
 
     #[ORM\OneToMany(targetEntity: Matiere::class, mappedBy: 'classe')]
     private Collection $matieres;
-
 
     public function __construct()
     {
@@ -131,8 +126,6 @@ class Classe
         return $this->name;
     }
 
-
-
     public function addStudent(User $student): static
     {
         if (!$this->students->contains($student)) {
@@ -181,11 +174,6 @@ class Classe
                 $matiere->setClasse(null);
             }
         }
-
         return $this;
     }
-
-
-
-
 }
