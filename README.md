@@ -54,13 +54,13 @@ php bin/console assets:install
 La commande 5 est une commande pour load les fixtures et des utilisateurs par défaut associés à chaque classe (une utilisateur, une classe): 
 Vous pouvez désormais vous connecter et accéder au menu:
   
-admin1 (Admin) -id: admin1, pwd: admin1
-L3Class (User) -id: L3Class, pwd: L3Class
-L3App (User) -id: L3App, pwd: L3App
-M1G1 (User) -id: M1G1, pwd: M1G1
-M1G2 (User) -id: M1G2, pwd: M1G2
-M2G1 (User) -id: M2G1, pwd: M2G1
-M2G2 (User) -id: M2G2, pwd: M2G2
+admin1 (Admin) -id: admin1, pwd: admin1 <br>
+L3Class (User) -id: L3Class, pwd: L3Class <br>
+L3App (User) -id: L3App, pwd: L3App<br>
+M1G1 (User) -id: M1G1, pwd: M1G1<br>
+M1G2 (User) -id: M1G2, pwd: M1G2<br>
+M2G1 (User) -id: M2G1, pwd: M2G1<br>
+M2G2 (User) -id: M2G2, pwd: M2G2<br>
 
 
 ## Fonctionnalités
