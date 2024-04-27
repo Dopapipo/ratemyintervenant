@@ -25,7 +25,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Used to upgrade (rehash) the makeadminview's password automatically over time.
+     * Used to upgrade (rehash) the user's password automatically over time.
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -38,20 +38,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
-    //    /**
-    //     * @return User[] Returns an array of User objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('u.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
 
         public function findOneByEmail($value): ?User
         {
@@ -63,14 +49,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ;
         }
 
-    public function deleteById(int $id): void
-    {
-        $user = $this->find($id);
-        if ($user) {
-            $this->getEntityManager()->remove($user);
-            $this->getEntityManager()->flush();
-        }
-    }
     public function findNotAdmins()
     {
         return $this->createQueryBuilder('u')

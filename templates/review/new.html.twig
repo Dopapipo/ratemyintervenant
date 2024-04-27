@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="{{ asset('css/new_review.css') }}">
 {% endblock %}
 
-{% block title %}Poster une Review
+{% block title %}Poster un retour
 {% endblock %}
 
 {% block body %}
@@ -17,7 +17,7 @@
                         {{ block('title') }}
                     </div>
                     <div class="card-body">
-                        <h1 class="mb-4">Poster une Review</h1>
+                        <h1 class="mb-4">Poster un retour</h1>
 
                         {{ include('review/_form.html.twig', {'button_label': 'Poster'}) }}
                         {% if review is defined %}

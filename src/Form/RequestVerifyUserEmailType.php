@@ -20,7 +20,7 @@ class RequestVerifyUserEmailType extends AbstractType
                 'attr' => ['autocomplete' => 'email'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your email',
+                        'message' => 'Veuillez rentrer votre adresse email',
                     ]),
                 ],
             ])

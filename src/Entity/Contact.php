@@ -6,6 +6,7 @@ use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
+//Hide functionnality not implemented yet
 class Contact
 {
     #[ORM\Id]

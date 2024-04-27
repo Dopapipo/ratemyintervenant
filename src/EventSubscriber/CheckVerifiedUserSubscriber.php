@@ -10,25 +10,26 @@ use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Event\LoginFailureEvent;
 
-class CheckVerifiedUserSubscriber implements EventSubscriberInterface
+//Banned users are auto logged out on their next request thanks to how providers work
+readonly class CheckVerifiedUserSubscriber implements EventSubscriberInterface
 {
 
-    public function __construct(private readonly \Symfony\Component\Routing\RouterInterface  $router)
+    public function __construct(private \Symfony\Component\Routing\RouterInterface $router)
     {
     }
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             CheckPassportEvent::class => ['onCheckPassport', -10],
             LoginFailureEvent::class => ['onLoginFailure'],
         ];
     }
-    public function onCheckPassport(CheckPassportEvent $event)
+    public function onCheckPassport(CheckPassportEvent $event): void
     {
         $passport = $event->getPassport();
         $user = $passport->getUser();
         if (!$user instanceof User) {
-            throw new \Exception('Unexpected makeadminview type');
+            throw new \Exception('Unexpected user type');
         }
         if (!$user->isVerified()) {
             throw new AccountNotVerifiedException();
@@ -37,7 +38,7 @@ class CheckVerifiedUserSubscriber implements EventSubscriberInterface
             throw new AccountBannedException();
         }
     }
-    public function onLoginFailure(LoginFailureEvent $event)
+    public function onLoginFailure(LoginFailureEvent $event): void
     {
 
         if ($event->getException() instanceof AccountNotVerifiedException ) {
