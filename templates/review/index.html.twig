@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Toutes les reviews{% endblock %}
+{% block title %}Tous les retours{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/review_index.css') }}">
 {% endblock %}
 {% block body %}
-    <h1 class="text-center mb-5">Toutes les notes des intervenants</h1>
+    <h1 class="text-center mb-5">Tous les retours des intervenants</h1>
 
     <section class="py-5">
 
@@ -75,7 +75,7 @@
                 {% endfor %}
 
                 {% if reviews is empty%}
-                <p class="text-center">Aucune review disponible</p>
+                <p class="text-center">Aucun retour disponible</p>
                 {% endif %}
             </div>
         </div>

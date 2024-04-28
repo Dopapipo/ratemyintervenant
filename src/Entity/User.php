@@ -70,8 +70,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinTable(name: 'user_disliked_reviews')]
     private Collection $dislikedReviews;
 
-
-
     public function __construct()
     {
         $this->reviews = new ArrayCollection();
@@ -320,6 +318,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $dislikedReview->removeUserThatDisliked($this);
         return $this;
     }
-
-
 }

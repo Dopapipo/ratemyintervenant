@@ -14,10 +14,6 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/intervenant')]
 class IntervenantController extends AbstractController
 {
-
-
-
-
     #[Route('/{id}', name: 'app_intervenant_show', methods: ['GET'])]
     public function show(Intervenant $intervenant): Response
     {
@@ -25,6 +21,4 @@ class IntervenantController extends AbstractController
             'intervenant' => $intervenant,
         ]);
     }
-
-
 }

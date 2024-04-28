@@ -44,6 +44,7 @@ class ReviewType extends AbstractType
             ])
 
         ;
+        //Only show matiere field if the form is in new mode
         if ($mode === 'new') {
             $builder->add('matiere', EntityType::class, [
                 'class' => Matiere::class,

@@ -7,6 +7,8 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurgerInterface;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 
+//Solution found on stackoverflow to allow purge with truncate on fixture load
+//Apparently it's a known-ish issue
 class MysqlOrmPurger implements ORMPurgerInterface
 {
 

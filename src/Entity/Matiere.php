@@ -117,7 +117,6 @@ class Matiere
                 $review->setMatiere(null);
             }
         }
-
         return $this;
     }
 }

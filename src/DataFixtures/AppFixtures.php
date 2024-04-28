@@ -9,13 +9,16 @@ use App\Entity\Review;
 use App\Entity\User;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements OrderedFixtureInterface
 {
     private static $MINIMUM_INTERVENANTS_PAR_CLASSE = 3;
     private static $MAXIMUM_INTERVENANTS_PAR_CLASSE = 7;
     private static $NUMBER_OF_USERS = 50;
+
+
     private static $MAX_MATIERES_PAR_INTERVENANT = 4;
     private static $MINIMUM_REVIEWS = 5;
     private static $MAXIMUM_REVIEWS = 20;
@@ -175,117 +178,87 @@ class AppFixtures extends Fixture
             "Mémoire de Master, Entreprenariat & Stage/Alternance",
         ],
     ];
+    private bool $formatted = false;
 
     public function __construct(private readonly UserFactory $factory) //UserFactory pour l'autowiring
     //(juste besoin des méthodes de l'interface, mais symfony ne l'autowire pas....
     {
     }
-
+    /*
+     * Order is based on dependencies, the order of the fixtures is important
+     * Could have specified dependencies directly but this works nicely aswell
+     */
     public function load(ObjectManager $manager): void
     {
         $this->formatClassesMatieres();
-        $this->loadClassesAndMatieres($manager);
-        $this->loadIntervenants($manager);
-        $this->loadUsers($manager);
-        $this->loadReviews($manager);
-        $this->loadLoggableUsers($manager);
-
     }
 
     private function formatClassesMatieres(): void
-    {
+    {   if ($this->formatted) {
+        return;
+    }
         foreach ($this->abbreviatons as $classeName => $abbreviation) {
             for ($i = 0; $i < count($this->classes_matieres[$classeName]); $i++) {
                 $this->classes_matieres[$classeName][$i] = $this->classes_matieres[$classeName][$i] . ' ' . $abbreviation;
             }
         }
+        $this->formatted = true;
     }
-
-    public function loadClassesAndMatieres(ObjectManager $manager) {
-        foreach ($this->classes_matieres as $classeName => $matieres) {
-            $classe = new Classe();
-            $classe->setName($classeName);
-            $manager->persist($classe);
-            foreach ($matieres as $matiereName) {
-                $matiere = new Matiere();
-                $matiere->setName($matiereName);
-                $matiere->setClasse($classe);
-                $manager->persist($matiere);
-            }
-        }
-        $manager->flush();
-    }
-    private function loadIntervenants(ObjectManager $manager) {
-        foreach ($this->classes_matieres as $classeName => $matieres) {
-            for ($i = 0; $i < random_int(self::$MINIMUM_INTERVENANTS_PAR_CLASSE, self::$MAXIMUM_INTERVENANTS_PAR_CLASSE); $i++) {
-                //Intervenant matieres between 1 and MAX_MATIERES_PAR_INTERVENANT
-                $intervenant = new Intervenant();
-                $classe = $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]);
-                $intervenant->addClassesTaught($classe);
-                $intervenant->setName($this->factory::faker()->name());
-                $intervenant->setProfilePictureFileName('defaut-intervenant.jpg');
-
-                for ($i = 0; $i < random_int(1, min(count($matieres), self::$MAX_MATIERES_PAR_INTERVENANT)); $i++) {
-                    $matiere = $manager->getRepository(Matiere::class)->findOneBy(['name' => $matieres[$i]]);
-                    $intervenant->addMatieresEnseignee($matiere);
-                }
-                $manager->persist($intervenant);
-            }
-        }
-        $manager->flush();
-    }
-    private function loadUsers(ObjectManager $manager) {
-        UserFactory::createMany(self::$NUMBER_OF_USERS);
-        $users = $manager->getRepository(User::class)->findNotAdmins();
-        foreach ($users as $user) {
-            $user->setClasse($manager->getRepository(Classe::class)->findAll()[random_int(0, count($this->classes_matieres) - 1)]);
-            $manager->persist($user);
-        }
-
-        $manager->flush();
-    }
-    private function loadLoggableUsers(ObjectManager $manager)
+    /**
+     * @return array
+     */
+    public function getClassesMatieres(): array
     {
-        $admin = $manager->getRepository(User::class)->findOneBy(['username' => 'admin1']);
-        if (!$admin) {
-            $adminUser = UserFactory::new()->create([
-                'username' => 'admin1',
-                'password' => 'admin1',
-                'roles' => ['ROLE_ADMIN', 'ROLE_USER'],
-            ]);
-        }
-
-        foreach($this->abbreviatons as $classeName=>$classeAbbreviation) {
-            UserFactory::createOne([
-                'username' => $classeAbbreviation,
-                'password' => $classeAbbreviation,
-                'roles' => ['ROLE_USER'],
-                'classe' => $manager->getRepository(Classe::class)->findOneBy(['name' => $classeName]),
-            ]);
-        }
-        $manager->flush();
+        return $this->classes_matieres;
     }
 
-    private function loadReviews(ObjectManager $manager) {
-        $users = $manager->getRepository(User::class)->findNotAdmins();
-        foreach ($users as $author) {
-            $classe = $author->getClasse();
-            $allIntervenantsParClasseAuteur = $classe->getIntervenants();
-            foreach ($allIntervenantsParClasseAuteur as $intervenant) {
-                $matieresDeIntervenantDansClasseAuteur = $intervenant->getMatieresEnseignees()->filter(fn(Matiere $matiere) => $matiere->getClasse() === $classe);
-                foreach ($matieresDeIntervenantDansClasseAuteur as $matiere) {
-                    $review = new Review();
-                    $review->setMatiere($matiere);
-                    $review->setAuthor($author);
-                    $review->setGrade(random_int(1, 5));
-                    $review->setContent($this->factory::faker()->realText(300));
-                    $review->setIntervenant($intervenant);
-                    $manager->persist($review);
+    public function getOrder()
+    {
+        return 1;
+    }
 
-                }
-            }
-        }
+    /**
+     * @return array
+     */
+    public function getAbbreviatons(): array
+    {
+        return $this->abbreviatons;
+    }
 
-        $manager->flush();
+    /**
+     * @return UserFactory
+     */
+    public function getFactory(): UserFactory
+    {
+        return $this->factory;
+    }
+    public static function getMINIMUMINTERVENANTSPARCLASSE(): int
+    {
+        return self::$MINIMUM_INTERVENANTS_PAR_CLASSE;
+    }
+
+    public static function getMAXIMUMINTERVENANTSPARCLASSE(): int
+    {
+        return self::$MAXIMUM_INTERVENANTS_PAR_CLASSE;
+    }
+
+    public static function getNUMBEROFUSERS(): int
+    {
+        return self::$NUMBER_OF_USERS;
+    }
+
+    public static function getMAXMATIERESPARINTERVENANT(): int
+    {
+        return self::$MAX_MATIERES_PAR_INTERVENANT;
+    }
+
+    public static function getMINIMUMREVIEWS(): int
+    {
+        return self::$MINIMUM_REVIEWS;
+    }
+
+    public static function getMAXIMUMREVIEWS(): int
+    {
+        return self::$MAXIMUM_REVIEWS;
     }
 }
