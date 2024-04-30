@@ -75,7 +75,7 @@ Utilisateur:
 - Voir le profil d'un intervenant et toutes ses reviews
 - Faire une review d'un intervenant de sa classe
 - Modifier ou supprimer sa review
-- Envoyer un formulaire de contacte
+- Envoyer un formulaire de contact
 
 Admin:
 - CRUD classe
@@ -84,14 +84,14 @@ Admin:
 - CRUD review
 - CRUD utilisateur 
 - Bannir utilisateur
-- Lire un formulaire de contacte
+- Lire un formulaire de contact
 
 
 ## Documentation du projet:
 
-- Les technologies utilisées pour ce projet: 
-local: symfony, composer.
-docker: BDD mysql, maildev, adminer. (à venir: composer php, phpunit, xdebug)
+- Les technologies utilisées pour ce projet:
+    - local: symfony, composer.
+    - docker: BDD mysql, maildev, adminer. (à venir sur docker avant deploiement: composer php, phpunit, xdebug)
 
 - Les langages et utilisés pour ce projet: 
 php, twig, CSS, JaveScript, DQL.
